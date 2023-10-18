@@ -24,6 +24,7 @@ const Input = ({ label, type, register }) => {
             
             {/*//* Label */}
             <span
+            onClick={()=>setInputFocus(true)}
                 className={`bg-white px-2 cursor-text text-center absolute left-2 duration-300 transform
                 ${inputFocus ? ' -translate-y-1/2 scale-90 text-primary' : 'translate-y-1/2 text-gray-600'} rounded-lg`
                             }

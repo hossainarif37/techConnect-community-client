@@ -17,4 +17,8 @@ input:-webkit-autofill:active{
     .input {
         @apply border w-full p-3 outline-none text-gray-700 rounded
     }
+
+    .error{
+        @apply text-red-500 mt-2
+    }
 }
