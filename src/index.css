@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+@layer components {
+    .btn {
+        @apply px-10 py-2.5 active:scale-95 duration-300 rounded
+    }
+
+    .input {
+        @apply border w-full p-3 outline-none text-gray-700 rounded
+    }
+}

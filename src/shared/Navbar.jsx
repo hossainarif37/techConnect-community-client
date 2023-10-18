@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai"
-import { toggle } from "../states/toggle";
+import { toggle } from "../states/state";
 import userIcon from '../assets/icons/userIcon.png'
 
 const Navbar = () => {
