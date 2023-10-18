@@ -4,13 +4,13 @@ import { useEffect, useRef } from "react";
 import { getData } from "../hooks/useApi";
 
 // eslint-disable-next-line react/prop-types
-const RequireAuth = ( ) => {
+const RequireAuth = () => {
     const navigate = useNavigate();
     const effectRun = useRef(false);
     console.log('Render');
-    useEffect(()=>{
+    useEffect(() => {
         navigate('/login')
-    },[navigate])
+    }, [navigate])
 
     //* Get the current user from database
     //     useEffect(() => {

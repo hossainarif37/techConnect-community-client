@@ -20,3 +20,19 @@ export const getData = (url) => {
             return data;
         })
 }
+
+//* Store data in the database
+export const postData = (url, data) => {
+    return fetch(baseURL + url, {
+        method: 'POST',
+        headers: {
+            authorization: localStorage.getItem('token'),
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(data => {
+            return data;
+        })
+}

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    //* hanle login function
     const handleLogin = (data) => {
         console.log(data);
     }
@@ -15,10 +16,12 @@ const Login = () => {
                 onSubmit={handleSubmit(handleLogin)}
                 className="lg:w-[450px] mx-auto rounded shadow-lg p-10"
             >
-                <h1 className="text-3xl lg:text-4xl font-bold mb-10 text-gray-800 text-center">Login</h1>
+                {/*//* Title */}
+                <h1 className="text-3xl lg:text-4xl font-bold mb-10 text-gray-700 text-center">Login</h1>
+
                 <div className="flex flex-col gap-y-7 mb-5">
+                    {/*//* Email */}
                     <div>
-                        {/*//* Email */}
                         <Input
                             label='Email'
                             type='email'
@@ -32,10 +35,12 @@ const Login = () => {
                                 })
                             }}
                         />
+                        {/*//! error */}
                         <p className="error">{errors?.email?.message}</p>
                     </div>
+
+                    {/*//* Password */}
                     <div>
-                        {/*//* Password */}
                         <Input
                             label='Password'
                             type='password'
@@ -49,15 +54,18 @@ const Login = () => {
                                 })
                             }}
                         />
+                        {/*//! error */}
                         <p className="error">{errors?.password?.message}</p>
                     </div>
 
+                    {/* //*Submit Button */}
                     <button
                         type="submit"
                         className="btn bg-primary text-white"
                     >Login</button>
 
                 </div>
+                {/*//* Navigate to Register page */}
                 <p className="text-center"><span>Don't have an account? <Link className="text-primary underline" to='/register'>Create an account</Link></span></p>
             </form>
         </section>
