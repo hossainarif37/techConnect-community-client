@@ -56,6 +56,7 @@ const Register = () => {
                         <Input
                             label='Name'
                             type='text'
+                            id='name'
                             register={{
                                 ...register('name', {
                                     required: 'Name is required',
@@ -79,6 +80,7 @@ const Register = () => {
                         <Input
                             label='Email'
                             type='email'
+                            id='email'
                             register={{
                                 ...register('email', {
                                     required: 'Email is required',
@@ -98,6 +100,7 @@ const Register = () => {
                         <Input
                             label='Password'
                             type='password'
+                            id='password'
                             register={{
                                 ...register('password', {
                                     required: 'Password is required',
@@ -117,6 +120,7 @@ const Register = () => {
                         <Input
                             label='Confirm Password'
                             type='password'
+                            id='confirmPassword'
                             register={{
                                 ...register('confirmPassword', {
                                     required: 'Confirm password is required', minLength: {

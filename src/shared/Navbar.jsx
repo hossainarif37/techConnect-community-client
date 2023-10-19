@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai"
-import { toggle } from "../states/state";
+import { toggle, user } from "../states/state";
 import userIcon from '../assets/icons/userIcon.png'
 
 const Navbar = () => {
@@ -11,6 +11,8 @@ const Navbar = () => {
         <li><Link to='/contact'>Books</Link></li>
         <li><Link to='/admin/user-order'>Meetup</Link></li>
     </>
+
+    const navigate = useNavigate();
 
     const handleNavToggle = () => {
         toggle.value = !toggle.value;
@@ -34,7 +36,11 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                     {/* Logout Button */}
-                    <button onClick={() => { }} className="border px-10 py-2 hidden lg:block">Logout</button>
+                    <button onClick={() => {
+                        localStorage.removeItem('token');
+                        user.value = null;
+                        // navigate('/')
+                    }} className="border px-10 py-2 hidden lg:block">Logout</button>
                 </div>
                 {/* Mobile Menu */}
                 <div className="block lg:hidden">
@@ -48,7 +54,7 @@ const Navbar = () => {
                     <ul className={`shadow-xl  bg-white absolute text-center rounded-md w-48 p-5 duration-300 right-0 space-y-3 ${toggle.value ? 'right-0' : '-right-56'} `}>
                         {menuItems}
                         {/* Logout Button */}
-                        <button onClick={() => { }} className="border px-10 py-1">Logout</button>
+                        <button onClick={() => localStorage.removeItem('token')} className="border px-10 py-1">Logout</button>
                     </ul>
                 </div>
             </div>

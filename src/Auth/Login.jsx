@@ -1,14 +1,34 @@
 import { useState } from "react";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { postData } from "../hooks/useApi";
+import { loading, token, user } from "../states/state";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     //* hanle login function
     const handleLogin = (data) => {
-        console.log(data);
+        loading.value = true;
+        postData('/api/auth/login', data)
+            .then((result) => {
+                console.log(20, result.token.split(' ')[1]);
+                loading.value = false;
+                if (result.success) {
+                    localStorage.setItem('token', result.token);
+                    token.value = result.token;
+                    user.value = result.user;
+                    toast.success(result.message);
+                    navigate(from, { replace: true });
+                } else {
+                    toast.error(result.error);
+                }
+            })
     }
     return (
         <section className="h-screen flex items-center">
@@ -25,7 +45,7 @@ const Login = () => {
                         <Input
                             label='Email'
                             type='email'
-                            name='email'
+                            id='email'
                             register={{
                                 ...register('email', {
                                     required: 'Email is required', pattern: {
@@ -44,7 +64,7 @@ const Login = () => {
                         <Input
                             label='Password'
                             type='password'
-                            name='password'
+                            id='password'
                             register={{
                                 ...register('password', {
                                     required: 'Password is required', minLength: {
