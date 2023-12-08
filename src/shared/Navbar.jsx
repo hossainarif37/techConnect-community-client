@@ -1,30 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineMenu } from "react-icons/ai"
-import { toggle, user } from "../states/state";
+import { Link } from "react-router-dom";
+import { toggle } from "../states/state";
 import userIcon from '../assets/icons/userIcon.png'
+import OpenCloseButton from "../components/OpenCloseButton";
+import LoginLogoutButton from "../components/LoginLogoutButton";
 
 const Navbar = () => {
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/services'>Questions</Link></li>
-        <li><Link to='/projects'>Courses</Link></li>
-        <li><Link to='/contact'>Books</Link></li>
-        <li><Link to='/admin/user-order'>Meetup</Link></li>
+        <li><Link to='#'>Questions</Link></li>
+        <li><Link to='/courses'>Courses</Link></li>
+        <li><Link to='/books'>Books</Link></li>
+        <li><Link to='/meetup'>Meetup</Link></li>
     </>
 
-    const navigate = useNavigate();
-
-    const handleNavToggle = () => {
-        toggle.value = !toggle.value;
-    }
 
     return (
-        <nav className="bg-white lg:px-20 p-3 lg:py-5 sticky top-0 z-50">
-            <div className="flex justify-between items-center">
+        <nav className="bg-white  p-3 lg:py-5 sticky top-0 z-50">
+            <div className="flex container justify-between items-center">
 
                 <h1 className="flex items-center gap-3">
                     <Link to='/profile'>
-                        <img src={userIcon} className="w-10" alt="" />
+                        <img src={userIcon} className="w-14" alt="" />
                     </Link>
                     <Link to='/' className="lg:text-4xl text-3xl font-bold">
                         <span className="text-gray-800">Tech</span><span className="text-[#ff5200]">Connect</span>
@@ -35,26 +31,21 @@ const Navbar = () => {
                     <ul className="flex mx-auto space-x-10">
                         {menuItems}
                     </ul>
-                    {/* Logout Button */}
-                    <button onClick={() => {
-                        localStorage.removeItem('token');
-                        user.value = null;
-                        // navigate('/')
-                    }} className="border px-10 py-2 hidden lg:block">Logout</button>
+                    {/* Authentication Button */}
+                    <LoginLogoutButton isDesktop={true} />
                 </div>
                 {/* Mobile Menu */}
                 <div className="block lg:hidden">
                     {/*//? Navbar Button */}
-                    <button
-                        className="text-3xl pt-2"
-                        onClick={handleNavToggle}
-                    >
-                        <AiOutlineMenu />
-                    </button>
-                    <ul className={`shadow-xl  bg-white absolute text-center rounded-md w-48 p-5 duration-300 right-0 space-y-3 ${toggle.value ? 'right-0' : '-right-56'} `}>
+                    <OpenCloseButton />
+                    <ul className={`shadow-xl  bg-white absolute text-center border-t rounded-md w-60 p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${toggle.value ? 'scale-x-100' : 'scale-x-0'}`}>
+                        {/*//? Navbar Button */}
+                        <div className="w-full text-right">
+                            <OpenCloseButton />
+                        </div>
                         {menuItems}
-                        {/* Logout Button */}
-                        <button onClick={() => localStorage.removeItem('token')} className="border px-10 py-1">Logout</button>
+                        {/* Authentication Button */}
+                        <LoginLogoutButton isDesktop={false} />
                     </ul>
                 </div>
             </div>

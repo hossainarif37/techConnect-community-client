@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const Register = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [customError, setCustomError] = useState('');
-    let [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Register = () => {
             })
     }
     return (
-        <section className="py-20 flex items-center">
+        <section className="h-screen flex items-center">
             <Modal
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}

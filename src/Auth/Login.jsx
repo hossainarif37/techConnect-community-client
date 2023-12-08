@@ -18,18 +18,25 @@ const Login = () => {
         postData('/api/auth/login', data)
             .then((result) => {
                 console.log(20, result.token.split(' ')[1]);
-                loading.value = false;
                 if (result.success) {
                     localStorage.setItem('token', result.token);
                     token.value = result.token;
                     user.value = result.user;
                     toast.success(result.message);
                     navigate(from, { replace: true });
+                    loading.value = false;
                 } else {
+                    loading.value = false;
                     toast.error(result.error);
                 }
             })
     }
+
+    if (loading.value) {
+        return <p>loading...</p>
+    }
+
+
     return (
         <section className="h-screen flex items-center">
             <form

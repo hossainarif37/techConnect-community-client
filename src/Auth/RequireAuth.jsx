@@ -8,20 +8,16 @@ const RequireAuth = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const effectRun = useRef(false);
-    console.log('Render');
-    console.log(localStorage.getItem('token'));
     //* Get the current user from database
     useEffect(() => {
         if (effectRun.current === false) {
             const fetchUser = () => {
-                console.log(16, localStorage.getItem('token'));
                 fetch(baseURL + '/api/user/current-user', {
                     headers: {
                         authorization: localStorage.getItem('token')
                     }
                 })
                     .then(res => {
-                        console.log(22, res);
                         if (!res.ok) {
                             loading.value = false;
                             token.value = '';
@@ -31,7 +27,6 @@ const RequireAuth = ({ children }) => {
                         return res.json();
                     })
                     .then(data => {
-                        console.log(32, data);
                         loading.value = false;
                         if (data.success) {
                             user.value = data.user;
@@ -53,10 +48,10 @@ const RequireAuth = ({ children }) => {
         }
 
     }, []);
+    console.log(loading.value);
     if (loading.value) {
         return <p>loading...</p>
     }
-    console.log(57, user.value);
 
     if (!user.value) {
         return <Navigate to='/login' state={{ from: location }} replace />
