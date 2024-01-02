@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import Navbar from "./shared/Navbar";
 import { baseURL, loading, toggle, token, user } from "./states/state";
 import { useEffect, useRef } from "react";
-import CustomLoading from "./components/CustomLoading";
+import CustomLoading from "./components/common/CustomLoading";
 
 const App = () => {
   const effectRun = useRef(false);

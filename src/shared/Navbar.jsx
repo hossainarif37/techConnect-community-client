@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { toggle } from "../states/state";
 import userIcon from '../assets/icons/userIcon.png'
-import OpenCloseButton from "../components/OpenCloseButton";
-import LoginLogoutButton from "../components/LoginLogoutButton";
+import OpenCloseButton from "../components/common/OpenCloseButton";
+import LoginLogoutButton from "../components/common/LoginLogoutButton";
+import UserImage from "../components/common/UserImage";
 
 const Navbar = () => {
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='#'>Questions</Link></li>
-        <li><Link to='/courses'>Courses</Link></li>
-        <li><Link to='/books'>Books</Link></li>
-        <li><Link to='/meetup'>Meetup</Link></li>
+        <li><Link to='#'>Courses</Link></li>
+        <li><Link to='#'>Books</Link></li>
+        <li><Link to='#'>Meetup</Link></li>
     </>
 
 
@@ -19,11 +20,9 @@ const Navbar = () => {
             <div className="flex container justify-between items-center">
 
                 <h1 className="flex items-center gap-3">
-                    <Link to='/profile'>
-                        <img src={userIcon} className="w-14" alt="" />
-                    </Link>
+                    <UserImage />
                     <Link to='/' className="lg:text-4xl text-3xl font-bold">
-                        <span className="text-gray-800">Tech</span><span className="text-[#ff5200]">Connect</span>
+                        <span className="text-gray-800">Tech</span><span className="text-secondary">Connect</span>
                     </Link>
                 </h1>
                 {/* Desktop Menu */}

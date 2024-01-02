@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Input from "../components/Input";
+import Input from "../../components/common/Input"
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { postData } from "../hooks/useApi";
-import { loading, token, user } from "../states/state";
+import { postData } from "../../hooks/useApi";
+import { loading, token, user } from "../../states/state";
 import toast from "react-hot-toast";
 
 const Login = () => {

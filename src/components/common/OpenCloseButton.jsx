@@ -1,5 +1,5 @@
 import { AiOutlineMenu } from "react-icons/ai";
-import { toggle } from "../states/state";
+import { toggle } from "../../states/state";
 import { IoMdClose } from "react-icons/io";
 
 const OpenCloseButton = () => {

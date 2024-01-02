@@ -1,11 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import ErrorPage from "../pages/Home/ErrorPage";
 import Home from "../pages/Home/Home";
-import Register from "../Auth/Register";
-import Login from "../Auth/Login";
-import RequireAuth from "../Auth/RequireAuth";
-import Profile from "../pages/Profile/Profile";
+import ErrorPage from "../pages/ErrorElement/ErrorPage";
+import Register from "../pages/Auth/Register";
+import Login from "../pages/Auth/Login";
+import Profile from "../pages/Profile/Layout/Profile";
 
 export const router = createBrowserRouter([
     {

@@ -1,5 +1,5 @@
 import { LuLogOut } from "react-icons/lu";
-import { user } from "../states/state";
+import { user } from "../../states/state";
 import { useNavigate } from "react-router-dom";
 
 const LoginLogoutButton = ({ isDesktop }) => {

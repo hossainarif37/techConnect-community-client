@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Input from "../components/Input";
+import Input from "../../components/common/Input";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { postData } from "../hooks/useApi";
-import Modal from "../components/Modal";
+import { postData } from "../../hooks/useApi";
+import Modal from "../../components/common/Modal";
 import toast from "react-hot-toast";
 
 const Register = () => {
