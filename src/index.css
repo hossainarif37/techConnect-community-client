@@ -25,7 +25,11 @@ input:-webkit-autofill:active {
     }
 
     .btn {
-        @apply lg:px-10 px-5 py-2.5 active:scale-95 duration-300 rounded border border-accent
+        @apply lg:px-10 px-5 py-2.5 active:scale-95 duration-300 rounded border border-accent 
+    }
+
+    .btn-disabled{
+        @apply bg-accent border-none text-white active:scale-100 cursor-not-allowed
     }
 
     .input {
