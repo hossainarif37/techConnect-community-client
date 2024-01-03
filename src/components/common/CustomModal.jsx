@@ -33,7 +33,7 @@ const CustomModal = ({ isModalOpen, closeModal }) => {
 
     return (
         <>
-            <div className={`${isModalOpen ? "scale-100" : "scale-0"}  bg-black bg-opacity-30 top-0 flex items-center justify-center w-full z-50 h-screen fixed right-0`}>
+            <div className={`${isModalOpen ? "scale-100" : "scale-0"} px-2 bg-black bg-opacity-30 top-0 flex items-center justify-center w-full z-50 h-screen fixed right-0`}>
 
                 {/*//* Modal Body */}
                 <div className={`bg-white lg:w-2/5 lg:mt-20 xl:mt-10 p-5 duration-300 rounded-xl ${isModalOpen ? "scale-100" : "scale-0"}`}>
@@ -91,7 +91,7 @@ const CustomModal = ({ isModalOpen, closeModal }) => {
                         <button
                             disabled={!isExistText}
                             type="button"
-                            className={` ${!isExistText ? "btn-disabled" : "btn bg-secondary hover:border-secondary text-white hover:bg-transparent  hover:text-black-secondary"} select-none   xl:py-4 lg:py-3  w-full  font-bold`}
+                            className={` ${!isExistText ? "btn-disabled" : "btn bg-secondary hover:border-secondary text-white hover:bg-transparent  hover:text-black-secondary"} select-none  py-3 rounded-lg xl:py-4 lg:py-3  w-full  font-bold`}
                             onClick={closeModal}
                         >
                             Post

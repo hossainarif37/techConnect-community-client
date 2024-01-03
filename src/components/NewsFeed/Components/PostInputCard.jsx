@@ -15,7 +15,7 @@ const PostInputCard = () => {
     }
 
     return (
-        <div className="bg-white rounded-xl flex p-10 gap-5">
+        <div className="bg-white rounded-xl flex p-3 lg:p-10 gap-5">
             <UserImage modal={true} />
             <button
                 onClick={openModal}
