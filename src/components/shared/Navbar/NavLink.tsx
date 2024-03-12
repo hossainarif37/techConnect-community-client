@@ -1,4 +1,6 @@
+"use client"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type NavLinkProps = {
     title: string;
@@ -6,9 +8,12 @@ type NavLinkProps = {
 }
 
 const NavLink = ({ title, path }: NavLinkProps) => {
+    const pathName = usePathname();
+
     return (
-        <li>
-            <Link href={path}>
+        <li >
+            <Link
+                className={`${pathName === path && 'bg-gray-200 lg:bg-transparent rounded  md:font-bold py-2 block w-full'}`} href={path}>
                 {title}
             </Link>
         </li>

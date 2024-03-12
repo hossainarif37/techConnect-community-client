@@ -3,7 +3,7 @@
 import { LuLogOut } from "react-icons/lu";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { IRootState } from "@/types";
+import { IRootState } from "@/types/types";
 import { useRouter } from "next/navigation";
 
 const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
@@ -27,7 +27,7 @@ const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
                     :
                     <button onClick={() => {
                         router.push('/login');
-                    }} className={`${!isDesktop && 'w-full'}  btn border-primary hover:bg-primary hover:text-white`}>Login</button>
+                    }} className={`${!isDesktop && 'w-full'}`}>Login</button>
             }
         </>
     );

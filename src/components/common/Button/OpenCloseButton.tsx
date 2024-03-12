@@ -1,26 +1,35 @@
+"use client"
+
+import { toggleNav } from "@/redux/slices/navbar/navbarSlice";
+import { IRootState } from "@/types/types";
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 
 const OpenCloseButton = () => {
-    const [isToggle, setIstoggle] = useState(false);
+    const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
+
+    const dispatch = useDispatch();
 
     const handleNavToggle = () => {
-        console.log('handleNavToggle clicked');
+        dispatch(toggleNav())
     }
     return (
         <>
             {
-                !isToggle
+                !isNavToggle
                     ?
 
                     <button
+                        type="button"
                         className="text-3xl pt-2"
                         onClick={handleNavToggle}
                     >
                         <AiOutlineMenu />
                     </button> :
                     <button
+                        type="button"
                         className="text-3xl pt-2"
                         onClick={handleNavToggle}
                     >

@@ -5,18 +5,22 @@ export const navLinks = [
     },
     {
         title: 'Questions',
-        path: "/questions",
+        path: "#",
+        // path: "/questions",
     },
     {
         title: 'Courses',
-        path: "/courses",
+        path: "#",
+        // path: "/courses",
     },
     {
         title: 'Books',
-        path: "/books",
+        path: "#",
+        // path: "/books",
     },
     {
         title: 'Meetup',
-        path: "/meetup",
+        path: "#",
+        // path: "/meetup",
     }
 ]

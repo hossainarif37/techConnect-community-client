@@ -1,16 +1,19 @@
 "use client"
 
 import LoginLogoutButton from "@/components/common/Button/LoginLogoutButton";
-import OpenCloseButton from "@/components/common/Button/OpenCloseButton";
 import UserImage from "@/components/common/UserImage";
 import { navLinks } from "@/constants/navLinks";
 import Link from "next/link";
-import { useState } from "react";
 import NavLink from "./NavLink";
+import { useSelector } from "react-redux";
+import { IRootState } from "@/types/types";
+import CloseMenu from "@/components/common/Button/CloseMenu";
+import OpenMenu from "@/components/common/Button/OpenMenu";
 
 const Navbar = () => {
 
-    const [isToggle, setIstoggle] = useState(false);
+    const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
+
 
 
     return (
@@ -19,15 +22,16 @@ const Navbar = () => {
 
                 {/* Navbar Logo */}
                 <h1 className="flex items-center gap-3">
-                    <UserImage />
+                    <UserImage customWidth="w-14" />
                     <Link href='/' className="lg:text-4xl text-3xl font-bold">
-                        <span className="text-gray-800">Tech</span><span className="text-secondary">Connect</span>
+                        <span className="text-gray-800">Tech</span>
+                        <span className="text-secondary">Connect</span>
                     </Link>
                 </h1>
 
                 {/* Desktop Menu */}
                 <div className="lg:flex hidden items-center flex-1 justify-between">
-                    <ul className="flex mx-auto space-x-10">
+                    <ul className="flex items-center mx-auto space-x-10">
                         {
                             navLinks?.map((link, i) => (
                                 <NavLink
@@ -47,16 +51,18 @@ const Navbar = () => {
                 {/* Mobile Menu */}
                 <div className="block lg:hidden">
 
-                    {/* Navbar Button */}
-                    <OpenCloseButton />
+                    {/* Navbar Menu Button */}
+                    {!isNavToggle && <OpenMenu />}
 
-                    {/* Navbar Menu */}
-                    <ul className={`shadow-xl  bg-white absolute text-center border-t rounded-md w-60 p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isToggle ? 'scale-x-100' : 'scale-x-0'}`}>
+                    {/* Navbar Close Button */}
+                    <ul className={`shadow-xl bg-white absolute text-center border-t rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>
 
                         {/* Navbar Menu Button */}
                         <div className="w-full text-right">
-                            <OpenCloseButton />
+                            <CloseMenu />
                         </div>
+
+                        <hr />
 
                         {/* Navlinks */}
                         {

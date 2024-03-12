@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from './slices/user/userSlice'
+import navbarSlice from './slices/navbar/navbarSlice'
+import { baseApi } from './api/baseApi'
 
 export const store = configureStore({
     reducer: {
-        userSlice
+        [baseApi.reducerPath]: baseApi.reducer,
+        userSlice,
+        navbarSlice
     },
 })
 
