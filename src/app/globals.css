@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities{
+    .container{
+        @apply max-w-7xl mx-auto
+    }
+
+    .btn {
+        @apply lg:px-10 px-5 py-2.5 active:scale-95 duration-300 rounded border border-accent 
+    }
+
+    .btn-disabled{
+        @apply bg-accent border-none text-white active:scale-100 cursor-not-allowed
+    }
+
+    .input {
+        @apply border w-full p-3 outline-none text-gray-700 rounded
+    }
+
+    .error {
+        @apply text-red-500 mt-2
+    }
+}
