@@ -1,17 +1,20 @@
+"use client"
+
 import { useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-type InputProps<TFormValues extends Record<string, any>> = {
+interface InputProps {
     label: string;
     type: string;
-    register: any;
+    register: UseFormRegisterReturn
     id: string;
 }
 
-const Input: React.FC<InputProps<any>> = ({ label, type, register, id }) => {
+const Input = ({ label, type, register, id }: InputProps) => {
     const [inputFocus, setInputFocus] = useState(false);
     const [eyeToggle, setEyeToggle] = useState(false);
+
     return (
         <div className="relative">
 
@@ -37,13 +40,20 @@ const Input: React.FC<InputProps<any>> = ({ label, type, register, id }) => {
                 className={`bg-white px-2 cursor-text text-center absolute left-2 duration-200 transform
                 ${inputFocus ? ' -translate-y-1/2 scale-90 text-primary' : 'translate-y-1/2 text-gray-600'} rounded-lg`
                 }
-            >{label}</label>
+            >
+                {label}
+            </label>
 
             {/*//* Password Show Eye Button */}
-            {type === 'password' && <span
-                onClick={() => setEyeToggle(eyeToggle ? false : true)}
-                className="absolute top-2 right-3 p-2 cursor-pointer select-none hover:bg-gray-100 rounded-full"
-            >{eyeToggle ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}</span>}
+            {
+                type === 'password' &&
+                <span
+                    onClick={() => setEyeToggle(eyeToggle ? false : true)}
+                    className="absolute top-2 right-3 p-2 cursor-pointer select-none hover:bg-gray-100 rounded-full"
+                >
+                    {eyeToggle ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </span>
+            }
         </div>
     );
 };
