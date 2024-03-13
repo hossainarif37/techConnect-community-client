@@ -4,7 +4,7 @@
 
 @layer utilities{
     .container{
-        @apply max-w-7xl mx-auto
+        @apply max-w-7xl mx-auto px-4
     }
 
     .btn {
@@ -22,4 +22,12 @@
     .error {
         @apply text-red-500 mt-2
     }
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: all 5000s ease-in-out 0s;
 }
