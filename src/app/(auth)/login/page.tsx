@@ -4,22 +4,58 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import InputWithLabel from "@/components/common/Input/InputWithLabel";
+import { useLoginMutation } from "@/redux/api/endpoints/users/users";
+import toast from "react-hot-toast";
 
 interface IFormInput {
     email: string;
     password: string;
 }
 
+type LoginErrorType = {
+    status: number;
+    data: {
+        success: boolean;
+        message: string;
+    }
+}
+
+
+
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
+    const [login, { isLoading, isError, error }] = useLoginMutation();
 
 
     //* hanle login function
     const handleLogin = (data: IFormInput) => {
-        console.log(data);
+        const loginResponse = login({ email: data.email, password: data.password }).unwrap();
+
+        toast.promise(loginResponse, {
+            loading: 'Loading',
+            success: ({ message }) => {
+                router.push('/');
+                return message;
+
+            },
+            error: ({ data }) => {
+                console.log(data)
+                return data?.message || 'Login failed';
+            },
+        });
     }
 
+
+
+    // if (isError) {
+    //     toast.error((error as LoginErrorType).data.message);
+    // } else {
+    //     if (loginResponse?.success) {
+    //         toast.success(loginResponse.message);
+    //         // router.push("/");
+    //     }
+    // }
 
 
 
