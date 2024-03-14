@@ -1,7 +1,7 @@
 "use client"
 
 import AuthLayout from "@/components/layouts/AuthLayout/AuthLayout";
-import { useCurrentUserQuery } from "@/redux/api/endpoints/users/users";
+import { useCurrentUserQuery, useLazyCurrentUserQuery } from "@/redux/api/endpoints/users/users";
 import { setUser } from "@/redux/slices/user/userSlice";
 import { IRootState, LoginErrorType } from "@/types/types";
 import { useRouter } from "next/navigation";
@@ -12,31 +12,35 @@ import Cookies from "js-cookie";
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice)
-    const { data: userData, isLoading, isError, error } = useCurrentUserQuery(undefined);
+    // const { data: userData, isLoading, isError, error } = useCurrentUserQuery(undefined);
+    const token = Cookies.get('authToken');
+    // console.log(token);
+    const [getCurrentUser, { data: userData, isLoading, isError, error }] = useLazyCurrentUserQuery();
+
+    console.log(userData);
 
     useEffect(() => {
-        if (isLoading) {
-            return;
-        }
+        getCurrentUser(undefined);
 
-        if (userData?.success) {
+        if (userData?.success && token) {
             dispatch(setUser({ user: userData.user, isAuthenticated: true }));
         }
-    }, [isLoading, userData, isError, error, dispatch, user]);
+
+    }, [userData, token, isAuthenticated]);
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     // Ensure children are returned when the user is authenticated
-    if (userData?.success || isAuthenticated) {
-        console.log('User is authenticated', isAuthenticated);
+    if (isAuthenticated) {
+        console.log('User is authenticated', userData);
         return children;
     }
 
 
 
-    if (isError) {
+    if (!isAuthenticated) {
         console.log(error);
         if ((error as LoginErrorType)?.status === 401) {
             return <AuthLayout />
