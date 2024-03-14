@@ -29,7 +29,7 @@ export interface INavbar {
 }
 
 export type LoginErrorType = {
-    status: number;
+    status: number | string;
     data: {
         success: boolean;
         message: string;
