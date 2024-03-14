@@ -13,9 +13,17 @@ const AuthLayout = () => {
         <div className="container">
             <div className="my-20 md:my-40">
                 <div className="w-full md:w-[450px] mx-auto rounded md:shadow-lg px-5 md:p-10">
-                    <LoginRegisterTab isLoginComponent={isLoginComponent} setIsLoginComponent={setIsLoginComponent} />
-                    {isLoginComponent ? <Login isLoginComponent={isLoginComponent} setIsLoginComponent={setIsLoginComponent} /> :
-                        <Register isLoginComponent={isLoginComponent} setIsLoginComponent={setIsLoginComponent} />}
+
+                    <LoginRegisterTab
+                        isLoginComponent={isLoginComponent}
+                        setIsLoginComponent={setIsLoginComponent}
+                    />
+
+                    {
+                        isLoginComponent ? <Login isLoginComponent={isLoginComponent} setIsLoginComponent={setIsLoginComponent} /> :
+                            <Register isLoginComponent={isLoginComponent} setIsLoginComponent={setIsLoginComponent} />
+                    }
+
                 </div>
             </div>
         </div>
