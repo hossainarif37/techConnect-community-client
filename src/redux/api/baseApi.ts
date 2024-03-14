@@ -10,7 +10,6 @@ export const baseApi = createApi({
         prepareHeaders: (headers, { getState }) => {
             // Retrieve the token from the cookie
             const token = Cookies.get('authToken');
-            console.log('again');
             if (token) {
                 headers.set('authorization', token);
             }
