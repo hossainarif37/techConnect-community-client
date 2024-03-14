@@ -41,8 +41,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
     if (!isAuthenticated) {
-        console.log(error);
-        if ((error as LoginErrorType)?.status === 401) {
+        if ((error as LoginErrorType)?.status === 401 || (error as LoginErrorType)?.status === 'FETCH_ERROR') {
+            if ((error as LoginErrorType)?.status === 'FETCH_ERROR') {
+                return <div className="h-screen flex justify-center items-center">
+                    <h1 className="text-3xl">Internal server error!</h1>
+                </div>
+            }
             return <AuthLayout />
         }
     }
