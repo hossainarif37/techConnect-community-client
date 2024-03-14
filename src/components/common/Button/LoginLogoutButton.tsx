@@ -2,23 +2,25 @@
 
 import { LuLogOut } from "react-icons/lu";
 import { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { removeUser } from "@/redux/slices/user/userSlice";
 
 const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
-    const { email } = useSelector((state: IRootState) => state.userSlice);
+    const { user } = useSelector((state: IRootState) => state.userSlice);
+    const dispatch = useDispatch();
 
     const router = useRouter();
 
     return (
         <>
             {
-                email ?
+                user ?
                     <button onClick={() => {
-                        localStorage.removeItem('token');
-                        // setUser(null);
-                        router.push('/');
+                        Cookies.remove('authToken');
+                        dispatch(removeUser())
                     }}
                         className={`${!isDesktop && 'w-full'} btn border-black flex items-center justify-center gap-2`}>
                         <span>Logout</span>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar/Navbar";
+import AuthProvider from "@/providers/AuthProvider";
 
 
 export const metadata: Metadata = {
@@ -18,8 +19,6 @@ export default function Layout({
             <main>
                 {children}
             </main>
-
         </>
-
     );
 }

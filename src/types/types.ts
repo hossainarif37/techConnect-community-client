@@ -5,8 +5,7 @@ export interface IRootState {
     navbarSlice: INavbar;
 }
 
-// User Interface
-export interface IUser {
+export type UserType = {
     _id: string;
     name: string;
     email: string;
@@ -17,8 +16,22 @@ export interface IUser {
     savedArticles?: string[];
 }
 
+// User Interface
+export interface IUser {
+    isAuthenticated: boolean;
+    user: null | UserType
+}
+
 
 // Navbar Slice Interface
 export interface INavbar {
     isNavToggle: boolean
+}
+
+export type LoginErrorType = {
+    status: number;
+    data: {
+        success: boolean;
+        message: string;
+    }
 }

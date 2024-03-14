@@ -3,79 +3,61 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Input from "@/components/common/Input/InputWithLabel";
-import { useRegisterMutation } from "@/redux/api/endpoints/users/users";
+import InputWithLabel from "@/components/common/Input/InputWithLabel";
+import { useLoginMutation } from "@/redux/api/endpoints/users/users";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "@/types/types";
+import { setUser } from "@/redux/slices/user/userSlice";
+import Cookies from "js-cookie";
 
 interface IFormInput {
-    name: string;
     email: string;
     password: string;
 }
 
-const Register = () => {
+
+const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
-    const [registerUser, { isLoading, isError, error }] = useRegisterMutation();
+    const [login, { isLoading, isError, error }] = useLoginMutation();
+
+    const dispatch = useDispatch();
+    const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice);
 
 
     //* hanle login function
-    const handleRegister = (data: IFormInput) => {
-        const registerResponse = registerUser({ name: data.name, email: data.email, password: data.password }).unwrap();
+    const handleLogin = (data: IFormInput) => {
+        const loginResponse = login({ email: data.email, password: data.password }).unwrap();
+        console.log(loginResponse);
 
-        toast.promise(registerResponse, {
+
+        toast.promise(loginResponse, {
             loading: 'Loading',
-            success: ({ message }) => {
-                router.push('/login');
+            success: ({ user, message, token }) => {
+                console.log(message);
+                dispatch(setUser({ user: user, isAuthenticated: true }));
+                Cookies.set('authToken', token);
                 return message;
 
             },
             error: ({ data }) => {
                 console.log(data)
-                return data?.message || 'Registration failed';
+                return data?.message || 'Login failed';
             },
         });
     }
 
 
-
-
     return (
         <form
-            onSubmit={handleSubmit(handleRegister)}
+            onSubmit={handleSubmit(handleLogin)}
         >
-            {/*//* Title */}
-            {/* <h1 className="text-3xl lg:text-4xl font-bold mb-10 text-gray-700 text-center">Register</h1> */}
 
             <div className="flex flex-col gap-y-7 mb-5">
-
-                {/*//* Name */}
-                <div>
-                    <Input
-                        label='Name'
-                        type='name'
-                        id='name'
-                        register={{
-                            ...register('name', {
-                                required: 'Name is required',
-                                maxLength: {
-                                    value: 20,
-                                    message: 'Maximum length 20 characters'
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: 'Minimum length 3 characters'
-                                }
-                            })
-                        }}
-                    />
-                    {/*//! error */}
-                    <p className="error">{errors?.name?.message}</p>
-                </div>
-
                 {/*//* Email */}
                 <div>
-                    <Input
+                    <InputWithLabel
                         label='Email'
                         type='email'
                         id='email'
@@ -94,7 +76,7 @@ const Register = () => {
 
                 {/*//* Password */}
                 <div>
-                    <Input
+                    <InputWithLabel
                         label='Password'
                         type='password'
                         id='password'
@@ -116,19 +98,17 @@ const Register = () => {
                     type="submit"
                     className="btn bg-primary text-white"
                 >
-                    Register
+                    Login
                 </button>
 
             </div>
-
             {/*//* Navigate to Register page */}
-            <p className="text-center">
-                <span>Already have an account? <Link className="text-primary underline" href='/login'>Login</Link></span>
-            </p>
-
+            <p className="text-center"><span>Don't have an account? <button
+                type="button"
+                onClick={() => setIsLoginComponent(false)}
+                className="text-primary underline">Create an account</button></span></p>
         </form>
-        // </section>
     );
 };
 
-export default Register;
+export default Login;

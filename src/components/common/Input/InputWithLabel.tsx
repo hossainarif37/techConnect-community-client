@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface InputProps {
     label: string;
@@ -51,7 +52,7 @@ const Input = ({ label, type, register, id }: InputProps) => {
                     onClick={() => setEyeToggle(eyeToggle ? false : true)}
                     className="absolute top-2 right-3 p-2 cursor-pointer select-none hover:bg-gray-100 rounded-full"
                 >
-                    {eyeToggle ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    {eyeToggle ? <FaEye /> : <FaEyeSlash />}
                 </span>
             }
         </div>
