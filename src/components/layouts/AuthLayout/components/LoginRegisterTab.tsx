@@ -4,8 +4,6 @@ import Link from "next/link";
 import tabStyles from "./tab.module.css"
 
 const LoginRegisterTab = ({ isLoginComponent, setIsLoginComponent }: any) => {
-    // const isLoginComponent = useisLoginComponent();
-    // console.log(isLoginComponent);
 
 
     return (
@@ -18,7 +16,6 @@ const LoginRegisterTab = ({ isLoginComponent, setIsLoginComponent }: any) => {
                     onClick={() => setIsLoginComponent(true)}
                     className={`${tabStyles.tab} ${isLoginComponent ? 'text-white' : 'text-gray-700'}`}>
                     Login
-
                 </button>
 
                 {/* Register */}
