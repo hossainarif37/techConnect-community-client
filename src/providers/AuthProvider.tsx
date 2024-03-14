@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice)
-    // const { data: userData, isLoading, isError, error } = useCurrentUserQuery(undefined);
+
     const token = Cookies.get('authToken');
     // console.log(token);
     const [getCurrentUser, { data: userData, isLoading, isError, error }] = useLazyCurrentUserQuery();

@@ -26,7 +26,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
         toast.promise(registerResponse, {
             loading: 'Loading',
             success: ({ message }) => {
-                router.push('/login');
+                setIsLoginComponent(true);
                 return message;
 
             },
