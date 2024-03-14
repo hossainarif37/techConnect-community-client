@@ -25,9 +25,15 @@ const userApi = baseApi.injectEndpoints({
                 url: '/user/current-user',
                 method: 'GET',
             }),
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: '/auth/logout',
+                method: 'POST',
+            })
         })
     })
 })
 
 
-export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery } = userApi;
+export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery } = userApi;

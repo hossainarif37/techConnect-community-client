@@ -20,7 +20,7 @@ const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
                 user ?
                     <button onClick={() => {
                         Cookies.remove('authToken');
-                        dispatch(removeUser())
+                        dispatch(removeUser());
                     }}
                         className={`${!isDesktop && 'w-full'} btn border-black flex items-center justify-center gap-2`}>
                         <span>Logout</span>
