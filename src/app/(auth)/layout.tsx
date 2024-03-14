@@ -9,13 +9,13 @@ export default function Layout({
 }>) {
     return (
         <section className="container">
-            <Link className="flex items-center absolute top-10 hover:underline font-semibold" href={'/'}>
+            {/* <Link className="flex items-center absolute top-10 hover:underline font-semibold" href={'/'}>
                 <BiArrowBack className='mr-2' /> Back To Home
-            </Link>
+            </Link> */}
 
-            <div className="my-28 md:my-40">
+            <div className="h-screen flex items-center ">
 
-                <div className="md:w-[450px] mx-auto rounded md:shadow-lg px-5 md:p-10">
+                <div className="w-full md:w-[450px] mx-auto rounded md:shadow-lg px-5 md:p-10">
                     <LoginRegisterTab />
                     {children}
                 </div>

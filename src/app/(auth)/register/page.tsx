@@ -37,9 +37,6 @@ const Register = () => {
         });
     }
 
-
-
-
     return (
         <form
             onSubmit={handleSubmit(handleRegister)}
