@@ -6,36 +6,38 @@ import Link from "next/link";
 import InputWithLabel from "@/components/common/Input/InputWithLabel";
 import { useLoginMutation } from "@/redux/api/endpoints/users/users";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "@/types/types";
+import { setUser } from "@/redux/slices/user/userSlice";
+import Cookies from "js-cookie";
 
 interface IFormInput {
     email: string;
     password: string;
 }
 
-type LoginErrorType = {
-    status: number;
-    data: {
-        success: boolean;
-        message: string;
-    }
-}
 
-
-
-const Login = () => {
+const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
     const [login, { isLoading, isError, error }] = useLoginMutation();
+
+    const dispatch = useDispatch();
+    const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice);
 
 
     //* hanle login function
     const handleLogin = (data: IFormInput) => {
         const loginResponse = login({ email: data.email, password: data.password }).unwrap();
+        console.log(loginResponse);
+
 
         toast.promise(loginResponse, {
             loading: 'Loading',
-            success: ({ message }) => {
-                router.push('/');
+            success: ({ user, message, token }) => {
+                console.log(message);
+                dispatch(setUser({ user: user, isAuthenticated: true }));
+                Cookies.set('authToken', token);
                 return message;
 
             },
@@ -101,7 +103,10 @@ const Login = () => {
 
             </div>
             {/*//* Navigate to Register page */}
-            <p className="text-center"><span>Don't have an account? <Link className="text-primary underline" href='/register'>Create an account</Link></span></p>
+            <p className="text-center"><span>Don't have an account? <button
+                type="button"
+                onClick={() => setIsLoginComponent(false)}
+                className="text-primary underline">Create an account</button></span></p>
         </form>
     );
 };

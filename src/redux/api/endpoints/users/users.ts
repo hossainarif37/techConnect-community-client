@@ -1,3 +1,5 @@
+
+
 import { baseApi } from "../../baseApi";
 
 const userApi = baseApi.injectEndpoints({
@@ -7,7 +9,7 @@ const userApi = baseApi.injectEndpoints({
                 url: '/auth/login',
                 method: 'POST',
                 body
-            })
+            }),
         }),
 
         register: builder.mutation({
@@ -17,8 +19,15 @@ const userApi = baseApi.injectEndpoints({
                 body
             })
         }),
+
+        currentUser: builder.query({
+            query: () => ({
+                url: '/user/current-user',
+                method: 'GET',
+            }),
+        })
     })
 })
 
 
-export const { useLoginMutation, useRegisterMutation } = userApi;
+export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery } = userApi;

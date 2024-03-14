@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+import Login from "../../components/layouts/AuthLayout/components/Login/Login";
+import Register from "../../components/layouts/AuthLayout/components/Register/Register";
+import LoginRegisterTab from "../../components/layouts/AuthLayout/components/LoginRegisterTab";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -6,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 const Home = () => {
+
   return (
     <div>
       Home

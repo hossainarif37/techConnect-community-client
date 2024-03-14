@@ -3,9 +3,9 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Input from "@/components/common/Input/InputWithLabel";
 import { useRegisterMutation } from "@/redux/api/endpoints/users/users";
 import toast from "react-hot-toast";
+import Input from "@/components/common/Input/InputWithLabel";
 
 interface IFormInput {
     name: string;
@@ -13,7 +13,7 @@ interface IFormInput {
     password: string;
 }
 
-const Register = () => {
+const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
     const [registerUser, { isLoading, isError, error }] = useRegisterMutation();
@@ -120,7 +120,10 @@ const Register = () => {
 
             {/*//* Navigate to Register page */}
             <p className="text-center">
-                <span>Already have an account? <Link className="text-primary underline" href='/login'>Login</Link></span>
+                <span>Already have an account? <button
+                    type="button"
+                    onClick={() => setIsLoginComponent(true)}
+                    className="text-primary underline">Login</button></span>
             </p>
 
         </form>
