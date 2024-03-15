@@ -29,20 +29,17 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
     //* hanle login function
     const handleLogin = (data: IFormInput) => {
         const loginResponse = login({ email: data.email, password: data.password }).unwrap();
-        console.log(loginResponse);
 
 
         toast.promise(loginResponse, {
             loading: 'Loading',
             success: ({ user, message, token }) => {
-                console.log(message);
                 dispatch(setUser({ user: user, isAuthenticated: true }));
                 Cookies.set('authToken', token);
                 return message;
 
             },
             error: ({ data }) => {
-                console.log(data)
                 return data?.message || 'Login failed';
             },
         });

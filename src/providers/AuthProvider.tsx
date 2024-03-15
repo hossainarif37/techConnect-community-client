@@ -14,10 +14,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice)
 
     const token = Cookies.get('authToken');
-    // console.log(token);
     const [getCurrentUser, { data: userData, isLoading, isError, error }] = useLazyCurrentUserQuery();
 
-    console.log(userData);
 
     useEffect(() => {
         getCurrentUser(undefined);
@@ -34,7 +32,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Ensure children are returned when the user is authenticated
     if (isAuthenticated) {
-        console.log('User is authenticated', userData);
         return children;
     }
 

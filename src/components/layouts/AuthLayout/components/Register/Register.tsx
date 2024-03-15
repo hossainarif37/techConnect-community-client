@@ -31,7 +31,6 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
             },
             error: ({ data }) => {
-                console.log(data)
                 return data?.message || 'Registration failed';
             },
         });
