@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import Loading from "../components/common/Loading"
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [userData, token, isAuthenticated]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     // Ensure children are returned when the user is authenticated
