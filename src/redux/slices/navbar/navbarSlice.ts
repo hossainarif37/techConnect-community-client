@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState: INavbar = {
     isNavToggle: false,
+    isProfileDropdown: true,
 }
 
 
@@ -13,10 +14,13 @@ const navbarSlice = createSlice({
         toggleNav: (state) => {
             state.isNavToggle = !state.isNavToggle
         },
+        toggleProfileDropdown: (state) => {
+            state.isProfileDropdown = !state.isProfileDropdown
+        },
     },
 })
 
 
-export const { toggleNav } = navbarSlice.actions;
+export const { toggleNav, toggleProfileDropdown } = navbarSlice.actions;
 
 export default navbarSlice.reducer;

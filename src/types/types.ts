@@ -25,7 +25,8 @@ export interface IUser {
 
 // Navbar Slice Interface
 export interface INavbar {
-    isNavToggle: boolean
+    isNavToggle: boolean,
+    isProfileDropdown: boolean;
 }
 
 export type LoginErrorType = {
