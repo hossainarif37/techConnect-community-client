@@ -18,8 +18,8 @@ const Navbar = () => {
 
 
     return (
-        <nav className="bg-white  p-3 lg:py-5 sticky top-0 z-40 container">
-            <div className="flex container justify-between items-center">
+        <nav className="bg-white  p-3 lg:py-5 sticky top-0 z-40">
+            <div className="flex justify-between items-center">
 
                 {/* Navbar Logo */}
                 <div className="flex items-center gap-3">
