@@ -1,18 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
 import profile_blank_image from "../../../public/icons/profile_blank_image.png";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleProfileDropdown } from "@/redux/slices/navbar/navbarSlice";
+import { IRootState } from "@/types/types";
+import UserMenuDropdown from "../shared/Navbar/UserMenuDropDown/UserMenuDropdown";
 
-type UserImageProps = {
+type UserImagePropsTypes = {
     profilePicture?: string;
     customWidth: string;
 }
 
-const UserImage = ({ profilePicture, customWidth }: UserImageProps) => {
+const UserImage = ({ profilePicture, customWidth }: UserImagePropsTypes) => {
+
+    const dispatch = useDispatch();
+
+    const { isProfileDropdown } = useSelector((state: IRootState) => state.navbarSlice);
+
+    const handleProfileDropdown = () => {
+        dispatch(toggleProfileDropdown());
+    }
+
+    console.log(isProfileDropdown);
+
     return (
-        <Link className="relative cursor-pointer group" href="/profile">
-            <div className="w-full h-full absolute rounded-full opacity-0 group-hover:opacity-10 bg-black top-0 duration-100"></div>
-            <Image className={`${customWidth} relative cursor-pointer group`} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
-        </Link>
+        <>
+            <div
+                onClick={handleProfileDropdown}
+                className="relative cursor-pointer group" title="Account"
+            >
+
+                <div className="w-full h-full absolute rounded-full opacity-0 group-hover:opacity-30 bg-black top-0 duration-100"></div>
+
+                <Image className={`${customWidth} relative cursor-pointer group`} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
+
+                {isProfileDropdown && <UserMenuDropdown />}
+            </div>
+
+
+        </>
     );
 };
 
