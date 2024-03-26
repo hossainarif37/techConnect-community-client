@@ -9,9 +9,15 @@ import { removeUser } from "@/redux/slices/user/userSlice";
 import { LuLogOut } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import Loading from "@/components/common/Loading";
 
 const UserMenuDropdown = () => {
     const dispatch = useDispatch();
+    const { user } = useSelector((state: IRootState) => state.userSlice);
+    if (!user) {
+        return <Loading />
+    }
+
 
     return (
         <>
@@ -21,7 +27,7 @@ const UserMenuDropdown = () => {
             <ul className={`${userDropdownStyles.userProfileDropdown} `}>
                 <li>
                     <Link
-                        href="#"
+                        href={`/profile/${user._id}/posts`}
                         title="Profile"
                     >
                         <span><CgProfile /></span>

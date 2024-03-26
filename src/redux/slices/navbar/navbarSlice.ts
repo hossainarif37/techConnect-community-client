@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState: INavbar = {
     isNavToggle: false,
-    isProfileDropdown: true,
+    isProfileDropdown: false,
 }
 
 

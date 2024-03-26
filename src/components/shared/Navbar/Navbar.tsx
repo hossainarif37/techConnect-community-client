@@ -15,8 +15,6 @@ const Navbar = () => {
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
 
 
-
-
     return (
         <nav className="bg-white  p-3 lg:py-5 sticky top-0 z-40">
             <div className="flex justify-between items-center">
