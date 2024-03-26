@@ -21,7 +21,7 @@ const UserMenuDropdown = () => {
             <ul className={`${userDropdownStyles.userProfileDropdown} `}>
                 <li>
                     <Link
-                        href="#"
+                        href="/profile/me"
                         title="Profile"
                     >
                         <span><CgProfile /></span>

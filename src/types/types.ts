@@ -19,7 +19,7 @@ export type UserType = {
 // User Interface
 export interface IUser {
     isAuthenticated: boolean;
-    user: null | UserType
+    user: UserType | null
 }
 
 

@@ -21,7 +21,6 @@ const UserImage = ({ profilePicture, customWidth }: UserImagePropsTypes) => {
         dispatch(toggleProfileDropdown());
     }
 
-    console.log(isProfileDropdown);
 
     return (
         <>
