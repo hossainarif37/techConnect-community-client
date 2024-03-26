@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import profile_blank_image from "../../../../../public/icons/profile_blank_image.png";
 import Loading from "@/components/common/Loading";
+import { FaCloudUploadAlt } from "react-icons/fa";
 
 
 const ProfileHeader = () => {
@@ -15,6 +16,10 @@ const ProfileHeader = () => {
     }
 
     const { name, profilePicture, followers, following } = user;
+
+    const handleUploadPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value);
+    }
 
     return (
         <section >
@@ -43,7 +48,11 @@ const ProfileHeader = () => {
                     </div>
 
                     {/* Change Photo Button */}
-                    <button type="button" className="btn font-semibold border border-accent">Change Photo</button>
+                    <label htmlFor="upload-photo" className="btn cursor-pointer font-semibold border flex items-center border-accent gap-3">
+                        <input onChange={handleUploadPhoto} type="file" className="hidden" id="upload-photo" />
+                        <span className="text-2xl text-gray-800"><FaCloudUploadAlt /></span>
+                        <span>Upload Photo</span>
+                    </label>
                 </div>
 
             </div>
