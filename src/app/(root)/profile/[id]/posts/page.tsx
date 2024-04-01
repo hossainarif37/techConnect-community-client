@@ -1,5 +1,5 @@
 
-const ProfilePostPage = () => {
+const ProfilePage = () => {
     return (
         <div>
             ProfilePostPage
@@ -7,4 +7,4 @@ const ProfilePostPage = () => {
     );
 };
 
-export default ProfilePostPage;
+export default ProfilePage;
