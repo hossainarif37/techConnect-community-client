@@ -9,16 +9,17 @@ import UserMenuDropdown from "../shared/Navbar/UserMenuDropDown/UserMenuDropdown
 type UserImagePropsTypes = {
     profilePicture?: string;
     customWidth: string;
+    isProfileDropdownBtn?: boolean;
 }
 
-const UserImage = ({ profilePicture, customWidth }: UserImagePropsTypes) => {
+const UserImage = ({ profilePicture, customWidth, isProfileDropdownBtn }: UserImagePropsTypes) => {
 
     const dispatch = useDispatch();
 
     const { isProfileDropdown } = useSelector((state: IRootState) => state.navbarSlice);
 
     const handleProfileDropdown = () => {
-        dispatch(toggleProfileDropdown());
+        isProfileDropdownBtn && dispatch(toggleProfileDropdown());
     }
 
 
@@ -33,7 +34,7 @@ const UserImage = ({ profilePicture, customWidth }: UserImagePropsTypes) => {
 
                 <Image className={`${customWidth} relative cursor-pointer group`} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
 
-                {isProfileDropdown && <UserMenuDropdown />}
+                {(isProfileDropdown && isProfileDropdownBtn) && <UserMenuDropdown />}
             </div>
 
 

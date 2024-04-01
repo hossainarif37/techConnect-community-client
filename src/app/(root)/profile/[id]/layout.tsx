@@ -32,12 +32,9 @@ export default function ProfileLayout({
                         <CatergorySideBar />
                     </div>
 
-                    {/* Posts Area */}
-                    <div>
-                        {children}
-                    </div>
+                    {/* Newsfeed Area */}
+                    {children}
                 </div>
-                {/* <NewsFeedLayout /> */}
             </main>
         </>
     );
