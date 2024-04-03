@@ -1,0 +1,18 @@
+.reactionIcons{
+    @apply flex justify-between text-gray-600
+}
+
+.reactionIcons button{
+    @apply flex items-center gap-x-1 py-1  px-3
+}
+.reactionIcons button:hover{
+    @apply flex items-center gap-x-1 bg-white-secondary  rounded
+}
+
+.reactionIcons span{
+    @apply text-3xl text-black-secondary
+}
+
+.reactionIcons p{
+    @apply text-xl font-semibold
+}
