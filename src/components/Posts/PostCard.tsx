@@ -5,8 +5,9 @@ import { Icon } from "@iconify/react"
 
 
 
-const PostCard = ({ post, profilePicture, name }: any) => {
-    const { content, category } = post;
+const PostCard = ({ post }: any) => {
+    const { content, category, author } = post;
+    const { name, profilePicture } = author;
 
     return (
         <div className="bg-white py-3 px-10 rounded-xl">

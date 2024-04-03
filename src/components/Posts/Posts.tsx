@@ -11,7 +11,6 @@ const Posts = () => {
         return <Loading />
     }
 
-    const { author, name } = posts;
 
     return (
         <section className="lg:space-y-5 lg:py-5">
@@ -19,8 +18,6 @@ const Posts = () => {
                 posts?.map((post: any, i: number) => <PostCard
                     key={i}
                     post={post}
-                    name={name}
-                    profilePicture={author?.profilePicture}
                 />)
             }
 
