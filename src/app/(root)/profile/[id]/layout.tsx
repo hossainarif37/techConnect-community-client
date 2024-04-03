@@ -3,6 +3,7 @@ import Navbar from "@/components/shared/Navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileTabs from "../components/ProfileTabs/ProfileTabs";
+import CatergorySideBar from "../components/CatergorySideBar";
 
 
 export const metadata: Metadata = {
@@ -16,20 +17,24 @@ export default function ProfileLayout({
     children: React.ReactNode;
 }>) {
 
-
-
     return (
         <>
             <ProfileHeader />
 
-            <div className="container">
+            <main className="container">
                 <hr className="mt-5" />
                 <ProfileTabs />
-                {/* <NewsFeedLayout /> */}
-            </div>
 
-            <main>
-                {children}
+                {/* Newsfeed Layout */}
+                <div className="flex">
+                    {/* Category Sidebar */}
+                    <div>
+                        <CatergorySideBar />
+                    </div>
+
+                    {/* Newsfeed Area */}
+                    {children}
+                </div>
             </main>
         </>
     );

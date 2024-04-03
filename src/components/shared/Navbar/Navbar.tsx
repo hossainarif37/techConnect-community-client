@@ -43,7 +43,7 @@ const Navbar = () => {
                     </ul>
 
 
-                    <UserImage customWidth="w-14" />
+                    <UserImage customWidth="w-14" isProfileDropdownBtn={true} />
 
                     {/* Authentication Button */}
                     {/* <LoginLogoutButton isDesktop={true} /> */}
