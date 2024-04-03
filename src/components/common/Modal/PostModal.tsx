@@ -1,8 +1,8 @@
 "use client"
 
 
-import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { BaseSyntheticEvent, useContext, useEffect, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import toast from "react-hot-toast";
 import UserImage from "../UserImage";
@@ -16,15 +16,13 @@ type PostModalTypes = {
     closeModal: () => void;
 }
 
+type PostDataTypes = (data: FieldValues, event: BaseSyntheticEvent<object, any, any> | undefined) => void;
+
+
 const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
-    const [textareaRows, setTextareaRows] = useState(5); // Initial number of rows
+    const [textareaRows, setTextareaRows] = useState(5);
     const [isExistText, setIsExistText] = useState(false);
     const { user } = useSelector((state: IRootState) => state.userSlice);
-    // const { _id, refetch, isPending } = useContext(ProfileContext);
-
-    // User
-    // const { user } = useContext(AuthContext);
-
 
     const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm();
 
@@ -64,27 +62,32 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
 
 
-    // // Handle Create Post
-    // const handleCreatePost = (data) => {
-    //     postData('/api/article', { ...data, author: _id })
-    //         .then(result => {
-    //             if (result.success) {
-    //                 toast.success(result.message);
-    //                 refetch();
-    //                 reset();
-    //                 closeModal();
-    //             }
-    //         })
+    // Handle Create Post
+    const handleCreatePost: PostDataTypes = (data, event) => {
+        // postData('/api/article', { ...data, author: _id })
+        //     .then(result => {
+        //         if (result.success) {
+        //             toast.success(result.message);
+        //             refetch();
+        //             reset();
+        //         }
+        //     })
 
-    //     setIsExistText(false);
-    // }
+
+        closeModal();
+        console.log(data);
+        reset();
+
+        setIsExistText(false);
+    }
+    console.log(errors);
 
     return (
         <>
             <div className={`${isModalOpen ? "scale-100" : "scale-0"} px-2 bg-black bg-opacity-30 top-0 flex items-center justify-center w-full z-50 h-screen fixed right-0`}>
 
                 {/*//* Modal Body */}
-                <form className={`bg-white lg:w-2/5 lg:mt-20 xl:mt-10 p-5 duration-300 rounded-xl ${isModalOpen ? "scale-100" : "scale-0"}`}>
+                <form onSubmit={handleSubmit(handleCreatePost)} className={`bg-white lg:w-2/5 lg:mt-20 xl:mt-10 p-5 duration-300 rounded-xl ${isModalOpen ? "scale-100" : "scale-0"}`}>
 
 
                     {/* Modal Heading Start */}
@@ -101,7 +104,7 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
                                 {/* Topics Category Select */}
                                 <select
-                                    {...register('category')}
+                                    {...register('category', { required: 'Category is required!' })}
                                     className=' p-1 mt-1 outline-none border border-secondary rounded-lg cursor-pointer duration-100'
                                     name="category">
 
@@ -119,6 +122,10 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
                                         </option>)
                                     }
                                 </select>
+                                {/* Errors */}
+                                {
+                                    typeof errors?.category?.message === 'string' && <p className="error">{errors?.category?.message}</p>
+                                }
                             </div>
 
                         </div>
