@@ -1,10 +1,11 @@
 import Link from "next/link";
 import UserImage from "../common/UserImage";
 import postCardStyles from "./postcard.module.css"
+import { Icon } from "@iconify/react"
 
 
 
-const PostCard = ({ post, profilePicture, name }) => {
+const PostCard = ({ post, profilePicture, name }: any) => {
     const { content, category } = post;
 
     return (
@@ -31,7 +32,7 @@ const PostCard = ({ post, profilePicture, name }) => {
                         <div className="flex gap-x-1 bg-white-secondary px-1 mt-1 rounded-lg items-center">
 
                             {/* Category Icon */}
-                            <span className="text-3xl">Category Icon</span>
+                            <span className="text-3xl"><Icon icon="f7:menu" /></span>
 
                             {/* Category Text */}
                             <span className="font-bold">{category}</span>
@@ -48,7 +49,7 @@ const PostCard = ({ post, profilePicture, name }) => {
                 >
                     {/* Save Icon */}
                     <span className="text-3xl">
-                        S
+                        <Icon icon="fluent:save-copy-20-regular" />
                     </span>
                     <span className="font-bold">Save</span>
                 </button>
@@ -70,7 +71,7 @@ const PostCard = ({ post, profilePicture, name }) => {
                 {/* Like */}
                 <button>
                     {/* Like Icon */}
-                    <span>L</span>
+                    <span><Icon icon="ant-design:like-outlined" /></span>
                     {/* Text */}
                     <p>Like</p>
                 </button>
@@ -78,7 +79,7 @@ const PostCard = ({ post, profilePicture, name }) => {
                 {/* Comment */}
                 <button>
                     {/* Comment Icon */}
-                    <span>C</span>
+                    <span><Icon icon="octicon:comment-24" /></span>
                     {/* Text */}
                     <p>Comment</p>
                 </button>
@@ -86,7 +87,7 @@ const PostCard = ({ post, profilePicture, name }) => {
                 {/* Share */}
                 <button>
                     {/* Share Icon */}
-                    <span>S</span>
+                    <span><Icon icon="uil:share" /></span>
                     {/* Text */}
                     <p>Share</p>
                 </button>
