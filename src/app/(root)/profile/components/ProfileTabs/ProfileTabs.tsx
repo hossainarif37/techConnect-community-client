@@ -22,16 +22,17 @@ const ProfileTabs = () => {
             title: "Posts",
             path: `/profile/${_id}/posts`,
         },
+        // {
+        //     title: 'Questions',
+        //     path: `/profile/${_id}/questions`,
+        //     // path: "/questions",
+        // },
         {
-            title: 'Questions',
-            path: `/profile/${_id}/questions`,
-            // path: "/questions",
-        },
-        {
-            title: 'Saved',
+            title: 'Jobs',
             path: "#",
             // path: "/courses",
         },
+
         {
             title: 'Books',
             path: "#",
@@ -41,7 +42,12 @@ const ProfileTabs = () => {
             title: 'Courses',
             path: "#",
             // path: "/meetup",
-        }
+        },
+        {
+            title: 'Saved',
+            path: "#",
+            // path: "/courses",
+        },
     ]
 
     return (
