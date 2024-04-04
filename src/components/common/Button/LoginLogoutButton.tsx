@@ -27,9 +27,7 @@ const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
                         <span className="mt-[2px]"><LuLogOut /></span>
                     </button>
                     :
-                    <button onClick={() => {
-                        router.push('/login');
-                    }} className={`${!isDesktop && 'w-full'}`}>Login</button>
+                    <button className={`${!isDesktop && 'w-full'}`}>Login</button>
             }
         </>
     );
