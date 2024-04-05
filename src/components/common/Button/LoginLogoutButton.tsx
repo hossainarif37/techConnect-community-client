@@ -14,14 +14,21 @@ const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
 
     const router = useRouter();
 
+    const handleLogout = () => {
+        Cookies.remove('authToken');
+        dispatch(removeUser());
+        // Use setTimeout to ensure the state update is processed before redirecting
+        setTimeout(() => {
+            router.push('/');
+        }, 0);
+    };
+
+
     return (
         <>
             {
                 user ?
-                    <button onClick={() => {
-                        Cookies.remove('authToken');
-                        dispatch(removeUser());
-                    }}
+                    <button onClick={handleLogout}
                         className={`${!isDesktop && 'w-full'} btn border-black flex items-center justify-center gap-2`}>
                         <span>Logout</span>
                         <span className="mt-[2px]"><LuLogOut /></span>

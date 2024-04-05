@@ -28,6 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     }, [userData, token, isAuthenticated]);
 
+
     if (isLoading) {
         return <Loading />;
     }
