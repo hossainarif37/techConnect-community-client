@@ -15,6 +15,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice)
 
     const token = Cookies.get('authToken');
+    const router = useRouter();
     const [getCurrentUser, { data: userData, isLoading, isError, error }] = useLazyCurrentUserQuery();
 
 
@@ -26,6 +27,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
     }, [userData, token, isAuthenticated]);
+
 
     if (isLoading) {
         return <Loading />;
@@ -45,6 +47,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     <h1 className="text-3xl">Internal server error!</h1>
                 </div>
             }
+            router.push('/');
             return <AuthLayout />
         }
     }

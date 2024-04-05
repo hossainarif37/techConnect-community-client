@@ -9,9 +9,30 @@ const postsApi = baseApi.injectEndpoints({
                 url: '/posts',
                 method: 'GET',
             }),
+            providesTags: ['Posts'],
+        }),
+
+        getPostsByUser: builder.query({
+            query: (userId) => {
+                console.log(userId);
+                return ({
+                    url: `/posts/${userId}`,
+                    method: 'GET',
+                })
+            },
+            providesTags: ['Posts']
+        }),
+
+        createPost: builder.mutation({
+            query: (data) => ({
+                url: '/posts',
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['Posts'],
         })
     })
 })
 
 
-export const { usePostsQuery } = postsApi;
+export const { usePostsQuery, useCreatePostMutation, useGetPostsByUserQuery } = postsApi;

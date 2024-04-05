@@ -10,6 +10,7 @@ import { categories } from "@/constants/categories";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
+import { useCreatePostMutation } from "@/redux/api/endpoints/posts/posts";
 
 type PostModalTypes = {
     isModalOpen: boolean;
@@ -23,6 +24,8 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
     const [isExistText, setIsExistText] = useState(false);
     const { user } = useSelector((state: IRootState) => state.userSlice);
+
+    const [createPost, { isLoading, isError, error, data }] = useCreatePostMutation();
 
     const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm();
 
@@ -64,23 +67,26 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
     // Handle Create Post
     const handleCreatePost: PostDataTypes = (data, event) => {
-        // postData('/api/article', { ...data, author: _id })
-        //     .then(result => {
-        //         if (result.success) {
-        //             toast.success(result.message);
-        //             refetch();
-        //             reset();
-        //         }
-        //     })
-
+        const postResponse = createPost({ ...data, author: user?._id }).unwrap();
 
         closeModal();
         console.log(data);
         reset();
 
         setIsExistText(false);
+
+        toast.promise(postResponse, {
+            loading: 'Loading',
+            success: ({ message }) => {
+                return message;
+            },
+            error: ({ data }) => {
+                return data?.message || 'Post Create failed';
+            },
+        });
     }
-    console.log(errors);
+
+
 
     return (
         <>

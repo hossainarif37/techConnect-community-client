@@ -10,6 +10,7 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 
 const ProfileHeader = () => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
+    console.log(user)
 
     if (!user) {
         return <Loading />
