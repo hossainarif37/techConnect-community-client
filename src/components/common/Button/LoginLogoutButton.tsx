@@ -15,12 +15,10 @@ const LoginLogoutButton = ({ isDesktop }: { isDesktop: boolean }) => {
     const router = useRouter();
 
     const handleLogout = () => {
+        router.push('/');
         Cookies.remove('authToken');
         dispatch(removeUser());
         // Use setTimeout to ensure the state update is processed before redirecting
-        setTimeout(() => {
-            router.push('/');
-        }, 0);
     };
 
 

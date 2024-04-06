@@ -4,14 +4,17 @@ import PostCard from "@/components/Posts/PostCard";
 import Loading from "@/components/common/Loading";
 import { useGetPostsByUserQuery } from "@/redux/api/endpoints/posts/posts";
 import { IRootState } from "@/types/types";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
 
 const ProfilePosts = () => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
-    const { isLoading, isError, error, data } = useGetPostsByUserQuery(user?._id);
-    console.log(error);
-    console.log(data)
+    const searchParams = useSearchParams();
+    console.log(searchParams.get('categories'));
+    const categories = searchParams.get('categories') || '';
+    const { isLoading, isError, error, data } = useGetPostsByUserQuery({ userId: user?._id, categories });
+
 
     if (isLoading) {
         return <Loading />

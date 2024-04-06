@@ -13,16 +13,16 @@ const postsApi = baseApi.injectEndpoints({
         }),
 
         getPostsByUser: builder.query({
-            query: (userId) => {
-                console.log(userId);
+            query: ({ userId, categories }) => {
+                console.log(userId, categories);
+                // Assuming your API supports filtering by categories through query parameters
                 return ({
-                    url: `/posts/${userId}`,
+                    url: `/posts/${userId}?categories=${categories}`,
                     method: 'GET',
                 })
             },
             providesTags: ['Posts']
         }),
-
         createPost: builder.mutation({
             query: (data) => ({
                 url: '/posts',
