@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { IoIosList } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import { categories } from "@/constants/categories";
+import SearchInput from "@/components/common/Input/SearchInput";
 
 const CatergorySideBar = () => {
     const [categoryQueries, setCategoryQueries] = useState<string[]>([]);
@@ -19,6 +20,7 @@ const CatergorySideBar = () => {
         }
         setCategoryQueries(newQueries);
     };
+
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -41,6 +43,9 @@ const CatergorySideBar = () => {
             <div className="flex items-center gap-2 pb-3">
                 <span className="text-4xl"><IoIosList /></span> <h3 className="font-bold text-black-secondary">Select Categories</h3>
             </div>
+
+            {/* Search Input */}
+            <SearchInput searchInputText="Search Category" />
 
             {/* Categories Selection Input Area */}
             <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 py-5">

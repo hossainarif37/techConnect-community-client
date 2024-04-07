@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
+import CatergorySideBar from "./profile/components/CatergorySideBar";
 
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function Layout({
     return (
         <>
             <Navbar />
-            <main>
+            <main className="px-3">
                 {children}
             </main>
         </>

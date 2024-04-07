@@ -5,8 +5,8 @@ import { baseApi } from "../../baseApi";
 const postsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         posts: builder.query({
-            query: () => ({
-                url: '/posts',
+            query: (categories) => ({
+                url: `/posts?categories=${categories}`,
                 method: 'GET',
             }),
             providesTags: ['Posts'],
