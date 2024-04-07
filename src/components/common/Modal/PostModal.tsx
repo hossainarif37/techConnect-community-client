@@ -22,8 +22,9 @@ type PostDataTypes = (data: FieldValues, event: BaseSyntheticEvent<object, any, 
 
 const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
-    const [isExistText, setIsExistText] = useState(false);
+
     const { user } = useSelector((state: IRootState) => state.userSlice);
+    const [hasText, setHasText] = useState(false);
 
     const [createPost, { isLoading, isError, error, data }] = useCreatePostMutation();
 
@@ -33,7 +34,7 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
     const handleModalClose = () => {
         closeModal();
-        setIsExistText(false);
+        setHasText(false);
         if (contentInput) {
             (contentInput as HTMLTextAreaElement).value = '';
         }
@@ -50,11 +51,10 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
     // Handle Text Area Change
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (e.target.value) {
-            setIsExistText(true)
-        } else {
-            setIsExistText(false)
-        }
+        const text = e.target.value;
+        const trimmedText = text.trim();
+        setHasText(trimmedText.length > 0);
+
         if (textareaRows !== 8) {
             // Calculate the number of rows dynamically based on the textarea content
             const numberOfLineBreaks = (e.target.value.match(/\n/g) || []).length;
@@ -73,7 +73,7 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
         console.log(data);
         reset();
 
-        setIsExistText(false);
+        setHasText(false);
 
         toast.promise(postResponse, {
             loading: 'Loading',
@@ -113,10 +113,9 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
                                     {...register('category', { required: 'Category is required!' })}
                                     className=' p-1 mt-1 outline-none border border-secondary rounded-lg cursor-pointer duration-100'
                                     name="category"
-                                    defaultValue='Select Category'
                                 >
 
-                                    <option value='' disabled
+                                    <option value='' disabled selected
                                     >
                                         Select Category
                                     </option>
@@ -149,21 +148,25 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
                     {/* Textarea */}
                     <div className="mt-4">
                         <textarea
-                            {...register('content')}
+                            {...register('content', { required: 'Content is required! Share you thoughts' })}
                             className='w-full outline-none text-xl font-sans placeholder:font-normal text-black-secondary' placeholder='Write here...'
                             id="content-input"
                             cols={30}
                             rows={textareaRows}
                             onChange={handleTextareaChange}
                         ></textarea>
+                        {/* Errors */}
+                        {
+                            typeof errors?.content?.message === 'string' && <p className="error">{errors?.content?.message}</p>
+                        }
                     </div>
 
                     {/* Submit Button */}
                     <div className="mt-4 flex justify-end">
                         <button
-                            disabled={!isExistText}
+                            disabled={!hasText}
                             type="submit"
-                            className={` ${!isExistText ? "btn-disabled" : "btn bg-secondary hover:border-secondary text-white hover:bg-transparent  hover:text-black-secondary"} select-none  py-3 rounded-lg xl:py-4 lg:py-3  w-full  font-bold`}
+                            className={` ${!hasText ? "btn-disabled" : "btn bg-secondary hover:border-secondary text-white hover:bg-transparent hover:text-black-secondary"} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
                         >
                             Post
                         </button>
