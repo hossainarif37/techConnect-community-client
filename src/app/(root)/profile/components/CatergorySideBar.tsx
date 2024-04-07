@@ -40,8 +40,8 @@ const CatergorySideBar = () => {
     return (
         <aside className="lg:w-[480px] lg:pr-10 px-3 lg:px-0">
             {/* Categories area Title */}
-            <div className="flex items-center gap-2 pb-3">
-                <span className="text-4xl"><IoIosList /></span> <h3 className="font-bold text-black-secondary">Select Categories</h3>
+            <div className="flex items-center gap-2">
+                <span className="text-4xl"><IoIosList /></span> <h3 className="font-bold text-2xl text-black-secondary">Select Categories</h3>
             </div>
 
             {/* Search Input */}

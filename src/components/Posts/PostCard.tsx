@@ -24,7 +24,7 @@ const PostCard = ({ post }: any) => {
 
                     {/* User Image */}
                     <UserImage
-                        customWidth="w-20"
+                        customWidth="w-16"
                         profilePicture={profilePicture}
                     />
 

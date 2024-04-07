@@ -7,6 +7,7 @@ import Loading from "../common/Loading";
 import UserImage from "../common/UserImage";
 import { IoSearchOutline } from "react-icons/io5";
 import SearchInput from "../common/Input/SearchInput";
+import Link from "next/link";
 
 type UserType = {
     name: string;
@@ -19,11 +20,6 @@ const ActiveUserSideBar = () => {
 
     return (
         <aside className="lg:w-[480px] lg:pr-10 px-3">
-            {/* Categories area Title */}
-            <div className="flex items-center gap-2 pb-3">
-                <span className="text-4xl"><IoIosList /></span> <h3 className="font-bold text-black-secondary">Select Categories</h3>
-            </div>
-
             {/* Search Input */}
             <SearchInput searchInputText="Search User" />
 
@@ -34,7 +30,7 @@ const ActiveUserSideBar = () => {
                         className="flex items-center gap-2 lg:gap-3"
                     >
                         <UserImage customWidth="w-16" />
-                        <h3 className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer">{user.name}</h3>
+                        <Link href='#' className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer">{user.name}</Link>
                     </div>)
                 }
             </div>
