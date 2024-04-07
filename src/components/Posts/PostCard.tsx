@@ -2,6 +2,7 @@ import Link from "next/link";
 import UserImage from "../common/UserImage";
 import postCardStyles from "./postcard.module.css"
 import { Icon } from "@iconify/react"
+import React from "react";
 
 
 
@@ -9,18 +10,21 @@ const PostCard = ({ post }: any) => {
     const { content, category, author } = post;
     const { name, profilePicture } = author;
 
+    // Split the content by a single newline character
+    const contentLines = content.split('\n');
+
     return (
         <div className="bg-white py-3 px-10 rounded-xl">
 
             {/* Header Start */}
-            <div className="flex justify-between items-center text-black-secondary">
+            <div className="flex justify-between items-center text-black-secondary mb-2">
 
                 {/* Heading Left */}
                 <div className='flex gap-x-3 items-center'>
 
                     {/* User Image */}
                     <UserImage
-                        customWidth="w-20"
+                        customWidth="w-16"
                         profilePicture={profilePicture}
                     />
 
@@ -59,9 +63,20 @@ const PostCard = ({ post }: any) => {
             {/* Header End */}
 
             {/* Content */}
-            <p className="py-3 xl:text-xl lg:text-base">
-                {content}
-            </p>
+            {
+                contentLines.map((line: string, index: number) => {
+                    // Check if the next line is also empty to determine if we need a break
+                    const isNextLineEmpty = contentLines[index + 1] === '';
+
+                    return (
+                        <React.Fragment key={`fragment-${index}`}>
+                            {/* Render the line in a <p> tag */}
+                            <p className="pl-2 xl:text-xl lg:text-base">{line}</p>
+                            {/* If the next line is empty, render a <br /> tag to preserve the line break */}
+                            {isNextLineEmpty && <br key={`break-${index}`} />}
+                        </React.Fragment>
+                    );
+                })}
 
             {/* horizontal line */}
             <hr className="mt-5 mb-2" />
