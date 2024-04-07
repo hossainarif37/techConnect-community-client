@@ -8,26 +8,24 @@ import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
 
+
 const ProfilePosts = () => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const searchParams = useSearchParams();
-    console.log(searchParams.get('categories'));
     const categories = searchParams.get('categories') || '';
-    const { isLoading, isError, error, data } = useGetPostsByUserQuery({ userId: user?._id, categories });
-
+    const { isLoading, isError, error, data, refetch } = useGetPostsByUserQuery({ userId: user?._id, categories });
 
     if (isLoading) {
         return <Loading />
     }
 
-
     return (
         <section className="lg:space-y-5 lg:py-5">
             {
-                data?.posts?.map((post: any, i: number) => <PostCard
+                data?.posts?.length > 0 ? data?.posts?.map((post: any, i: number) => <PostCard
                     key={i}
                     post={post}
-                />)
+                />) : <h1 className="text-2xl font-semibold text-center mt-5 text-black-secondary">No posts here. Share your thoughts!</h1>
             }
 
         </section>

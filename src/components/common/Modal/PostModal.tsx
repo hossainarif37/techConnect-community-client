@@ -112,9 +112,11 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
                                 <select
                                     {...register('category', { required: 'Category is required!' })}
                                     className=' p-1 mt-1 outline-none border border-secondary rounded-lg cursor-pointer duration-100'
-                                    name="category">
+                                    name="category"
+                                    defaultValue='Select Category'
+                                >
 
-                                    <option value='' disabled selected
+                                    <option value='' disabled
                                     >
                                         Select Category
                                     </option>

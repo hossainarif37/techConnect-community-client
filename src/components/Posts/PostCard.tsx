@@ -2,6 +2,7 @@ import Link from "next/link";
 import UserImage from "../common/UserImage";
 import postCardStyles from "./postcard.module.css"
 import { Icon } from "@iconify/react"
+import React from "react";
 
 
 
@@ -68,12 +69,12 @@ const PostCard = ({ post }: any) => {
                     const isNextLineEmpty = contentLines[index + 1] === '';
 
                     return (
-                        <>
+                        <React.Fragment key={`fragment-${index}`}>
                             {/* Render the line in a <p> tag */}
-                            <p className="pl-2 xl:text-xl lg:text-base" key={`line-${index}`}>{line}</p>
+                            <p className="pl-2 xl:text-xl lg:text-base">{line}</p>
                             {/* If the next line is empty, render a <br /> tag to preserve the line break */}
                             {isNextLineEmpty && <br key={`break-${index}`} />}
-                        </>
+                        </React.Fragment>
                     );
                 })}
 

@@ -14,7 +14,6 @@ const postsApi = baseApi.injectEndpoints({
 
         getPostsByUser: builder.query({
             query: ({ userId, categories }) => {
-                console.log(userId, categories);
                 // Assuming your API supports filtering by categories through query parameters
                 return ({
                     url: `/posts/${userId}?categories=${categories}`,

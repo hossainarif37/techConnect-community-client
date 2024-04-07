@@ -35,10 +35,6 @@ const CatergorySideBar = () => {
         }
     }, [categoryQueries]);
 
-    // Example usage of searchParams
-    const categoriesFromUrl = searchParams.get('categories');
-    console.log(categoriesFromUrl);
-
     return (
         <aside className="lg:w-[480px] lg:pr-10 px-3 lg:px-0">
             {/* Categories area Title */}
