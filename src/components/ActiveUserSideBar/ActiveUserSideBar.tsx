@@ -8,6 +8,9 @@ import UserImage from "../common/UserImage";
 import { IoSearchOutline } from "react-icons/io5";
 import SearchInput from "../common/Input/SearchInput";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { IRootState } from "@/types/types";
+import { useEffect } from "react";
 
 type UserType = {
     name: string;
@@ -16,10 +19,16 @@ type UserType = {
 
 
 const ActiveUserSideBar = () => {
-    const { isLoading, isError, error, data } = useGetAllUsersQuery(undefined);
+    const { isLoading, isError, error, data, refetch } = useGetAllUsersQuery(undefined);
+
+    const { user } = useSelector((state: IRootState) => state.userSlice);
+
+    useEffect(() => {
+        refetch();
+    }, [user]);
 
     return (
-        <aside className="lg:w-[480px] lg:pr-10 px-3">
+        <aside className="lg:w-[480px] lg:pr-10 pl-5">
             {/* Search Input */}
             <SearchInput searchInputText="Search User" />
 

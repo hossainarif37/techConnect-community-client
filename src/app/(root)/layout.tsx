@@ -17,7 +17,7 @@ export default function Layout({
     return (
         <>
             <Navbar />
-            <main className="px-3">
+            <main className="px-5">
                 {children}
             </main>
         </>
