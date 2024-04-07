@@ -64,7 +64,7 @@ const PostCard = ({ post }: any) => {
 
             {/* Content */}
             {
-                contentLines.map((line, index) => {
+                contentLines.map((line: string, index: number) => {
                     // Check if the next line is also empty to determine if we need a break
                     const isNextLineEmpty = contentLines[index + 1] === '';
 
