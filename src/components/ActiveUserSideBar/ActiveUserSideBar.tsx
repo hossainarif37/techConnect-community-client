@@ -33,12 +33,12 @@ const ActiveUserSideBar = () => {
             <SearchInput searchInputText="Search User" />
 
             {/* Categories Selection Input Area */}
-            <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 py-5">
+            <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-5 py-5">
                 {
                     data?.users?.map((user: UserType, key: number) => <div key={key}
                         className="flex items-center gap-2 lg:gap-3"
                     >
-                        <UserImage customWidth="w-16" />
+                        <UserImage customWidth="w-12" />
                         <Link href='#' className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer">{user.name}</Link>
                     </div>)
                 }

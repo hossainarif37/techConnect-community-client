@@ -10,8 +10,17 @@ const PostCard = ({ post }: any) => {
     const { content, category, author } = post;
     const { name, profilePicture } = author;
 
-    // Split the content by a single newline character
-    const contentLines = content.split('\n');
+    // Function to split the text by newline and insert <br /> only if there is text after \n
+    const renderContentWithBr = (text: string) => {
+        const lines = text.split('\n');
+        return lines.map((line, index) => {
+            // Only add a <br /> if there is text after the newline
+            if (line.trim() === '' && index < lines.length - 1) {
+                return <br key={index} />;
+            }
+            return <React.Fragment key={index}><p className="pl-2 xl:text-xl lg:text-base">{line}</p></React.Fragment>;
+        });
+    };
 
     return (
         <div className="bg-white py-3 px-10 rounded-xl">
@@ -63,20 +72,8 @@ const PostCard = ({ post }: any) => {
             {/* Header End */}
 
             {/* Content */}
-            {
-                contentLines.map((line: string, index: number) => {
-                    // Check if the next line is also empty to determine if we need a break
-                    const isNextLineEmpty = contentLines[index + 1] === '';
-
-                    return (
-                        <React.Fragment key={`fragment-${index}`}>
-                            {/* Render the line in a <p> tag */}
-                            <p className="pl-2 xl:text-xl lg:text-base">{line}</p>
-                            {/* If the next line is empty, render a <br /> tag to preserve the line break */}
-                            {isNextLineEmpty && <br key={`break-${index}`} />}
-                        </React.Fragment>
-                    );
-                })}
+            {/* Render the modified content */}
+            {renderContentWithBr(content)}
 
             {/* horizontal line */}
             <hr className="mt-5 mb-2" />
