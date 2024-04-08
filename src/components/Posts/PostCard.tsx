@@ -8,7 +8,8 @@ import React from "react";
 
 const PostCard = ({ post }: any) => {
     const { content, category, author } = post;
-    const { name, profilePicture } = author;
+    const { name, profilePicture, _id } = author;
+
 
     // Function to split the text by newline and insert <br /> only if there is text after \n
     const renderContentWithBr = (text: string) => {
@@ -40,7 +41,7 @@ const PostCard = ({ post }: any) => {
                     {/* Title and Category Wrapper */}
                     <div>
                         {/* User Name */}
-                        <Link href="#" className='lg:text-base xl:text-lg text-black-secondary hover:underline font-bold'>{name}</Link>
+                        <Link href={`/profile/${_id}/posts`} className='lg:text-base xl:text-lg text-black-secondary hover:underline font-bold'>{name}</Link>
 
                         {/* Category Selection */}
                         <div className="flex gap-x-1 bg-white-secondary px-1 mt-1 rounded-lg items-center">

@@ -34,6 +34,13 @@ const userApi = baseApi.injectEndpoints({
             }),
         }),
 
+        getUserProfileById: builder.query({
+            query: (id) => ({
+                url: `/users/profile/${id}`,
+                method: 'GET',
+            }),
+        }),
+
         logout: builder.mutation({
             query: () => ({
                 url: '/auth/logout',
@@ -44,4 +51,4 @@ const userApi = baseApi.injectEndpoints({
 })
 
 
-export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery, useGetAllUsersQuery } = userApi;
+export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery, useGetAllUsersQuery, useGetUserProfileByIdQuery } = userApi;

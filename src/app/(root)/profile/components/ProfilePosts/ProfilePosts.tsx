@@ -4,7 +4,8 @@ import PostCard from "@/components/Posts/PostCard";
 import Loading from "@/components/common/Loading";
 import { useGetPostsByUserQuery } from "@/redux/api/endpoints/posts/posts";
 import { IRootState } from "@/types/types";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 
@@ -12,12 +13,22 @@ import { useSelector } from "react-redux";
 const ProfilePosts = () => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const searchParams = useSearchParams();
+    const params = useParams();
+
     const categories = searchParams.get('categories') || '';
-    const { isLoading, isError, error, data, refetch } = useGetPostsByUserQuery({ userId: user?._id, categories });
+    const { isLoading, isError, error, data, refetch } = useGetPostsByUserQuery({ userId: params.id, categories });
+
+
+    useEffect(() => {
+        refetch();
+        console.log('refetch');
+    }, [params]);
 
     if (isLoading) {
         return <Loading />
     }
+
+    console.log(data);
 
     return (
         <section className="lg:space-y-5 lg:py-5">

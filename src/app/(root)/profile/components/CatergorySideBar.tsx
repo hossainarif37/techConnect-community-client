@@ -16,9 +16,7 @@ const CatergorySideBar = () => {
         } else {
             newQueries = newQueries.filter(c => c !== category);
         }
-        console.log('newQueries', newQueries);
         setCategoryQueries(newQueries);
-        console.log('isChecked', isChecked);
     };
 
     const filteredCategories = categories.filter(c => c.toLowerCase().includes(searchInputValue.toLowerCase()));
@@ -45,8 +43,6 @@ const CatergorySideBar = () => {
         }
     }, [categoryQueries]);
 
-    console.log('categoryQueries: ', categoryQueries);
-    console.log('filteredCategories: ', filteredCategories);
 
     return (
         <aside className="lg:w-[480px] lg:pr-10 px-3 lg:px-0">
