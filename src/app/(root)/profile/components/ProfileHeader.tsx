@@ -6,16 +6,22 @@ import { useSelector } from "react-redux";
 import profile_blank_image from "../../../../../public/icons/profile_blank_image.png";
 import Loading from "@/components/common/Loading";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { useGetUserProfileByIdQuery } from "@/redux/api/endpoints/users/users";
+import { useParams } from "next/navigation";
 
 
 const ProfileHeader = () => {
-    const { user } = useSelector((state: IRootState) => state.userSlice);
+    const params = useParams();
+    console.log(params);
+    const { isError, error, isLoading, data } = useGetUserProfileByIdQuery(params.id);
 
-    if (!user) {
+
+
+    if (isLoading) {
         return <Loading />
     }
 
-    const { name, profilePicture, followers, following } = user;
+    const { name, profilePicture, followers, following } = data?.user;
 
     const handleUploadPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value);

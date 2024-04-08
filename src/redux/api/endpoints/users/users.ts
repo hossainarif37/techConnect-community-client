@@ -28,8 +28,15 @@ const userApi = baseApi.injectEndpoints({
         }),
 
         getAllUsers: builder.query({
-            query: () => ({
-                url: '/users',
+            query: (name) => ({
+                url: `/users?name=${name}`,
+                method: 'GET',
+            }),
+        }),
+
+        getUserProfileById: builder.query({
+            query: (id) => ({
+                url: `/users/profile/${id}`,
                 method: 'GET',
             }),
         }),
@@ -44,4 +51,4 @@ const userApi = baseApi.injectEndpoints({
 })
 
 
-export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery, useGetAllUsersQuery } = userApi;
+export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery, useGetAllUsersQuery, useGetUserProfileByIdQuery } = userApi;
