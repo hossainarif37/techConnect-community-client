@@ -1,15 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { IoIosList } from "react-icons/io";
-import { IoSearchOutline } from "react-icons/io5";
 import { categories } from "@/constants/categories";
 import SearchInput from "@/components/common/Input/SearchInput";
 
 const CatergorySideBar = () => {
     const [categoryQueries, setCategoryQueries] = useState<string[]>([]);
-    const searchParams = useSearchParams();
+    const [searchInputValue, setSearchInputValue] = useState('');
 
     const handleCategory = (category: string, isChecked: boolean) => {
         let newQueries = [...categoryQueries];
@@ -20,6 +18,14 @@ const CatergorySideBar = () => {
         }
         setCategoryQueries(newQueries);
     };
+
+    const filteredCategories = categories.filter(c => c.toLowerCase().includes(searchInputValue.toLowerCase()));
+
+    console.log(filteredCategories);
+
+    const handleSearchCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInputValue(e.target.value);
+    }
 
 
     useEffect(() => {
@@ -45,12 +51,12 @@ const CatergorySideBar = () => {
             </div>
 
             {/* Search Input */}
-            <SearchInput searchInputText="Search Category" />
+            <SearchInput searchInputText="Search Category" handleSearchCategory={handleSearchCategory} />
 
             {/* Categories Selection Input Area */}
             <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 py-5">
                 {
-                    categories?.map((category: string, key: number) => <div key={key}
+                    filteredCategories?.map((category: string, key: number) => <div key={key}
                         className="flex gap-2 lg:gap-3"
                     >
                         <input
