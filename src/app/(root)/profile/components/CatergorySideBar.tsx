@@ -16,12 +16,14 @@ const CatergorySideBar = () => {
         } else {
             newQueries = newQueries.filter(c => c !== category);
         }
+        console.log('newQueries', newQueries);
         setCategoryQueries(newQueries);
+        console.log('isChecked', isChecked);
     };
 
     const filteredCategories = categories.filter(c => c.toLowerCase().includes(searchInputValue.toLowerCase()));
 
-    console.log(filteredCategories);
+
 
     const handleSearchCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInputValue(e.target.value);
@@ -43,6 +45,9 @@ const CatergorySideBar = () => {
         }
     }, [categoryQueries]);
 
+    console.log('categoryQueries: ', categoryQueries);
+    console.log('filteredCategories: ', filteredCategories);
+
     return (
         <aside className="lg:w-[480px] lg:pr-10 px-3 lg:px-0">
             {/* Categories area Title */}
@@ -56,14 +61,24 @@ const CatergorySideBar = () => {
             {/* Categories Selection Input Area */}
             <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 py-5">
                 {
-                    filteredCategories?.map((category: string, key: number) => <div key={key}
-                        className="flex gap-2 lg:gap-3"
-                    >
-                        <input
-                            onChange={(e) => handleCategory(category, e.target.checked)}
-                            className="h-7 w-7 cursor-pointer" type="checkbox" name="category" value={category} id={category.toLowerCase()} />
-                        <label className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer" htmlFor={category.toLowerCase()}>{category}</label>
-                    </div>)
+                    filteredCategories?.map((category: string, key: number) => (
+                        <div key={key} className="flex gap-2 lg:gap-3">
+                            <input
+                                onChange={(e) => handleCategory(category, e.target.checked)}
+                                className="h-7 w-7 cursor-pointer"
+                                type="checkbox"
+                                name="category"
+                                id={category.toLowerCase()}
+                                checked={categoryQueries.includes(category)} // Determine if the category is selected
+                            />
+                            <label
+                                className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer"
+                                htmlFor={category.toLowerCase()}
+                            >
+                                {category}
+                            </label>
+                        </div>
+                    ))
                 }
             </div>
 
