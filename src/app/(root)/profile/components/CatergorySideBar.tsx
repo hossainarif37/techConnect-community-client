@@ -56,7 +56,7 @@ const CatergorySideBar = () => {
             </div>
 
             {/* Search Input */}
-            <SearchInput searchInputText="Search Category" handleSearchCategory={handleSearchCategory} />
+            <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
 
             {/* Categories Selection Input Area */}
             <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 py-5">
