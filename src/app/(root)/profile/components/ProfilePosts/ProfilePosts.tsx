@@ -21,14 +21,12 @@ const ProfilePosts = () => {
 
     useEffect(() => {
         refetch();
-        console.log('refetch');
     }, [params]);
 
     if (isLoading) {
         return <Loading />
     }
 
-    console.log(data);
 
     return (
         <section className="lg:space-y-5 lg:py-5">
