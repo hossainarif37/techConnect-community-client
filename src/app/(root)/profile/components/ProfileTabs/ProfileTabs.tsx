@@ -21,7 +21,7 @@ const ProfileTabs = () => {
     const profileTabLinks = [
         {
             title: "Posts",
-            path: `/profile/${_id}/posts`,
+            path: `/profile/${paramsId}/posts`,
         },
         {
             title: 'Jobs',
@@ -45,6 +45,8 @@ const ProfileTabs = () => {
             // path: "/profile/${_id}/saved",
         },
     ]
+
+    console.log(pathname);
 
     return (
         <div className={`mt-3 lg:my-5 grid ${paramsId !== _id ? 'md:grid-cols-4' : 'md:grid-cols-5'}  justify-center gap-3 lg:gap-7 ${profiletabStyles.tabLink}`}>
