@@ -33,10 +33,12 @@ const PostCard = ({ post }: any) => {
                 <div className='flex gap-x-3 items-center'>
 
                     {/* User Image */}
-                    <UserImage
-                        customWidth="w-16"
-                        profilePicture={profilePicture}
-                    />
+                    <Link href={`/profile/${_id}/posts`}>
+                        <UserImage
+                            customWidth="w-16"
+                            profilePicture={profilePicture}
+                        />
+                    </Link>
 
                     {/* Title and Category Wrapper */}
                     <div>
