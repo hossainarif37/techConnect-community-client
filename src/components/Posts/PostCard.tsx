@@ -26,9 +26,8 @@ const PostCard = ({ post }: any) => {
     };
 
     return (
-        <>
-            <div className="bg-white pt-3 px-10 rounded-xl">
-
+        <div className="bg-white py-3 px-10 rounded-xl">
+            <div>
                 {/* Header Start */}
                 <div className="flex justify-between items-center text-black-secondary mb-2">
 
@@ -104,11 +103,13 @@ const PostCard = ({ post }: any) => {
                     </button>
                 </div>
 
+                {/* horizontal line */}
+                <hr />
             </div>
 
             {/* Comments */}
             <Comments articleId={_id} />
-        </>
+        </div>
     );
 };
 
