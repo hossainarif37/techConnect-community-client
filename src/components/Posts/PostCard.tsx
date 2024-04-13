@@ -27,7 +27,7 @@ const PostCard = ({ post }: any) => {
 
     return (
         <>
-            <div className="bg-white py-3 px-10 rounded-xl">
+            <div className="bg-white pt-3 px-10 rounded-xl">
 
                 {/* Header Start */}
                 <div className="flex justify-between items-center text-black-secondary mb-2">
@@ -82,7 +82,7 @@ const PostCard = ({ post }: any) => {
                 {renderContentWithBr(content)}
 
                 {/* horizontal line */}
-                <hr className="mt-5 mb-2" />
+                <hr className="mt-5" />
 
                 {/* Reaction Icons */}
                 <div className={postCardStyles.reactionIcons}>
