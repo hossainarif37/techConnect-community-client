@@ -20,7 +20,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
     useEffect(() => {
-        getCurrentUser(undefined);
+        if (!isAuthenticated) {
+            getCurrentUser(undefined);
+        }
 
         if (userData?.success && token) {
             dispatch(setUser({ user: userData.user, isAuthenticated: true }));
