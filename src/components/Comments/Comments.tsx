@@ -4,6 +4,7 @@ import { useGetCommentsByPostIdQuery } from "@/redux/api/endpoints/comments/comm
 import Loading from "../common/Loading";
 import CommentInput from "./CommentInput";
 import UserImage from "../common/UserImage";
+import Link from "next/link";
 
 type CommentsPropsTypes = {
     articleId: string
@@ -29,15 +30,16 @@ const Comments = ({ articleId }: CommentsPropsTypes) => {
     }
     return (
         <div>
-
             {data?.totalComments > 1 && <button className="mt-3 hover:underline text-black-secondary text-lg font-bold">View more comments</button>}
 
             {
                 data?.comments?.length > 0 && data?.comments?.map((comment: IComment) => (
                     <div className="flex gap-x-2 mt-3">
-                        <UserImage customWidth="w-14" profilePicture={comment.author.profilePicture} />
+                        <Link href={`/profile/${comment.author._id}/posts`}>
+                            <UserImage customWidth="w-14" profilePicture={comment.author.profilePicture} />
+                        </Link>
                         <div className="bg-white-secondary p-3 rounded-xl">
-                            <h3 className="font-bold">{comment.author.name}</h3>
+                            <Link href={`/profile/${comment.author._id}/posts`} className="font-bold">{comment.author.name}</Link>
                             <p>{comment.content}</p>
                         </div>
                     </div>)
