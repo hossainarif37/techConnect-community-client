@@ -23,6 +23,7 @@ const CommentInput = ({ commentInputText, handleComment }: CommentInputPropsType
 
         // Calculate the number of rows dynamically based on the textarea content
         const numberOfLineBreaks = (e.target.value.match(/\n/g) || []).length;
+
         // If there is no text, set textareaRows to 1, otherwise calculate based on line breaks
         setTextareaRows(trimmedText.length === 0 ? 1 : Math.min(Math.max(numberOfLineBreaks + 1, 1), 8));
     };
@@ -33,7 +34,12 @@ const CommentInput = ({ commentInputText, handleComment }: CommentInputPropsType
 
             <textarea
                 onChange={handleTextareaChange}
-                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} bg-white-secondary outline-none p-4 placeholder:text-black-secondary text-lg placeholder:font-semibold border-none`} cols={30} name="comment-input" rows={textareaRows} id="comment-input" placeholder={commentInputText}
+                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} bg-white-secondary outline-none p-4 placeholder:text-black-secondary text-lg placeholder:font-semibold border-none`}
+                cols={30}
+                name="comment-input"
+                rows={textareaRows}
+                id="comment-input"
+                placeholder={commentInputText}
             ></textarea>
         </div>
     );
