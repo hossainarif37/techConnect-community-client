@@ -33,23 +33,27 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     return (
         <div>
             {
-                remainingLoading ? <LoadingRound /> : data?.remainingComments > 0 && <button
-                    onClick={() => handleViewMoreComments(postId)}
-                    className={
-                        `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
+                remainingLoading ? <LoadingRound /> : data?.remainingComments > 0 && (
+                    <button
+                        onClick={() => handleViewMoreComments(postId)}
+                        className={
+                            `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
                         ${(isViewMoreComments && remainingData?.remainingComments < 2) && 'hidden'}
                         mt-3 hover:underline text-black-secondary text-lg font-bold`
-                    }>View more comments</button>
-            }
-
-            {
-                remainingData?.success && remainingData?.comments?.map((comment: IComment) => <CommentCard comment={comment} />
+                        }>
+                        View more comments
+                    </button>
                 )
             }
 
             {
-                data?.comments?.length > 0 && data?.comments?.map((comment: IComment) => <CommentCard comment={comment} />
-                )
+                remainingData?.success && remainingData?.comments?.map((comment: IComment) => (
+                    <CommentCard comment={comment} />
+                ))
+            }
+
+            {
+                data?.comments?.length > 0 && data?.comments?.map((comment: IComment) => <CommentCard comment={comment} />)
             }
 
             {/* Comment Input  */}
