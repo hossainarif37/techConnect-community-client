@@ -1,11 +1,7 @@
 "use client"
 
 import { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery } from "@/redux/api/endpoints/comments/comments";
-import Loading from "../common/Loading";
 import CommentInput from "./CommentInput";
-import UserImage from "../common/UserImage";
-import Link from "next/link";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import CommentCard from "./CommentCard";
 import { IComment } from "@/types/types";
 import LoadingRound from "../common/LoadingRound";
@@ -16,12 +12,15 @@ type CommentsPropsTypes = {
 }
 
 
-
-
 const Comments = ({ postId }: CommentsPropsTypes) => {
-    const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
-    const [getRemainingComments, { data: remainingData, isError: remainingIsError, isLoading: remainingLoading, error: remainingError }] = useLazyGetCommentsByPostIdQuery();
     const [isViewMoreComments, setIsViewMoreComments] = useState(false);
+
+    // Get latest one comment by postId
+    const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
+
+    // Get remaining all comments by skip existing ones with the same postId
+    const [getRemainingComments, { data: remainingData, isError: remainingIsError, isLoading: remainingLoading, error: remainingError }] = useLazyGetCommentsByPostIdQuery();
+
     if (isLoading) {
         return <LoadingRound />
     }
@@ -30,9 +29,6 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
         setIsViewMoreComments(true);
         getRemainingComments({ postId, skip: 1 });
     }
-
-    console.log(remainingData);
-    console.log(data.remainingComments)
 
     return (
         <div>
