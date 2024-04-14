@@ -10,7 +10,6 @@ import Comments from "../Comments/Comments";
 const PostCard = ({ post }: any) => {
     const { content, category, author, _id, comments } = post;
     const { name, profilePicture, userId: userId } = author;
-    console.log(comments)
 
 
     // Function to split the text by newline and insert <br /> only if there is text after \n
@@ -108,7 +107,7 @@ const PostCard = ({ post }: any) => {
             </div>
 
             {/* Comments */}
-            <Comments articleId={_id} />
+            <Comments postId={_id} />
         </div>
     );
 };

@@ -36,3 +36,15 @@ export type LoginErrorType = {
         message: string;
     }
 }
+
+export interface IComment {
+    _id: string;
+    content: string;
+    author: {
+        _id: string;
+        name: string;
+        profilePicture: string;
+    };
+    article: string;
+    createdAt: string;
+}
