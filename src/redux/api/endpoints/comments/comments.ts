@@ -14,4 +14,4 @@ const commentApi = baseApi.injectEndpoints({
 })
 
 
-export const { useGetCommentsByPostIdQuery } = commentApi;
+export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery } = commentApi;

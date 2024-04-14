@@ -28,9 +28,18 @@ const Comments = ({ articleId }: CommentsPropsTypes) => {
     if (isLoading) {
         return <Loading />
     }
+
+    const handleViewMoreComments = (articleId: string) => {
+        console.log('view more comments', articleId);
+    }
+
     return (
         <div>
-            {data?.totalComments > 1 && <button className="mt-3 hover:underline text-black-secondary text-lg font-bold">View more comments</button>}
+            {
+                data?.totalComments > 1 && <button
+                    onClick={() => handleViewMoreComments(articleId)}
+                    className="mt-3 hover:underline text-black-secondary text-lg font-bold">View more comments</button>
+            }
 
             {
                 data?.comments?.length > 0 && data?.comments?.map((comment: IComment) => (
