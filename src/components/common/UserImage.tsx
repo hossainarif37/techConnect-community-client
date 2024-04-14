@@ -30,7 +30,7 @@ const UserImage = ({ profilePicture, customWidth, isProfileDropdownBtn }: UserIm
                 className="relative cursor-pointer group" title="Account"
             >
 
-                <div className="w-full h-full absolute rounded-full opacity-0 group-hover:opacity-40 bg-black top-0 duration-100"></div>
+                {/* <div className="w-full h-full absolute rounded-full opacity-0 group-hover:opacity-40 bg-black top-0 duration-100"></div> */}
 
                 <Image className={`${customWidth} relative cursor-pointer group`} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
 

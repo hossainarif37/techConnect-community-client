@@ -31,3 +31,13 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: all 5000s ease-in-out 0s;
 }
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+textarea {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    resize: none;
+}
