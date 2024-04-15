@@ -5,6 +5,7 @@ import UserImage from "../common/UserImage";
 import { IRootState } from "@/types/types";
 import { useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { IoMdSend } from "react-icons/io";
 
 type CommentInputPropsTypes = {
     commentInputText: string,
@@ -46,7 +47,17 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
                 id="comment-input"
                 placeholder={commentInputText}
             ></textarea>
-
+            {/* Submit Button */}
+            <div className="flex items-center -translate-x-16">
+                <button
+                    title="Comment"
+                    disabled={!hasText}
+                    className={`${hasText ? 'text-primary hover:bg-gray-200' : 'text-black-secondary'} text-2xl  w-10 h-10 flex justify-center items-center rounded-full`}
+                    type="submit"
+                >
+                    <IoMdSend />
+                </button>
+            </div>
 
         </>
     );

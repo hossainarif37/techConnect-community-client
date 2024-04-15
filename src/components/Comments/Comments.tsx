@@ -7,7 +7,6 @@ import { IComment } from "@/types/types";
 import LoadingRound from "../common/LoadingRound";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IoMdSend } from "react-icons/io";
 
 type CommentsPropsTypes = {
     postId: string
@@ -32,7 +31,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     const [getRemainingComments, { data: remainingData, isError: remainingIsError, isLoading: remainingLoading, error: remainingError }] = useLazyGetCommentsByPostIdQuery();
 
     if (isLoading) {
-        return <LoadingRound />
+        return <LoadingRound paddingY="py-4" />
     }
 
     const handleViewMoreComments = (postId: string) => {
@@ -43,7 +42,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     return (
         <div>
             {
-                remainingLoading ? <LoadingRound /> : data?.remainingComments > 0 && (
+                remainingLoading ? <LoadingRound paddingY="py-4" /> : data?.remainingComments > 0 && (
                     <button
                         onClick={() => handleViewMoreComments(postId)}
                         className={
@@ -75,13 +74,6 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                     register={{ ...register('comment') }}
                     commentInputText="Write a comment..."
                 />
-
-                {/* Submit Button */}
-                <button
-                    type="submit"
-                >
-                    <IoMdSend />
-                </button>
             </form>
 
         </div>
