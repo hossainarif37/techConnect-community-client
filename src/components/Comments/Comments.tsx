@@ -6,14 +6,24 @@ import CommentCard from "./CommentCard";
 import { IComment } from "@/types/types";
 import LoadingRound from "../common/LoadingRound";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IoMdSend } from "react-icons/io";
 
 type CommentsPropsTypes = {
     postId: string
 }
 
+interface IFormValues {
+    comment: string;
+}
 
 const Comments = ({ postId }: CommentsPropsTypes) => {
     const [isViewMoreComments, setIsViewMoreComments] = useState(false);
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
+
+    const handleComment: SubmitHandler<IFormValues> = (data) => {
+        console.log(data);
+    }
 
     // Get latest one comment by postId
     const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
@@ -47,17 +57,33 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
             }
 
             {
-                remainingData?.success && remainingData?.comments?.map((comment: IComment) => (
-                    <CommentCard comment={comment} />
+                remainingData?.success && remainingData?.comments?.map((comment: IComment, i: number) => (
+                    <CommentCard comment={comment} key={i} />
                 ))
             }
 
             {
-                data?.comments?.length > 0 && data?.comments?.map((comment: IComment) => <CommentCard comment={comment} />)
+                data?.comments?.length > 0 && data?.comments?.map((comment: IComment, i: number) => <CommentCard key={i} comment={comment} />)
             }
 
-            {/* Comment Input  */}
-            <CommentInput commentInputText="Write a comment..." />
+            {/* Comment Form  */}
+            <form
+                onSubmit={handleSubmit(handleComment)}
+                className="mt-3 flex gap-x-3"
+            >
+                <CommentInput
+                    register={{ ...register('comment') }}
+                    commentInputText="Write a comment..."
+                />
+
+                {/* Submit Button */}
+                <button
+                    type="submit"
+                >
+                    <IoMdSend />
+                </button>
+            </form>
+
         </div>
     );
 };

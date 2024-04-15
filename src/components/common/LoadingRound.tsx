@@ -1,10 +1,17 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const LoadingRound = () => {
+
+type LoadingRoundPropsType = {
+    paddingY?: string; // Example: 'py-2'
+    textSize?: string; // Example: 'text-lg'
+    textColor?: string; // Example: 'text-blue-500'
+}
+
+const LoadingRound = ({ paddingY, textColor, textSize }: LoadingRoundPropsType) => {
     return (
-        <div className="flex justify-center py-4">
+        <div className={`flex justify-center py-4 ${paddingY}`}>
             <AiOutlineLoading3Quarters
-                className="animate-spin text-2xl"
+                className={`animate-spin ${textColor} ${textSize}`}
             />
         </div>
     );

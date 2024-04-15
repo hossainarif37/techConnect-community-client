@@ -5,12 +5,9 @@ import { Icon } from "@iconify/react"
 import React from "react";
 import Comments from "../Comments/Comments";
 
-
-
 const PostCard = ({ post }: any) => {
     const { content, category, author, _id, comments } = post;
     const { name, profilePicture, userId: userId } = author;
-
 
     // Function to split the text by newline and insert <br /> only if there is text after \n
     const renderContentWithBr = (text: string) => {

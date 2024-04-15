@@ -8,6 +8,7 @@ import Loading from "@/components/common/Loading";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { useGetUserProfileByIdQuery } from "@/redux/api/endpoints/users/users";
 import { useParams } from "next/navigation";
+import LoadingRound from "@/components/common/LoadingRound";
 
 
 const ProfileHeader = () => {
@@ -18,7 +19,7 @@ const ProfileHeader = () => {
 
 
     if (isLoading) {
-        return <Loading />
+        return <LoadingRound paddingY="py-5" textColor="text-primary" textSize="text-2xl" />
     }
 
     const { name, profilePicture, followers, following } = data?.user;

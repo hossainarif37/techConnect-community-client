@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
+import LoadingRound from "../common/LoadingRound";
 
 const Posts = () => {
     const searchParams = useSearchParams();
@@ -19,16 +20,18 @@ const Posts = () => {
     }, [user]);
 
     if (isLoading) {
-        return <Loading />
+        return <LoadingRound paddingY="py-20" textColor="text-primary" textSize="text-2xl" />
     }
 
     return (
         <section className="lg:space-y-5 lg:py-5">
             {
-                data?.posts?.length > 0 ? data?.posts?.map((post: any, i: number) => <PostCard
-                    key={i}
-                    post={post}
-                />) : <h1 className="text-2xl font-semibold text-center mt-5 text-black-secondary">No posts here. Share your thoughts!</h1>
+                data?.posts?.length > 0 ? data?.posts?.map((post: any, i: number) => (
+                    <PostCard
+                        key={i}
+                        post={post}
+                    />)
+                ) : <h1 className="text-2xl font-semibold text-center mt-5 text-black-secondary">No posts here. Share your thoughts!</h1>
             }
 
         </section>

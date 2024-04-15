@@ -4,16 +4,21 @@ import { useSelector } from "react-redux";
 import UserImage from "../common/UserImage";
 import { IRootState } from "@/types/types";
 import { useState } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 type CommentInputPropsTypes = {
     commentInputText: string,
-    handleComment?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    register: UseFormRegisterReturn
 }
 
-const CommentInput = ({ commentInputText, handleComment }: CommentInputPropsTypes) => {
+
+
+const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const [hasText, setHasText] = useState(false);
     const [textareaRows, setTextareaRows] = useState(1);
+
+
 
     // Handle Text Area Change
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,19 +34,21 @@ const CommentInput = ({ commentInputText, handleComment }: CommentInputPropsType
     };
 
     return (
-        <div className="mt-3 flex gap-x-3">
+        <>
             <UserImage customWidth="w-16" profilePicture={user?.profilePicture} />
 
             <textarea
+                {...register}
                 onChange={handleTextareaChange}
                 className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} bg-white-secondary outline-none p-4 placeholder:text-black-secondary text-lg placeholder:font-semibold border-none`}
                 cols={30}
-                name="comment-input"
                 rows={textareaRows}
                 id="comment-input"
                 placeholder={commentInputText}
             ></textarea>
-        </div>
+
+
+        </>
     );
 };
 
