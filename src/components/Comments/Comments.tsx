@@ -3,10 +3,13 @@
 import { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery } from "@/redux/api/endpoints/comments/comments";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
-import { IComment } from "@/types/types";
+import { IComment, IRootState, IUser } from "@/types/types";
 import LoadingRound from "../common/LoadingRound";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import UserImage from "../common/UserImage";
+import { useSelector } from "react-redux";
+import TempCommentCard from "./TempCommentCard";
 
 type CommentsPropsTypes = {
     postId: string
@@ -16,13 +19,18 @@ interface IFormValues {
     comment: string;
 }
 
+
 const Comments = ({ postId }: CommentsPropsTypes) => {
     const [isViewMoreComments, setIsViewMoreComments] = useState(false);
+    const { user } = useSelector((state: IRootState) => state.userSlice);
     const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
+    const [tempComment, setTempComment] = useState<string[]>([]);
 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
-        console.log(data);
+        setTempComment([...tempComment, data.comment]);
+        reset();
     }
+
 
     // Get latest one comment by postId
     const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
@@ -65,11 +73,18 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                 data?.comments?.length > 0 && data?.comments?.map((comment: IComment, i: number) => <CommentCard key={i} comment={comment} />)
             }
 
+            {
+                tempComment.map((comment: string, i: number) => (
+                    <TempCommentCard key={i} comment={comment} />
+                ))
+            }
+
             {/* Comment Form  */}
             <form
                 onSubmit={handleSubmit(handleComment)}
                 className="mt-3 flex gap-x-3"
             >
+                <UserImage customWidth="w-16" profilePicture={user?.profilePicture} />
                 <CommentInput
                     register={{ ...register('comment') }}
                     commentInputText="Write a comment..."

@@ -15,7 +15,7 @@ type CommentInputPropsTypes = {
 
 
 const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) => {
-    const { user } = useSelector((state: IRootState) => state.userSlice);
+
     const [hasText, setHasText] = useState(false);
     const [textareaRows, setTextareaRows] = useState(1);
 
@@ -35,8 +35,8 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
     };
 
     return (
-        <>
-            <UserImage customWidth="w-16" profilePicture={user?.profilePicture} />
+
+        <div className={`flex-1 flex items-${textareaRows > 1 ? 'end' : 'center'} relative`}>
 
             <textarea
                 {...register}
@@ -48,7 +48,7 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
                 placeholder={commentInputText}
             ></textarea>
             {/* Submit Button */}
-            <div className="flex items-center -translate-x-16">
+            <div className={`absolute right-3 ${textareaRows > 1 && 'bottom-2'}`}>
                 <button
                     title="Comment"
                     disabled={!hasText}
@@ -59,7 +59,7 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
                 </button>
             </div>
 
-        </>
+        </div>
     );
 };
 
