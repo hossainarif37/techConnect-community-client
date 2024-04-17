@@ -7,8 +7,16 @@ const commentApi = baseApi.injectEndpoints({
                 url: skip ? `/comments/${postId}?skip=${skip}` : `/comments/${postId}`,
                 method: 'GET'
             })
+        }),
+
+        createComment: builder.mutation({
+            query: (data) => ({
+                url: '/comments',
+                method: 'POST',
+                body: data
+            })
         })
     })
 })
 
-export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery } = commentApi;
+export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery, useCreateCommentMutation } = commentApi;
