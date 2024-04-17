@@ -2,6 +2,7 @@
 
 import PostCard from "@/components/Posts/PostCard";
 import Loading from "@/components/common/Loading";
+import LoadingRound from "@/components/common/LoadingRound";
 import { useGetPostsByUserQuery } from "@/redux/api/endpoints/posts/posts";
 import { IRootState } from "@/types/types";
 import { useParams, useSearchParams } from "next/navigation";
@@ -24,7 +25,7 @@ const ProfilePosts = () => {
     }, [params]);
 
     if (isLoading) {
-        return <Loading />
+        return <LoadingRound paddingY="py-20" textColor="text-primary" textSize="text-2xl" />
     }
 
 
