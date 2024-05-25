@@ -78,7 +78,7 @@ const Navbar = () => {
                         }
 
                         {/* Authentication Button */}
-                        <LoginLogoutButton isDesktop={false} />
+                        {/* <LoginLogoutButton isDesktop={false} /> */}
 
                     </ul>
                 </div>

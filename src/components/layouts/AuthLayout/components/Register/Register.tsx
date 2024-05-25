@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useRegisterMutation } from "@/redux/api/endpoints/users/users";
 import toast from "react-hot-toast";
-import Input from "@/components/common/Input/InputWithLabel";
+import InputWithLabel from "@/components/common/Input/InputWithLabel";
 
 interface IFormInput {
     name: string;
@@ -47,7 +47,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
                 {/*//* Name */}
                 <div>
-                    <Input
+                    <InputWithLabel
                         label='Name'
                         type='name'
                         id='name'
@@ -71,7 +71,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
                 {/*//* Email */}
                 <div>
-                    <Input
+                    <InputWithLabel
                         label='Email'
                         type='email'
                         id='email'
@@ -90,7 +90,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
                 {/*//* Password */}
                 <div>
-                    <Input
+                    <InputWithLabel
                         label='Password'
                         type='password'
                         id='password'
