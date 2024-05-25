@@ -12,7 +12,7 @@ interface InputProps {
     id: string;
 }
 
-const Input = ({ label, type, register, id }: InputProps) => {
+const InputWithLabel = ({ label, type, register, id }: InputProps) => {
     const [inputFocus, setInputFocus] = useState(false);
     const [eyeToggle, setEyeToggle] = useState(false);
 
@@ -60,4 +60,4 @@ const Input = ({ label, type, register, id }: InputProps) => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export default Input;
+export default InputWithLabel;
