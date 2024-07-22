@@ -34,6 +34,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
 
     // Create a new comment
     const [createComment, { data: createCommentData, isError: isCreateCommentError, error: createCommentError, isLoading: isCreateCommentLoading }] = useCreateCommentMutation();
+    const [hasText, setHasText] = useState(false);
 
     // Get remaining all comments by skip existing ones with the same postId
     const [getRemainingComments, { data: remainingData, isError: remainingIsError, isLoading: remainingLoading, error: remainingError }] = useLazyGetCommentsByPostIdQuery();
@@ -51,6 +52,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     const handleComment: SubmitHandler<IFormValues> = (data) => {
         setTempComment([...tempComment, data.comment]);
         createComment({ content: data.comment, article: postId, author: user?._id });
+        setHasText(false);
         reset();
     }
 
@@ -66,7 +68,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                         className={
                             `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
                         ${(isViewMoreComments && remainingData?.remainingComments < 2) && 'hidden'}
-                        mt-3 hover:underline text-black-secondary text-lg font-bold`
+                        my-3 hover:underline text-black-secondary text-lg font-bold`
                         }>
                         View more comments
                     </button>
@@ -100,10 +102,12 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
             >
                 <UserImage customWidth="w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
-                    register={{ ...register('comment') }}
+                    register={{ ...register('comment', { required: true }) }}
                     commentInputText="Write a comment..."
                     isCreateCommentLoading={isCreateCommentLoading}
                     isError={isError}
+                    hasText={hasText}
+                    setHasText={setHasText}
                 />
             </form>
 
