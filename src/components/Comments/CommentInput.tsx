@@ -6,20 +6,21 @@ import { IRootState } from "@/types/types";
 import { useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { IoMdSend } from "react-icons/io";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 type CommentInputPropsTypes = {
     commentInputText: string,
-    register: UseFormRegisterReturn
+    register: UseFormRegisterReturn,
+    isCreateCommentLoading: boolean,
+    isError: boolean
 }
 
 
 
-const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) => {
+const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isError }: CommentInputPropsTypes) => {
 
     const [hasText, setHasText] = useState(false);
     const [textareaRows, setTextareaRows] = useState(1);
-
-
 
     // Handle Text Area Change
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -51,13 +52,19 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
             <div className={`absolute right-3 ${textareaRows > 1 && 'bottom-2'}`}>
                 <button
                     title="Comment"
-                    disabled={!hasText}
+                    disabled={!hasText || isCreateCommentLoading}
                     className={`${hasText ? 'text-primary hover:bg-gray-200' : 'text-black-secondary'} text-2xl  w-10 h-10 flex justify-center items-center rounded-full`}
                     type="submit"
                 >
-                    <IoMdSend />
+                    {isCreateCommentLoading ? <AiOutlineLoading3Quarters
+                        className='animate-spin'
+                    /> : <IoMdSend />}
                 </button>
             </div>
+
+            {/* //TODO: */}
+            {/* Need to show the error message here */}
+
 
         </div>
     );

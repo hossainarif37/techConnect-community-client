@@ -24,7 +24,7 @@ const Posts = () => {
     }
 
     return (
-        <section className="lg:space-y-5 lg:py-5">
+        <section className="lg:space-y-5 lg:py-5 h-screen">
             {
                 data?.posts?.length > 0 ? data?.posts?.map((post: any, i: number) => (
                     <PostCard

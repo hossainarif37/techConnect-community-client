@@ -3,13 +3,9 @@ import UserImage from "../common/UserImage";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 
-type TempCommentCardPropsTypes = {
-    comment: string,
-    isError: boolean,
-    isCreateCommentLoading: boolean
-}
+type TempCommentCardPropsTypes = { comment: string }
 
-const TempCommentCard = ({ comment, isCreateCommentLoading, isError }: TempCommentCardPropsTypes) => {
+const TempCommentCard = ({ comment }: TempCommentCardPropsTypes) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     return (
         <div className="flex gap-x-2 mt-3">
@@ -27,9 +23,6 @@ const TempCommentCard = ({ comment, isCreateCommentLoading, isError }: TempComme
                         {comment}
                     </p>
                 </div>
-
-                {isCreateCommentLoading && <p className="mt-2">Posting...</p>}
-                {isError && <p className="error">Something went wrong!</p>}
             </div>
         </div>
     );

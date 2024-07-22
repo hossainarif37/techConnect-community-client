@@ -87,8 +87,6 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                 tempComment.map((comment: string, i: number) => (
                     <TempCommentCard key={i}
                         comment={comment}
-                        isCreateCommentLoading={isCreateCommentLoading}
-                        isError={isCreateCommentError}
                     />
                 ))
             }
@@ -102,6 +100,8 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                 <CommentInput
                     register={{ ...register('comment') }}
                     commentInputText="Write a comment..."
+                    isCreateCommentLoading={isCreateCommentLoading}
+                    isError={isError}
                 />
             </form>
 
