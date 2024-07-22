@@ -64,8 +64,6 @@ const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isEr
 
             {/* //TODO: */}
             {/* Need to show the error message here */}
-
-
         </div>
     );
 };

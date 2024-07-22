@@ -22,7 +22,7 @@ const PostCard = ({ post }: any) => {
     };
 
     return (
-        <div className="bg-white py-3 px-10 rounded-xl">
+        <div className="bg-white py-3 px-10 rounded-xl max-h-full">
             <div>
                 {/* Header Start */}
                 <div className="flex justify-between items-center text-black-secondary mb-2">

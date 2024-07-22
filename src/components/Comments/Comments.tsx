@@ -57,7 +57,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     console.log(createCommentData);
 
     return (
-        <div>
+        <div className="">
             {
                 remainingLoading ? <LoadingRound paddingY="py-4" /> : data?.remainingComments > 0 && (
                     <button
@@ -73,28 +73,30 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                 )
             }
 
-            {
-                remainingData?.success && remainingData?.comments?.map((comment: IComment, i: number) => (
-                    <CommentCard comment={comment} key={i} />
-                ))
-            }
+            <div className="max-h-[300px] overflow-y-auto pb-3">
+                {
+                    remainingData?.success && remainingData?.comments?.map((comment: IComment, i: number) => (
+                        <CommentCard comment={comment} key={i} />
+                    ))
+                }
 
-            {
-                data?.comments?.length > 0 && data?.comments?.map((comment: IComment, i: number) => <CommentCard key={i} comment={comment} />)
-            }
+                {
+                    data?.comments?.length > 0 && data?.comments?.map((comment: IComment, i: number) => <CommentCard key={i} comment={comment} />)
+                }
 
-            {
-                tempComment.map((comment: string, i: number) => (
-                    <TempCommentCard key={i}
-                        comment={comment}
-                    />
-                ))
-            }
+                {
+                    tempComment.map((comment: string, i: number) => (
+                        <TempCommentCard key={i}
+                            comment={comment}
+                        />
+                    ))
+                }
+            </div>
 
             {/* Comment Form  */}
             <form
                 onSubmit={handleSubmit(handleComment)}
-                className="mt-3 flex gap-x-3"
+                className="pt-3 flex gap-x-3 border-t"
             >
                 <UserImage customWidth="w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
