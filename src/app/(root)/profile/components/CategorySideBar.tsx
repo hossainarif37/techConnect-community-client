@@ -5,7 +5,7 @@ import { IoIosList } from "react-icons/io";
 import { categories } from "@/constants/categories";
 import SearchInput from "@/components/common/Input/SearchInput";
 
-const CatergorySideBar = () => {
+const CategorySideBar = () => {
     const [categoryQueries, setCategoryQueries] = useState<string[]>([]);
     const [searchInputValue, setSearchInputValue] = useState('');
 
@@ -46,12 +46,6 @@ const CatergorySideBar = () => {
 
     return (
         <aside className="lg:w-[480px] lg:pr-10 px-3 lg:px-0">
-            {/* Categories area Title */}
-            <div className="flex items-center gap-2">
-                <span className="text-4xl"><IoIosList /></span> <h3 className="font-bold text-2xl text-black-secondary">Select Categories</h3>
-            </div>
-
-            {/* Search Input */}
             <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
 
             {/* Categories Selection Input Area */}
@@ -68,7 +62,7 @@ const CatergorySideBar = () => {
                                 checked={categoryQueries.includes(category)} // Determine if the category is selected
                             />
                             <label
-                                className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer"
+                                className="text-lg lg:text-xl  select-none text-white cursor-pointer"
                                 htmlFor={category.toLowerCase()}
                             >
                                 {category}
@@ -82,4 +76,4 @@ const CatergorySideBar = () => {
     );
 }
 
-export default CatergorySideBar;
+export default CategorySideBar;

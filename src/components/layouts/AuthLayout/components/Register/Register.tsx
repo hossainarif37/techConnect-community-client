@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRegisterMutation } from "@/redux/api/endpoints/users/users";
 import toast from "react-hot-toast";
 import InputWithLabel from "@/components/common/Input/InputWithLabel";
+import PrimaryButton from "@/components/common/Button/PrimaryButton";
 
 interface IFormInput {
     name: string;
@@ -108,12 +109,12 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
                 </div>
 
                 {/* //*Submit Button */}
-                <button
+                <PrimaryButton
                     type="submit"
                     className="btn bg-primary text-white"
                 >
                     Register
-                </button>
+                </PrimaryButton>
 
             </div>
 

@@ -16,11 +16,13 @@ const PostInputCard = () => {
     }
 
     return (
-        <div className="bg-white rounded-xl flex p-3 lg:p-10 gap-5">
-            <UserImage customWidth="w-20" />
+        <div className="bg-secondary rounded-xl flex p-3 lg:p-10 gap-5">
+            <UserImage className="w-16" />
             <button
                 onClick={openModal}
-                className="flex-1 rounded-full text-left text-lg font-semibold pl-10 text-black-secondary bg-white-secondary hover:bg-gray-secondary duration-100" type="button">Share Your Experience</button>
+                className="flex-1 rounded-full text-left text-lg font-semibold pl-10 bg-accent text-white  hover:bg-highlight duration-100" type="button">
+                Share Your Experience
+            </button>
 
             <PostModal
                 isModalOpen={isModalOpen}

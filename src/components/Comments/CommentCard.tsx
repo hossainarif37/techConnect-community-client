@@ -11,15 +11,15 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
     return (
         <div className="flex gap-x-2 mt-3">
             <Link href={`/profile/${comment?.author?._id}/posts`}>
-                <UserImage customWidth="w-14" profilePicture={comment?.author?.profilePicture} />
+                <UserImage className="w-14" profilePicture={comment?.author?.profilePicture} />
             </Link>
-            <div className="bg-white-secondary p-3 rounded-xl">
+            <div className="bg-accent p-3 rounded-xl">
                 <Link
-                    href={`/profile/${comment?.author?._id}/posts`} className="font-bold text-lg"
+                    href={`/profile/${comment?.author?._id}/posts`} className="font-bold text-white text-lg"
                 >
                     {comment?.author?.name}
                 </Link>
-                <p className="font-semibold text-black-secondary">
+                <p className="text-[#f3f3f3]">
                     {comment?.content}
                 </p>
             </div>

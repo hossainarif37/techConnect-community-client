@@ -5,9 +5,13 @@ import { Icon } from "@iconify/react"
 import React from "react";
 import Comments from "../Comments/Comments";
 
-const PostCard = ({ post }: any) => {
-    const { content, category, author, _id, comments } = post;
-    const { name, profilePicture, userId: userId } = author;
+const 
+PostCard = ({ post }: any) => {
+    const { content, category, author, _id: postId, comments } = post;
+    console.log(10, author);
+    const { name, profilePicture, _id: authorId } = author;
+
+    
 
     // Function to split the text by newline and insert <br /> only if there is text after \n
     const renderContentWithBr = (text: string) => {
@@ -17,12 +21,12 @@ const PostCard = ({ post }: any) => {
             if (line.trim() === '' && index < lines.length - 1) {
                 return <br key={index} />;
             }
-            return <React.Fragment key={index}><p className="pl-2 xl:text-xl lg:text-base">{line}</p></React.Fragment>;
+            return <React.Fragment key={index}><p className="pl-2 xl:text-xl text-[#f3f3f3] lg:text-base">{line}</p></React.Fragment>;
         });
     };
 
     return (
-        <div className="bg-white py-3 px-10 rounded-xl max-h-full">
+        <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
             <div>
                 {/* Header Start */}
                 <div className="flex justify-between items-center text-black-secondary mb-2">
@@ -31,9 +35,9 @@ const PostCard = ({ post }: any) => {
                     <div className='flex gap-x-3 items-center'>
 
                         {/* User Image */}
-                        <Link href={`/profile/${userId}/posts`}>
+                        <Link href={`/profile/${authorId}/posts`}>
                             <UserImage
-                                customWidth="w-16"
+                                className="w-16"
                                 profilePicture={profilePicture}
                             />
                         </Link>
@@ -41,16 +45,16 @@ const PostCard = ({ post }: any) => {
                         {/* Title and Category Wrapper */}
                         <div>
                             {/* User Name */}
-                            <Link href={`/profile/${userId}/posts`} className='lg:text-base xl:text-lg text-black-secondary hover:underline font-bold'>{name}</Link>
+                            <Link href={`/profile/${authorId}/posts`} className='lg:text-base xl:text-lg text-white hover:underline font-bold'>{name}</Link>
 
                             {/* Category Selection */}
-                            <div className="flex gap-x-1 bg-white-secondary px-1 mt-1 rounded-lg items-center">
+                            <div className="flex gap-x-1 bg-accent text-white px-1 mt-1 rounded-lg items-center">
 
                                 {/* Category Icon */}
                                 <span className="text-3xl"><Icon icon="f7:menu" /></span>
 
                                 {/* Category Text */}
-                                <span className="font-bold">{category}</span>
+                                <span className="">{category}</span>
 
                             </div>
                         </div>
@@ -60,7 +64,7 @@ const PostCard = ({ post }: any) => {
                     {/* Save Button */}
                     <button
                         type="button"
-                        className="flex items-center py-1 gap-x-1 px-2 rounded-lg cursor-pointer bg-white-secondary duration-200"
+                        className="flex items-center py-1 gap-x-1 px-2 rounded-lg cursor-pointer bg-accent text-white duration-200"
                     >
                         {/* Save Icon */}
                         <span className="text-3xl">
@@ -77,7 +81,8 @@ const PostCard = ({ post }: any) => {
                 {renderContentWithBr(content)}
 
                 {/* horizontal line */}
-                <hr className="mt-5" />
+               {/* horizontal line */}
+               <hr className="mt-5 border-none h-0.5 bg-white/10"/>
 
                 {/* Reaction Icons */}
                 <div className={postCardStyles.reactionIcons}>
@@ -100,11 +105,11 @@ const PostCard = ({ post }: any) => {
                 </div>
 
                 {/* horizontal line */}
-                <hr />
+                <hr className="border-none h-0.5 bg-white/10"/>
             </div>
 
             {/* Comments */}
-            <Comments postId={_id} />
+            <Comments postId={postId} />
         </div>
     );
 };

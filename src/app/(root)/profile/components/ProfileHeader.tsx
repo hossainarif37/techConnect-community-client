@@ -14,13 +14,15 @@ import LoadingRound from "@/components/common/LoadingRound";
 const ProfileHeader = () => {
     const params = useParams();
     console.log(params);
-    const { isError, error, isLoading, data } = useGetUserProfileByIdQuery(params.id);
+    const { isError, error, isLoading, data } = useGetUserProfileByIdQuery(params?.id);
 
 
+    console.log(data);
 
     if (isLoading) {
-        return <LoadingRound paddingY="py-5" textColor="text-primary" textSize="text-2xl" />
+        return <LoadingRound />
     }
+
 
     const { name, profilePicture, followers, following } = data?.user;
 
@@ -31,7 +33,7 @@ const ProfileHeader = () => {
     return (
         <section >
             {/*-------- Profile Header Start ---------*/}
-            <div className="lg:w-[750px] mx-auto flex flex-col lg:flex-row items-center">
+            <div className="lg:w-[750px] text-white mx-auto flex flex-col lg:flex-row items-center">
 
                 {/* Profile Photo */}
                 <div className="w-28 mb-3 lg:mb-0 lg:w-36 xl:w-48 mr-5">
@@ -45,7 +47,7 @@ const ProfileHeader = () => {
                 <div className="flex flex-1 justify-between gap-7 lg:gap-0 items-center">
                     <div>
                         {/* Name */}
-                        <h4 className="font-bold text-black-secondary">{name}</h4>
+                        <h4 className="font-bold">{name}</h4>
 
                         {/* Followers */}
                         <h4><span>{followers?.length}</span> Follwers</h4>
@@ -55,9 +57,9 @@ const ProfileHeader = () => {
                     </div>
 
                     {/* Change Photo Button */}
-                    <label htmlFor="upload-photo" className="btn cursor-pointer font-semibold border flex items-center border-accent gap-3">
+                    <label htmlFor="upload-photo" className="btn bg-blue-primary cursor-pointer font-semibold border flex items-center border-accent gap-3">
                         <input onChange={handleUploadPhoto} type="file" className="hidden" id="upload-photo" />
-                        <span className="text-2xl text-gray-800"><FaCloudUploadAlt /></span>
+                        <span className="text-2xl"><FaCloudUploadAlt /></span>
                         <span>Upload Photo</span>
                     </label>
                 </div>

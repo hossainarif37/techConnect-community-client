@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import { setUser } from "@/redux/slices/user/userSlice";
 import Cookies from "js-cookie";
+import PrimaryButton from "@/components/common/Button/PrimaryButton";
 
 interface IFormInput {
     email: string;
@@ -91,12 +92,12 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
                 </div>
 
                 {/* //*Submit Button */}
-                <button
+                <PrimaryButton
                     type="submit"
-                    className="btn bg-primary text-white"
+                    className="bg-primary text-white"
                 >
                     Login
-                </button>
+                </PrimaryButton>
 
             </div>
             {/*//* Navigate to Register page */}

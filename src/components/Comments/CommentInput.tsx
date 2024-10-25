@@ -44,7 +44,7 @@ const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isEr
             <textarea
                 {...register}
                 onChange={handleTextareaChange}
-                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} bg-white-secondary outline-none p-4 placeholder:text-black-secondary text-lg placeholder:font-semibold border-none`}
+                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-4  text-lg placeholder:font-semibold `}
                 cols={30}
                 rows={textareaRows}
                 id="comment-input"
@@ -55,7 +55,7 @@ const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isEr
                 <button
                     title="Comment"
                     disabled={isCreateCommentLoading}
-                    className={`text-primary hover:bg-gray-200 text-2xl  w-10 h-10 flex justify-center items-center rounded-full`}
+                    className={`text-white hover:bg-accent text-2xl  w-10 h-10 flex justify-center items-center rounded-full`}
                     type="submit"
                 >
                     {isCreateCommentLoading ? <AiOutlineLoading3Quarters

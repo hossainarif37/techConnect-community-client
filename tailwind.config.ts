@@ -9,12 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary': '#22D3EE',
-        'secondary': '#3B82F6',
-        'accent': '#D9D9D9',
-        'white-secondary': '#F3F3F3',
-        'gray-secondary': '#EDEDED',
-        'black-secondary': '#444',
+        'primary': '#031022',   
+        'secondary': '#122033', 
+        'accent': '#1D3453',    
+        'highlight': '#254369', 
+        'light-gray': '#D9D9D9',
+        'white': '#F3F3F3',     
+        'gray-primary': '#EDEDED',      
+        'black': '#444444',
+        'blue-primary': '#00A3FF',
       },
     },
     screens: {

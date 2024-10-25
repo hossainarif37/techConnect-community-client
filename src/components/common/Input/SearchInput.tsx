@@ -10,11 +10,11 @@ type SearchInputPropsTypes = {
 const SearchInput = ({ searchInputText, handleSearch }: SearchInputPropsTypes) => {
 
     return (
-        <div className="relative flex items-center mt-3 bg-white-secondary pl-5 rounded-full">
-            <span className="text-3xl text-black-secondary"><IoSearchOutline /></span>
+        <div className="relative flex items-center bg-secondary border border-accent pl-5 rounded-full">
+            <span className="text-3xl text-white"><IoSearchOutline /></span>
             <input
                 onChange={handleSearch}
-                className="input input-secondary bg-transparent placeholder:text-black-secondary text-lg placeholder:font-semibold border-none  rounded-full py-4" type="text" name="search" id="search" placeholder={searchInputText} />
+                className="input input-secondary bg-transparent placeholder:text-white text-lg semibold border-none  rounded-full py-4" type="text" name="search" id="search" placeholder={searchInputText} />
         </div>
     );
 };

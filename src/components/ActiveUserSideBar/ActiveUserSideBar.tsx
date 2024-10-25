@@ -44,8 +44,8 @@ const ActiveUserSideBar = () => {
                     data?.users?.map((user: UserType, key: number) => <div key={key}
                         className="flex items-center gap-2 lg:gap-3"
                     >
-                        <UserImage customWidth="w-12" />
-                        <Link href='#' className="text-lg lg:text-xl font-bold select-none text-black-secondary cursor-pointer">{user.name}</Link>
+                        <UserImage className="w-12" />
+                        <Link href='#' className="text-lg lg:text-xl font-semibold select-none text-white cursor-pointer">{user.name}</Link>
                     </div>)
                 }
             </div>

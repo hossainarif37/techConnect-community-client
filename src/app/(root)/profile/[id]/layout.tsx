@@ -3,7 +3,7 @@ import Navbar from "@/components/shared/Navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileTabs from "../components/ProfileTabs/ProfileTabs";
-import CatergorySideBar from "../components/CatergorySideBar";
+import CategorySideBar from "../components/CategorySideBar";
 
 
 export const metadata: Metadata = {
@@ -22,17 +22,17 @@ export default function ProfileLayout({
             <ProfileHeader />
 
             <main className="container">
-                <hr className="mt-5" />
+                {/* <hr className="mt-5 border-none h-[1px] w-full bg-secondary" /> */}
                 <ProfileTabs />
 
-                {/* Newsfeed Layout */}
+                {/* News feed Layout */}
                 <div className="flex">
                     {/* Category Sidebar */}
                     <div>
-                        <CatergorySideBar />
+                        <CategorySideBar />
                     </div>
 
-                    {/* Newsfeed Area */}
+                    {/* News feed Area */}
                     {children}
                 </div>
             </main>

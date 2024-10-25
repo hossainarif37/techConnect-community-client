@@ -4,7 +4,7 @@ import ProfilePosts from "../../components/ProfilePosts/ProfilePosts";
 
 const ProfilePostPage = () => {
     return (
-        <section className="bg-accent flex-1 lg:px-14 px-5 py-5">
+        <section className="flex-1 lg:pl-20 px-5 lg:px-0 py-5">
             <PostInputCard />
             <ProfilePosts />
         </section>
