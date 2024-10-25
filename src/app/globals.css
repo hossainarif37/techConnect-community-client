@@ -2,25 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-primary
+}
+
 @layer utilities{
     .container{
         @apply max-w-7xl mx-auto px-4
     }
 
     .btn {
-        @apply lg:px-10 px-5 py-2.5 active:scale-95 duration-300 rounded border border-accent 
+        @apply lg:px-10 px-5 py-2.5 active:scale-95 duration-300 rounded-lg border border-accent 
     }
 
     .btn-disabled{
-        @apply bg-accent border-none text-white active:scale-100 cursor-not-allowed
+        @apply bg-secondary text-white cursor-not-allowed
     }
 
     .input {
-        @apply border w-full p-3 outline-none text-gray-700 rounded
+        @apply border w-full p-3 outline-none text-white rounded
     }
 
     .error {
         @apply text-red-500 mt-2
+    }
+
+    .gradient-blue {
+        @apply bg-gradient-to-r from-blue-400 to-blue-primary
     }
 }
 

@@ -1,6 +1,5 @@
 "use client"
 
-import LoginLogoutButton from "@/components/common/Button/LoginLogoutButton";
 import UserImage from "@/components/common/UserImage";
 import { navLinks } from "@/constants/navLinks";
 import Link from "next/link";
@@ -16,16 +15,12 @@ const Navbar = () => {
 
 
     return (
-        <nav className="bg-white  p-3 lg:py-5 sticky top-0 z-40">
+        <nav className="bg-[#122033] text-white  p-3 lg:py-5 sticky top-0 z-40">
             <div className="flex justify-between items-center">
 
                 {/* Navbar Logo */}
                 <div className="flex items-center gap-3">
-                    {/* <UserImage customWidth="w-14" /> */}
-                    <Link href='/' className="lg:text-4xl text-3xl font-bold">
-                        <span className="text-gray-800">Tech</span>
-                        <span className="text-secondary">Connect</span>
-                    </Link>
+                    <Link href='/' className="lg:text-4xl text-3xl font-bold text-transparent bg-clip-text gradient-blue">TechConnect</Link>
                 </div>
 
                 {/* Desktop Menu */}
@@ -42,12 +37,7 @@ const Navbar = () => {
                         }
                     </ul>
 
-
-                    <UserImage customWidth="w-14" isProfileDropdownBtn={true} />
-
-                    {/* Authentication Button */}
-                    {/* <LoginLogoutButton isDesktop={true} /> */}
-
+                    <UserImage className="w-14" isProfileDropdownBtn={true} />
                 </div>
 
                 {/* Mobile Menu */}
@@ -76,10 +66,6 @@ const Navbar = () => {
                                 />
                             ))
                         }
-
-                        {/* Authentication Button */}
-                        {/* <LoginLogoutButton isDesktop={false} /> */}
-
                     </ul>
                 </div>
             </div>

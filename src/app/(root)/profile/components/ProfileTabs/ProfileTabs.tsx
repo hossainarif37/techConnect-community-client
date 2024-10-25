@@ -52,7 +52,7 @@ const ProfileTabs = () => {
         <div className={`mt-3 lg:my-5 grid ${paramsId !== _id ? 'md:grid-cols-4' : 'md:grid-cols-5'}  justify-center gap-3 lg:gap-7 ${profiletabStyles.tabLink}`}>
             {
                 profileTabLinks.map((link, i) =>
-                    <Link className={`${(paramsId !== _id && link.title === 'Saved') ? 'hidden' : 'block'} ${link.path === pathname ? 'bg-secondary text-white' : 'text-black-secondary'}`} key={i} href={link.path}>{link.title}</Link>
+                    <Link className={`${(paramsId !== _id && link.title === 'Saved') ? 'hidden' : 'block'} ${link.path === pathname && 'bg-highlight'} text-white`} key={i} href={link.path}>{link.title}</Link>
                 )
             }
         </div>

@@ -20,11 +20,11 @@ const Posts = () => {
     }, [user]);
 
     if (isLoading) {
-        return <LoadingRound paddingY="py-20" textColor="text-primary" textSize="text-2xl" />
+        return <LoadingRound className="text-blue-500 text-4xl py-20" />
     }
 
     return (
-        <section className="lg:space-y-5 lg:py-5">
+        <section className="lg:space-y-5 lg:py-5 min-h-screen">
             {
                 data?.posts?.length > 0 ? data?.posts?.map((post: any, i: number) => (
                     <PostCard

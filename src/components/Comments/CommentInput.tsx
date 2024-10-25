@@ -3,23 +3,26 @@
 import { useSelector } from "react-redux";
 import UserImage from "../common/UserImage";
 import { IRootState } from "@/types/types";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { IoMdSend } from "react-icons/io";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 type CommentInputPropsTypes = {
     commentInputText: string,
-    register: UseFormRegisterReturn
+    register: UseFormRegisterReturn,
+    isCreateCommentLoading: boolean,
+    isError: boolean,
+    hasText: boolean,
+    setHasText: Dispatch<SetStateAction<boolean>>
 }
 
 
 
-const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) => {
+const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isError, hasText, setHasText }: CommentInputPropsTypes) => {
 
-    const [hasText, setHasText] = useState(false);
+
     const [textareaRows, setTextareaRows] = useState(1);
-
-
 
     // Handle Text Area Change
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -41,7 +44,7 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
             <textarea
                 {...register}
                 onChange={handleTextareaChange}
-                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} bg-white-secondary outline-none p-4 placeholder:text-black-secondary text-lg placeholder:font-semibold border-none`}
+                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-4  text-lg placeholder:font-semibold `}
                 cols={30}
                 rows={textareaRows}
                 id="comment-input"
@@ -51,14 +54,18 @@ const CommentInput = ({ commentInputText, register }: CommentInputPropsTypes) =>
             <div className={`absolute right-3 ${textareaRows > 1 && 'bottom-2'}`}>
                 <button
                     title="Comment"
-                    disabled={!hasText}
-                    className={`${hasText ? 'text-primary hover:bg-gray-200' : 'text-black-secondary'} text-2xl  w-10 h-10 flex justify-center items-center rounded-full`}
+                    disabled={isCreateCommentLoading}
+                    className={`text-white hover:bg-accent text-2xl  w-10 h-10 flex justify-center items-center rounded-full`}
                     type="submit"
                 >
-                    <IoMdSend />
+                    {isCreateCommentLoading ? <AiOutlineLoading3Quarters
+                        className='animate-spin'
+                    /> : <IoMdSend />}
                 </button>
             </div>
 
+            {/* //TODO: */}
+            {/* Need to show the error message here */}
         </div>
     );
 };
