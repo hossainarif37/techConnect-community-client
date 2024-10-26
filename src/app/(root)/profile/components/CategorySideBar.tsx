@@ -49,7 +49,7 @@ const CategorySideBar = () => {
         <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
     
         {/* Scrollable Categories Section */}
-        <div className="scrollbar-style flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] mt-5">
+        <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] mt-5">
             <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 pb-24">
                 {
                     filteredCategories?.map((category: string, key: number) => (

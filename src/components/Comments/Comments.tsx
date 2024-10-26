@@ -64,10 +64,8 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
         reset();
     }
 
-    console.log(67, remainingData);
-
     return (
-        <div className="">
+        <div>
             {
                 remainingLoading ? <LoadingRound /> : data?.remainingComments > 0 && (
                     <button
@@ -83,7 +81,9 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                 )
             }
 
-            <div className="max-h-[300px] overflow-y-auto pb-3">
+
+            {/* Comment Card */}
+            <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
                 {
                     remainingData?.success && remainingData?.comments?.map((comment: IComment, i: number) => (
                         <CommentCard comment={comment} key={i} />

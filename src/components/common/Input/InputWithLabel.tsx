@@ -24,7 +24,7 @@ const InputWithLabel = ({ label, type, register, id }: InputProps) => {
                 id={id}
                 {...register}
                 type={eyeToggle ? 'text' : type}
-                className={`input placeholder:text-white bg-primary border-highlight`}
+                className={`input placeholder:text-white bg-primary border-accent`}
                 onFocus={() => setInputFocus(true)}
                 onBlur={(e) => {
                     if (e.target.value) {

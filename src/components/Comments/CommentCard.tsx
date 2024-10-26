@@ -13,7 +13,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
             <Link href={`/profile/${comment?.author?._id}/posts`}>
                 <UserImage className="w-14" profilePicture={comment?.author?.profilePicture} />
             </Link>
-            <div className="bg-accent p-3 rounded-xl">
+            <div className="flex-1 bg-accent p-3 rounded-xl">
                 <Link
                     href={`/profile/${comment?.author?._id}/posts`} className="font-bold text-white text-lg"
                 >

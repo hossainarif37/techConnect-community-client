@@ -38,20 +38,18 @@ const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isEr
     };
 
     return (
-
         <div className={`flex-1 flex items-${textareaRows > 1 ? 'end' : 'center'} relative`}>
-
             <textarea
                 {...register}
                 onChange={handleTextareaChange}
-                className={`w-full ${textareaRows > 1 ? 'rounded-xl' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-4  text-lg placeholder:font-semibold `}
+                className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-4  text-lg placeholder:font-semibold `}
                 cols={30}
                 rows={textareaRows}
                 id="comment-input"
                 placeholder={commentInputText}
             ></textarea>
             {/* Submit Button */}
-            <div className={`absolute right-3 ${textareaRows > 1 && 'bottom-2'}`}>
+            <div className={`absolute right-3 ${textareaRows > 1 && 'bottom-1'}`}>
                 <button
                     title="Comment"
                     disabled={isCreateCommentLoading}
