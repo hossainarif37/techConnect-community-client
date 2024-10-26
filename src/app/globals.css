@@ -6,6 +6,20 @@ body {
     @apply bg-primary
 }
 
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: inset 10 10 black;
+    border-radius: 50px;
+    background:#122033;
+}
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f3f3f36e 0%, #f4f4f46e 100%);
+    border-radius: 10px;
+}
+
 @layer utilities{
     .container{
         @apply max-w-7xl mx-auto px-4
@@ -48,4 +62,24 @@ textarea {
     -ms-overflow-style: none;
     scrollbar-width: none;
     resize: none;
+}
+
+
+/* Chrome, Safari, Edge */
+.scrollbar-style::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar-style::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 black;
+    border-radius: 50px;
+}
+
+.scrollbar-style::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.scrollbar-style:hover::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f3f3f32c 0%, #f4f4f42f 100%);
 }

@@ -28,9 +28,7 @@ export default function ProfileLayout({
                 {/* News feed Layout */}
                 <div className="flex">
                     {/* Category Sidebar */}
-                    <div>
                         <CategorySideBar />
-                    </div>
 
                     {/* News feed Area */}
                     {children}
