@@ -47,7 +47,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     }, [isCreateCommentLoading])
 
     if (isLoading) {
-        return <LoadingRound className="" />
+        return <LoadingRound className="text-blue-primary text-4xl py-10" />
     }
 
     const handleViewMoreComments = (postId: string) => {

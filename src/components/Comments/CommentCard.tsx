@@ -15,7 +15,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
             </Link>
             <div className="flex-1 bg-accent p-3 rounded-xl">
                 <Link
-                    href={`/profile/${comment?.author?._id}/posts`} className="font-bold text-white text-lg"
+                    href={`/profile/${comment?.author?._id}/posts`} className="font-bold text-white text-lg hover:underline"
                 >
                     {comment?.author?.name}
                 </Link>

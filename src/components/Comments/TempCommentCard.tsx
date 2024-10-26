@@ -12,17 +12,15 @@ const TempCommentCard = ({ comment }: TempCommentCardPropsTypes) => {
             <Link href={`/profile/${user?._id}/posts`}>
                 <UserImage className="w-14" profilePicture={user?.profilePicture} />
             </Link>
-            <div className="">
-                <div className="bg-accent p-3 rounded-xl">
-                    <Link
-                        href={`/profile/${user?._id}/posts`} className="font-bold text-white text-lg"
-                    >
-                        {user?.name}
-                    </Link>
-                    <p className="text-[#f3f3f3]">
-                        {comment}
-                    </p>
-                </div>
+            <div className="flex-1 bg-accent p-3 rounded-xl">
+                <Link
+                    href={`/profile/${user?._id}/posts`} className="font-bold text-white text-lg hover:underline"
+                >
+                    {user?.name}
+                </Link>
+                <p className="text-[#f3f3f3]">
+                    {comment}
+                </p>
             </div>
         </div>
     );
