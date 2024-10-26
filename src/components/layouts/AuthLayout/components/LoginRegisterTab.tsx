@@ -14,14 +14,14 @@ const LoginRegisterTab = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
                 <button
                     onClick={() => setIsLoginComponent(true)}
-                    className={`${tabStyles.tab} ${isLoginComponent ? 'text-white hover:bg-secondary hover:text-white' : 'hover:bg-slate-100  hover:text-black-secondary'}`}>
+                    className={`${tabStyles.tab}`}>
                     Login
                 </button>
 
                 {/* Register */}
                 <button
                     onClick={() => setIsLoginComponent(false)}
-                    className={`${tabStyles.tab} ${!isLoginComponent ? 'text-white hover:bg-secondary hover:text-white' : 'hover:bg-slate-100  hover:text-black-secondary'}`}>
+                    className={`${tabStyles.tab}`}>
                     Register
                 </button>
 
