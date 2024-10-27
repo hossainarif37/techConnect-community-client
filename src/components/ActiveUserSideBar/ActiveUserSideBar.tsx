@@ -43,14 +43,14 @@ const ActiveUserSideBar = () => {
 
             {/* Scrollable Categories Section */}
             <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] mt-5">
-                <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-5 pb-24">
+                <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-3 pb-24 pr-2">
                     {
-                        data?.users?.map((user: UserType, key: number) => <div key={key}
-                            className="flex items-center gap-2 lg:gap-3"
-                        >
-                            <UserImage className="w-12" />
-                            <Link href={`/profile/${user?._id}/posts`} className="text-lg lg:text-xl font-semibold select-none text-white cursor-pointer">{user.name}</Link>
-                        </div>)
+                        data?.users?.map((user: UserType, key: number) => (
+                            <Link href={`/profile/${user?._id}/posts`} key={key} className="flex items-center gap-2 lg:gap-3 hover:bg-accent p-2.5 rounded-lg duration-150">
+                                <UserImage className="w-10" />
+                                <span className="text-lg lg:text-xl font-semibold select-none text-white cursor-pointer">{user.name}</span>
+                            </Link>
+                        ))
                     }
                 </div>
             </div>

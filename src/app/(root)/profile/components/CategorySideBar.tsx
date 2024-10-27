@@ -50,10 +50,10 @@ const CategorySideBar = () => {
     
         {/* Scrollable Categories Section */}
         <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] mt-5">
-            <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-7 pb-24">
+            <div className="flex flex-wrap gap-x-6 lg:gap-x-0 lg:flex-col gap-y-3 pb-24 pr-2">
                 {
                     filteredCategories?.map((category: string, key: number) => (
-                        <div key={key} className="flex gap-2 lg:gap-3">
+                        <label htmlFor={category.toLowerCase()} key={key} className="flex gap-2 lg:gap-3 hover:bg-accent hover:cursor-pointer p-3 rounded-lg duration-150">
                             <input
                                 onChange={(e) => handleCategory(category, e.target.checked)}
                                 className="h-7 w-7 cursor-pointer"
@@ -62,13 +62,13 @@ const CategorySideBar = () => {
                                 id={category.toLowerCase()}
                                 checked={categoryQueries.includes(category)} // Determine if the category is selected
                             />
-                            <label
+                            <span
                                 className="text-lg lg:text-xl select-none text-white cursor-pointer"
-                                htmlFor={category.toLowerCase()}
+                                
                             >
                                 {category}
-                            </label>
-                        </div>
+                            </span>
+                        </label>
                     ))
                 }
             </div>
