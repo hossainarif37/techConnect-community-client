@@ -14,16 +14,12 @@ import Loading from "@/components/common/Loading";
 const UserMenuDropdown = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state: IRootState) => state.userSlice);
-    if (!user) {
-        return <Loading />
-    }
-
-
+  
     return (
             <ul className={`${userDropdownStyles.userProfileDropdown} `}>
                 <li>
                     <Link
-                        href={`/profile/${user._id}/posts`}
+                        href={`/profile/${user?._id}/posts`}
                         title="Profile"
                     >
                         <span><CgProfile /></span>

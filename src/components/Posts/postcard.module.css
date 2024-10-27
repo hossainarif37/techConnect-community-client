@@ -17,10 +17,10 @@
     @apply text-xl font-semibold
 }
 
-.postActionsMenu{
+.postActionsDropdown{
     @apply z-10 w-48 rounded-lg p-2 absolute top-12 bg-accent border border-highlight right-0
 }
 
-.postActionsMenu button{
-    @apply border-black flex items-center justify-start gap-2 w-full px-4 py-3 text-sm text-white hover:bg-highlight duration-150 rounded-lg
+.postActionsDropdown button{
+    @apply border-black flex items-center justify-start gap-2 w-full px-4 py-3 text-sm text-white hover:bg-highlight rounded-lg
 }

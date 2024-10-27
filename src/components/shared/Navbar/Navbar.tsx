@@ -8,11 +8,14 @@ import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import CloseMenu from "@/components/common/Button/CloseMenu";
 import OpenMenu from "@/components/common/Button/OpenMenu";
+import { useState } from "react";
+import UserMenuDropdown from "./UserMenuDropDown/UserMenuDropdown";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 const Navbar = () => {
-
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
-
+    const [isProfileDropdown, setIsProfileDropdown] = useState(false);
+    const dropdownRef = useOutsideClick(() => setIsProfileDropdown(false), isProfileDropdown);
 
     return (
         <nav className="bg-[#122033] text-white  p-3 lg:py-5 sticky top-0 z-40">
@@ -37,7 +40,14 @@ const Navbar = () => {
                         }
                     </ul>
 
-                    <UserImage className="w-14" isProfileDropdownBtn={true} />
+                    <div onClick={() => setIsProfileDropdown(!isProfileDropdown)} className="relative" ref={dropdownRef}>
+                        <UserImage className="w-14" />
+
+                        {/* Profile Dropdown */}
+                        {
+                            isProfileDropdown && <UserMenuDropdown />
+                        }
+                    </div>
                 </div>
 
                 {/* Mobile Menu */}

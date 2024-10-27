@@ -25,7 +25,7 @@ interface IActionItem {
     onClick: TOnClickHandler;
 }
 
-interface PostActionsMenuProps {
+interface PostActionsDropdownProps {
     authorId: string;
     setActionsDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -78,20 +78,20 @@ const nonLoggedInUserPostActions: IActionItem[] = [
     },
 ]
 
-const PostActionsMenu = ({setActionsDropdown, authorId}: PostActionsMenuProps) => {
+const PostActionsDropdown = ({setActionsDropdown, authorId}: PostActionsDropdownProps) => {
     const {user} = useSelector((state: IRootState) => state.userSlice);
     const isFollow = true;
 
     const actionButtons = user?._id === authorId ? loggedInUserPostActions : nonLoggedInUserPostActions;
 
     return (
-        <ul className={`${postCardStyles.postActionsMenu}`}>
+        <ul className={`${postCardStyles.postActionsDropdown}`}>
                 {
                     actionButtons.map((action, index) => (
                         <li key={index} className={`${action.title === "Follow" && isFollow && "hidden" || action.title === "Unfollow" && !isFollow && "hidden"}`}>
                             <button onClick={() => action.onClick(setActionsDropdown)}>
-                                <span className="text-2xl">{action.icon}</span>
-                                <span className="text-lg font-semibold">{action.title}</span>
+                                <span className="text-xl">{action.icon}</span>
+                                <span className="">{action.title}</span>
                             </button>
                         </li>
                     ))
@@ -100,4 +100,4 @@ const PostActionsMenu = ({setActionsDropdown, authorId}: PostActionsMenuProps) =
     );
 };
 
-export default PostActionsMenu;
+export default PostActionsDropdown;

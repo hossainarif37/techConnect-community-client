@@ -1,28 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import PostActionsMenu from "./PostActionsMenu";
+import useOutsideClick from "@/hooks/useOutsideClick";
+import PostActionsDropdown from "./PostActionsDropdown";
 
 const PostActionButton = ({ authorId }: { authorId: string }) => {
     const [actionsDropdown, setActionsDropdown] = useState(false);
 
-    const dropdownRef = useRef(null);
+    const dropdownRef = useOutsideClick(() => setActionsDropdown(false), actionsDropdown);
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (dropdownRef.current && !(dropdownRef.current as HTMLElement).contains(event.target as Node)) {
-            setActionsDropdown(false);
-        }
-    };
-
-    useEffect(() => {
-        if (actionsDropdown) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [actionsDropdown]);
     return (
         <div className="relative" ref={dropdownRef}>
             {/* Action Button */}
@@ -36,7 +21,7 @@ const PostActionButton = ({ authorId }: { authorId: string }) => {
 
             {/* Dropdown */}
             {actionsDropdown && (
-                <PostActionsMenu
+                <PostActionsDropdown
                     authorId={authorId}
                     setActionsDropdown={setActionsDropdown}
                 />

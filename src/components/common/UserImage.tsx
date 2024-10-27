@@ -10,37 +10,10 @@ import { cn } from "@/lib/utils";
 type UserImagePropsTypes = {
     profilePicture?: string;
     className?: string;
-    isProfileDropdownBtn?: boolean;
 }
 
-const UserImage = ({ profilePicture, className, isProfileDropdownBtn }: UserImagePropsTypes) => {
-
-    const dispatch = useDispatch();
-
-    const { isProfileDropdown } = useSelector((state: IRootState) => state.navbarSlice);
-
-    const handleProfileDropdown = () => {
-        isProfileDropdownBtn && dispatch(toggleProfileDropdown());
-    }
-
-
-    return (
-        <>
-            <div
-                onClick={handleProfileDropdown}
-                className="relative cursor-pointer group" title="Account"
-            >
-
-                {/* <div className="w-full h-full absolute rounded-full opacity-0 group-hover:opacity-40 bg-black top-0 duration-100"></div> */}
-
-                <Image className={cn('relative cursor-pointer group', className)} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
-
-                {(isProfileDropdown && isProfileDropdownBtn) && <UserMenuDropdown />}
-            </div>
-
-
-        </>
-    );
-};
+const UserImage = ({ profilePicture, className }: UserImagePropsTypes) => (
+    <Image className={cn('relative cursor-pointer group', className)} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
+);
 
 export default UserImage;
