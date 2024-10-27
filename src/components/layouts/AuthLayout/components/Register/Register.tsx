@@ -111,7 +111,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
                 {/* //*Submit Button */}
                 <PrimaryButton
                     type="submit"
-                    className="btn bg-primary text-white"
+                    className="bg-gradient-to-r from-[#079EF2] to-blue-primary text-white"
                 >
                     Register
                 </PrimaryButton>
@@ -119,11 +119,11 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
             </div>
 
             {/*//* Navigate to Register page */}
-            <p className="text-center">
+            <p className="text-center text-white">
                 <span>Already have an account? <button
                     type="button"
                     onClick={() => setIsLoginComponent(true)}
-                    className="text-primary underline">Login</button></span>
+                    className="underline">Login</button></span>
             </p>
 
         </form>

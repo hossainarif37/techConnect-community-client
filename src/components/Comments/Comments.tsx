@@ -27,9 +27,6 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
     const [tempComment, setTempComment] = useState<string[]>([]);
 
-
-
-
     // Get latest one comment by postId
     const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
 
@@ -47,7 +44,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     }, [isCreateCommentLoading])
 
     if (isLoading) {
-        return <LoadingRound className="" />
+        return <LoadingRound className="text-blue-primary text-4xl py-10" />
     }
 
     const handleViewMoreComments = (postId: string) => {
@@ -55,35 +52,36 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
         getRemainingComments({ postId, skip: 1 });
     }
 
-    console.log(tempComment);
-
 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
-        createComment({ content: data.comment, article: postId, author: user?._id });
-        setHasText(false);
-        reset();
+        createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then(()=>{
+            setHasText(false);
+            reset();
+        }).catch((err)=>{
+            console.log('Comment Error:', err);
+        })
     }
 
-    console.log(67, remainingData);
-
     return (
-        <div className="">
+        <div>
             {
-                remainingLoading ? <LoadingRound /> : data?.remainingComments > 0 && (
+                remainingLoading ? <LoadingRound className="text-blue-primary text-4xl py-5" /> : data?.remainingComments > 0 && (
                     <button
                         type="button"
                         onClick={() => handleViewMoreComments(postId)}
                         className={
                             `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
                         ${(isViewMoreComments && remainingData?.remainingComments < 2) && 'hidden'}
-                        my-3 hover:underline text-[#f3f3f3] underline text-lg font-bold`
+                        my-3 hover:underline text-[#ddd] underline text-lg font-bold`
                         }>
                         View more comments
                     </button>
                 )
             }
 
-            <div className="max-h-[300px] overflow-y-auto pb-3">
+
+            {/* Comment Card */}
+            <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
                 {
                     remainingData?.success && remainingData?.comments?.map((comment: IComment, i: number) => (
                         <CommentCard comment={comment} key={i} />

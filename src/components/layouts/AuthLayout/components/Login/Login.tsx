@@ -94,17 +94,17 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
                 {/* //*Submit Button */}
                 <PrimaryButton
                     type="submit"
-                    className="bg-primary text-white"
+                    className="bg-gradient-to-r from-[#079EF2] to-blue-primary text-white"
                 >
                     Login
                 </PrimaryButton>
 
             </div>
             {/*//* Navigate to Register page */}
-            <p className="text-center"><span>Don't have an account? <button
+            <p className="text-center text-white"><span>Don't have an account? <button
                 type="button"
                 onClick={() => setIsLoginComponent(false)}
-                className="text-primary underline">Create an account</button></span></p>
+                className="underline">Create an account</button></span></p>
         </form>
     );
 };

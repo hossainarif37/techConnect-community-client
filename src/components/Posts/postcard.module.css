@@ -16,3 +16,11 @@
 .reactionIcons p{
     @apply text-xl font-semibold
 }
+
+.postActionsDropdown{
+    @apply z-10 w-48 rounded-lg p-2 absolute top-12 bg-accent border border-highlight right-0
+}
+
+.postActionsDropdown button{
+    @apply border-black flex items-center justify-start gap-2 w-full px-4 py-3 text-sm text-white hover:bg-highlight rounded-lg
+}

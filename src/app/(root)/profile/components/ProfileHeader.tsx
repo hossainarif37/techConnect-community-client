@@ -20,7 +20,7 @@ const ProfileHeader = () => {
     console.log(data);
 
     if (isLoading) {
-        return <LoadingRound />
+        return <LoadingRound className="text-2xl text-blue-primary py-20"/>
     }
 
 
@@ -31,7 +31,7 @@ const ProfileHeader = () => {
     }
 
     return (
-        <section >
+        <section>
             {/*-------- Profile Header Start ---------*/}
             <div className="lg:w-[750px] text-white mx-auto flex flex-col lg:flex-row items-center">
 

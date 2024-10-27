@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply bg-primary
-}
-
 @layer utilities{
     .container{
         @apply max-w-7xl mx-auto px-4
@@ -32,6 +28,39 @@ body {
     }
 }
 
+body {
+    @apply bg-primary
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: inset 10 10 black;
+    border-radius: 50px;
+    background:#122033;
+}
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f3f3f36e 0%, #f4f4f46e 100%);
+    border-radius: 10px;
+}
+
+.comment-scrollbar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.comment-scrollbar::-webkit-scrollbar-track {
+    box-shadow: inset 10 10 black;
+    border-radius: 50px;
+}
+.comment-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f3f3f333 0%, #f4f4f42c 100%);
+    border-radius: 10px;
+}
+
+
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -48,4 +77,24 @@ textarea {
     -ms-overflow-style: none;
     scrollbar-width: none;
     resize: none;
+}
+
+
+/* Chrome, Safari, Edge */
+.sidebar-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 black;
+    border-radius: 50px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.sidebar-scrollbar:hover::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #f3f3f32c 0%, #f4f4f42f 100%);
 }

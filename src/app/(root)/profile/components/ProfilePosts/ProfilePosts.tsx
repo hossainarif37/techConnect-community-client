@@ -25,7 +25,7 @@ const ProfilePosts = () => {
     }, [params]);
 
     if (isLoading) {
-        return <LoadingRound />
+        return <LoadingRound className="text-blue-primary text-4xl py-20"/>
     }
 
 

@@ -12,7 +12,7 @@ const AuthLayout = () => {
     return (
         <div className="container">
             <div className="my-20 md:my-40">
-                <div className="w-full md:w-[450px] mx-auto rounded md:shadow-lg px-5 md:p-10">
+                <div className="w-full md:w-[450px] mx-auto rounded-md md:shadow-md md:shadow-secondary md:border md:border-secondary/75 px-5 md:p-10">
 
                     <LoginRegisterTab
                         isLoginComponent={isLoginComponent}

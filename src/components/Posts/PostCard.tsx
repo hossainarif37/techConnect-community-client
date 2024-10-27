@@ -2,28 +2,16 @@ import Link from "next/link";
 import UserImage from "../common/UserImage";
 import postCardStyles from "./postcard.module.css"
 import { Icon } from "@iconify/react"
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Comments from "../Comments/Comments";
+import { renderContentWithBr } from "@/utils/renderContentWithBr";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import PostActionsMenu from "./PostActionsDropdown";
+import PostActionButton from "./PostActionButton";
 
-const 
-PostCard = ({ post }: any) => {
+const PostCard = ({ post }: any) => {
     const { content, category, author, _id: postId, comments } = post;
-    console.log(10, author);
     const { name, profilePicture, _id: authorId } = author;
-
-    
-
-    // Function to split the text by newline and insert <br /> only if there is text after \n
-    const renderContentWithBr = (text: string) => {
-        const lines = text.split('\n');
-        return lines.map((line, index) => {
-            // Only add a <br /> if there is text after the newline
-            if (line.trim() === '' && index < lines.length - 1) {
-                return <br key={index} />;
-            }
-            return <React.Fragment key={index}><p className="pl-2 xl:text-xl text-[#f3f3f3] lg:text-base">{line}</p></React.Fragment>;
-        });
-    };
 
     return (
         <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
@@ -61,28 +49,20 @@ PostCard = ({ post }: any) => {
 
                     </div>
 
-                    {/* Save Button */}
-                    <button
-                        type="button"
-                        className="flex items-center py-1 gap-x-1 px-2 rounded-lg cursor-pointer bg-accent text-white duration-200"
-                    >
-                        {/* Save Icon */}
-                        <span className="text-3xl">
-                            <Icon icon="fluent:save-copy-20-regular" />
-                        </span>
-                        <span className="font-bold">Save</span>
-                    </button>
+                    {/* Action Button */}
+                    <PostActionButton authorId={authorId} />
+
 
                 </div>
                 {/* Header End */}
 
                 {/* Content */}
                 {/* Render the modified content */}
-                {renderContentWithBr(content)}
+                {renderContentWithBr(content, "pl-2 xl:text-xl text-[#f3f3f3] lg:text-base")}
 
                 {/* horizontal line */}
-               {/* horizontal line */}
-               <hr className="mt-5 border-none h-0.5 bg-white/10"/>
+                {/* horizontal line */}
+                <hr className="mt-5 border-none h-0.5 bg-white/10" />
 
                 {/* Reaction Icons */}
                 <div className={postCardStyles.reactionIcons}>
@@ -105,11 +85,13 @@ PostCard = ({ post }: any) => {
                 </div>
 
                 {/* horizontal line */}
-                <hr className="border-none h-0.5 bg-white/10"/>
+                <hr className="border-none h-0.5 bg-white/10" />
             </div>
 
             {/* Comments */}
             <Comments postId={postId} />
+
+
         </div>
     );
 };
