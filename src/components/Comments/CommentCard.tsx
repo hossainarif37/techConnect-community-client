@@ -1,6 +1,8 @@
 import { IComment } from "@/types/types";
 import Link from "next/link";
 import UserImage from "../common/UserImage";
+import React from "react";
+import { renderContentWithBr } from "@/utils/renderContentWithBr";
 
 // Adjust the CommentCard component to accept a single `comment` prop
 interface CommentCardProps {
@@ -19,9 +21,9 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
                 >
                     {comment?.author?.name}
                 </Link>
-                <p className="text-[#f3f3f3]">
-                    {comment?.content}
-                </p>
+
+                {/* Render the modified content */}
+                {renderContentWithBr(comment?.content)}
             </div>
         </div>
     );

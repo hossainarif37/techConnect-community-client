@@ -4,26 +4,13 @@ import postCardStyles from "./postcard.module.css"
 import { Icon } from "@iconify/react"
 import React from "react";
 import Comments from "../Comments/Comments";
+import { renderContentWithBr } from "@/utils/renderContentWithBr";
 
 const 
 PostCard = ({ post }: any) => {
     const { content, category, author, _id: postId, comments } = post;
     console.log(10, author);
     const { name, profilePicture, _id: authorId } = author;
-
-    
-
-    // Function to split the text by newline and insert <br /> only if there is text after \n
-    const renderContentWithBr = (text: string) => {
-        const lines = text.split('\n');
-        return lines.map((line, index) => {
-            // Only add a <br /> if there is text after the newline
-            if (line.trim() === '' && index < lines.length - 1) {
-                return <br key={index} />;
-            }
-            return <React.Fragment key={index}><p className="pl-2 xl:text-xl text-[#f3f3f3] lg:text-base">{line}</p></React.Fragment>;
-        });
-    };
 
     return (
         <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
@@ -78,7 +65,7 @@ PostCard = ({ post }: any) => {
 
                 {/* Content */}
                 {/* Render the modified content */}
-                {renderContentWithBr(content)}
+                {renderContentWithBr(content, "pl-2 xl:text-xl text-[#f3f3f3] lg:text-base")}
 
                 {/* horizontal line */}
                {/* horizontal line */}

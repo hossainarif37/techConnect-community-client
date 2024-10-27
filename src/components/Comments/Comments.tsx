@@ -27,9 +27,6 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
     const [tempComment, setTempComment] = useState<string[]>([]);
 
-
-
-
     // Get latest one comment by postId
     const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
 
@@ -55,19 +52,20 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
         getRemainingComments({ postId, skip: 1 });
     }
 
-    console.log(tempComment);
-
 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
-        createComment({ content: data.comment, article: postId, author: user?._id });
-        setHasText(false);
-        reset();
+        createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then(()=>{
+            setHasText(false);
+            reset();
+        }).catch((err)=>{
+            console.log('Comment Error:', err);
+        })
     }
 
     return (
         <div>
             {
-                remainingLoading ? <LoadingRound /> : data?.remainingComments > 0 && (
+                remainingLoading ? <LoadingRound className="text-blue-primary text-4xl py-5" /> : data?.remainingComments > 0 && (
                     <button
                         type="button"
                         onClick={() => handleViewMoreComments(postId)}

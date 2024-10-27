@@ -2,6 +2,7 @@ import Link from "next/link";
 import UserImage from "../common/UserImage";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
+import { renderContentWithBr } from "@/utils/renderContentWithBr";
 
 type TempCommentCardPropsTypes = { comment: string }
 
@@ -18,9 +19,9 @@ const TempCommentCard = ({ comment }: TempCommentCardPropsTypes) => {
                 >
                     {user?.name}
                 </Link>
-                <p className="text-[#f3f3f3]">
-                    {comment}
-                </p>
+                
+                 {/* Render the modified content */}
+                 {renderContentWithBr(comment)}
             </div>
         </div>
     );
