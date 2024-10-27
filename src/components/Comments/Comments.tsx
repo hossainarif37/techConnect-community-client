@@ -104,7 +104,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
             {/* Comment Form  */}
             <form
                 onSubmit={handleSubmit(handleComment)}
-                className="pt-3 flex gap-x-3 "
+                className="pt-3 flex gap-x-3"
             >
                 <UserImage className="w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
