@@ -2,20 +2,21 @@ import Link from "next/link";
 import UserImage from "../common/UserImage";
 import postCardStyles from "./postcard.module.css"
 import { Icon } from "@iconify/react"
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Comments from "../Comments/Comments";
 import { renderContentWithBr } from "@/utils/renderContentWithBr";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import PostActionsMenu from "./PostActionsMenu";
+import PostActionButton from "./PostActionButton";
 
 const
     PostCard = ({ post }: any) => {
         const { content, category, author, _id: postId, comments } = post;
         const { name, profilePicture, _id: authorId } = author;
-        const [actionsDropdown, setActionsDropdown] = useState(false);
+        
 
         return (
-            <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full relative">
+            <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
                 <div>
                     {/* Header Start */}
                     <div className="flex justify-between items-center text-black-secondary mb-2">
@@ -51,20 +52,8 @@ const
                         </div>
 
                         {/* Action Button */}
-                        <div className="relative">
-                            <button
-                                onClick={() => setActionsDropdown(!actionsDropdown)}
-                                type="button"
-                                className="text-2xl cursor-pointer text-white hover:bg-accent rounded-full p-2 duration-100"
-                            >
-                                <HiOutlineDotsHorizontal />
-
-                            </button>
-                            {/* Dropdown */}
-                            {actionsDropdown && <PostActionsMenu
-                                authorId={authorId}
-                                setActionsDropdown={setActionsDropdown} />}
-                        </div>
+                        <PostActionButton authorId={authorId}/>
+                        
 
                     </div>
                     {/* Header End */}
