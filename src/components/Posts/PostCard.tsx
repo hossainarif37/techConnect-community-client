@@ -8,6 +8,7 @@ import { renderContentWithBr } from "@/utils/renderContentWithBr";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import PostActionsMenu from "./PostActionsDropdown";
 import PostActionButton from "./PostActionButton";
+import LikeButton from "./LikeButton";
 
 const PostCard = ({ post }: any) => {
     const { content, category, author, _id: postId, comments } = post;
@@ -68,17 +69,12 @@ const PostCard = ({ post }: any) => {
                 <div className={postCardStyles.reactionIcons}>
 
                     {/* Like */}
-                    <button>
-                        {/* Like Icon */}
-                        <span><Icon icon="ant-design:like-outlined" /></span>
-                        {/* Text */}
-                        <p>Like</p>
-                    </button>
+                   <LikeButton postId={postId} />
 
                     {/* Comment */}
                     <button>
                         {/* Comment Icon */}
-                        <span><Icon icon="octicon:comment-24" /></span>
+                        <span className="text-3xl"><Icon icon="octicon:comment-24" /></span>
                         {/* Text */}
                         <p>Comment</p>
                     </button>

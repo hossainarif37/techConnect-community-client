@@ -9,10 +9,6 @@
     @apply flex items-center gap-x-1 bg-accent  rounded
 }
 
-.reactionIcons span{
-    @apply text-3xl text-white
-}
-
 .reactionIcons p{
     @apply text-xl font-semibold
 }
