@@ -20,7 +20,6 @@ const UserMenuDropdown = () => {
 
 
     return (
-        <>
             <ul className={`${userDropdownStyles.userProfileDropdown} `}>
                 <li>
                     <Link
@@ -57,7 +56,6 @@ const UserMenuDropdown = () => {
                 </li>
 
             </ul>
-        </>
     );
 };
 

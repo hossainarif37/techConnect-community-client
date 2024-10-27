@@ -72,7 +72,7 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
                         className={
                             `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
                         ${(isViewMoreComments && remainingData?.remainingComments < 2) && 'hidden'}
-                        my-3 hover:underline text-[#f3f3f3] underline text-lg font-bold`
+                        my-3 hover:underline text-[#ddd] underline text-lg font-bold`
                         }>
                         View more comments
                     </button>
