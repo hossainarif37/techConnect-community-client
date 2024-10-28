@@ -13,7 +13,7 @@ import LikeButton from "./LikeButton";
 const PostCard = ({ post }: any) => {
     const { content, category, author, _id: postId, likes } = post;
     const { name, profilePicture, _id: authorId } = author;
-    const isLiked = likes.includes(authorId);
+    const isLiked = likes?.includes(authorId);
     const commentInputRef = useRef<HTMLTextAreaElement>(null);
 
     return (
