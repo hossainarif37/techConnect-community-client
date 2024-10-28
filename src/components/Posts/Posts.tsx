@@ -31,9 +31,8 @@ const Posts = () => {
                         key={i}
                         post={post}
                     />)
-                ) : <h1 className="text-2xl font-semibold text-center mt-5 text-black-secondary">No posts here. Share your thoughts!</h1>
+                ) : <h1 className="text-2xl font-semibold text-center mt-5 text-white">No posts here. Share your thoughts!</h1>
             }
-
         </section>
     );
 };

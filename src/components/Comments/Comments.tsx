@@ -13,7 +13,8 @@ import TempCommentCard from "./TempCommentCard";
 import Loading from "../common/Loading";
 
 type CommentsPropsTypes = {
-    postId: string
+    postId: string;
+    commentInputRef: React.RefObject<HTMLTextAreaElement>
 }
 
 interface IFormValues {
@@ -21,7 +22,7 @@ interface IFormValues {
 }
 
 
-const Comments = ({ postId }: CommentsPropsTypes) => {
+const Comments = ({ postId , commentInputRef}: CommentsPropsTypes) => {
     const [isViewMoreComments, setIsViewMoreComments] = useState(false);
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
@@ -104,10 +105,11 @@ const Comments = ({ postId }: CommentsPropsTypes) => {
             {/* Comment Form  */}
             <form
                 onSubmit={handleSubmit(handleComment)}
-                className="pt-3 flex gap-x-3 "
+                className="pt-3 flex gap-x-3"
             >
                 <UserImage className="w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
+                ref={commentInputRef}
                     register={{ ...register('comment', { required: true }) }}
                     commentInputText="Write a comment..."
                     isCreateCommentLoading={isCreateCommentLoading}

@@ -12,8 +12,12 @@ type UserImagePropsTypes = {
     className?: string;
 }
 
-const UserImage = ({ profilePicture, className }: UserImagePropsTypes) => (
-    <Image className={cn('relative cursor-pointer group', className)} src={profilePicture ? profilePicture : profile_blank_image} priority alt="" />
-);
+const UserImage = ({ profilePicture, className }: UserImagePropsTypes) => {
+    return (
+        <div>
+            <Image className={cn('relative cursor-pointer group', className)} src={profilePicture ? profilePicture : profile_blank_image} priority alt="User Image" />
+        </div>
+    )
+};
 
 export default UserImage;

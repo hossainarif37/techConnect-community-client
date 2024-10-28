@@ -8,10 +8,13 @@ import { renderContentWithBr } from "@/utils/renderContentWithBr";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import PostActionsMenu from "./PostActionsDropdown";
 import PostActionButton from "./PostActionButton";
+import LikeButton from "./LikeButton";
 
 const PostCard = ({ post }: any) => {
-    const { content, category, author, _id: postId, comments } = post;
+    const { content, category, author, _id: postId, likes } = post;
     const { name, profilePicture, _id: authorId } = author;
+    const isLiked = likes.includes(authorId);
+    const commentInputRef = useRef<HTMLTextAreaElement>(null);
 
     return (
         <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
@@ -68,17 +71,12 @@ const PostCard = ({ post }: any) => {
                 <div className={postCardStyles.reactionIcons}>
 
                     {/* Like */}
-                    <button>
-                        {/* Like Icon */}
-                        <span><Icon icon="ant-design:like-outlined" /></span>
-                        {/* Text */}
-                        <p>Like</p>
-                    </button>
+                    <LikeButton postId={postId} initialLikesCount={likes.length} initialIsLiked={isLiked} />
 
                     {/* Comment */}
-                    <button>
+                    <button type="button" onClick={() => commentInputRef.current?.focus()}>
                         {/* Comment Icon */}
-                        <span><Icon icon="octicon:comment-24" /></span>
+                        <span className="text-3xl"><Icon icon="octicon:comment-24" /></span>
                         {/* Text */}
                         <p>Comment</p>
                     </button>
@@ -89,9 +87,7 @@ const PostCard = ({ post }: any) => {
             </div>
 
             {/* Comments */}
-            <Comments postId={postId} />
-
-
+            <Comments postId={postId} commentInputRef={commentInputRef}/>
         </div>
     );
 };

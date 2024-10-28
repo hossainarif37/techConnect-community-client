@@ -1,9 +1,5 @@
 "use client"
-
-import { useSelector } from "react-redux";
-import UserImage from "../common/UserImage";
-import { IRootState } from "@/types/types";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, forwardRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { IoMdSend } from "react-icons/io";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -17,11 +13,14 @@ type CommentInputPropsTypes = {
     setHasText: Dispatch<SetStateAction<boolean>>
 }
 
-
-
-const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isError, hasText, setHasText }: CommentInputPropsTypes) => {
-
-
+const CommentInput = forwardRef<HTMLTextAreaElement, CommentInputPropsTypes>(({ 
+    commentInputText, 
+    register, 
+    isCreateCommentLoading, 
+    isError, 
+    hasText, 
+    setHasText 
+}, ref) => {
     const [textareaRows, setTextareaRows] = useState(1);
 
     // Handle Text Area Change
@@ -41,6 +40,7 @@ const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isEr
         <div className={`flex-1 flex items-${textareaRows > 1 ? 'end' : 'center'} relative`}>
             <textarea
                 {...register}
+                ref={ref}
                 onChange={handleTextareaChange}
                 className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-4  text-lg placeholder:font-semibold `}
                 cols={30}
@@ -61,11 +61,10 @@ const CommentInput = ({ commentInputText, register, isCreateCommentLoading, isEr
                     /> : <IoMdSend />}
                 </button>
             </div>
-
-            {/* //TODO: */}
-            {/* Need to show the error message here */}
         </div>
     );
-};
+});
+
+CommentInput.displayName = 'CommentInput';
 
 export default CommentInput;
