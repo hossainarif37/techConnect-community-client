@@ -51,12 +51,12 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.target.value;
         const trimmedText = text.trim();
-        setHasText(trimmedText.length > 0);
+        setHasText(trimmedText?.length > 0);
 
         // Calculate the number of rows dynamically based on the textarea content
-        const numberOfLineBreaks = (e.target.value.match(/\n/g) || []).length;
+        const numberOfLineBreaks = (e.target.value.match(/\n/g) || [])?.length;
         // If there is no text, set textareaRows to 1, otherwise calculate based on line breaks
-        setTextareaRows(trimmedText.length === 0 ? 5 : Math.min(Math.max(numberOfLineBreaks + 1, 5), 8)); // Set a minimum of 5 rows when text exists
+        setTextareaRows(trimmedText?.length === 0 ? 5 : Math.min(Math.max(numberOfLineBreaks + 1, 5), 8)); // Set a minimum of 5 rows when text exists
     };
 
 
