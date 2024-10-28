@@ -71,7 +71,7 @@ const PostCard = ({ post }: any) => {
                 <div className={postCardStyles.reactionIcons}>
 
                     {/* Like */}
-                    <LikeButton postId={postId} initialLikesCount={likes.length} initialIsLiked={isLiked} />
+                    <LikeButton postId={postId} initialLikesCount={likes?.length} initialIsLiked={isLiked} />
 
                     {/* Comment */}
                     <button type="button" onClick={() => commentInputRef.current?.focus()}>

@@ -31,7 +31,7 @@ const CategorySideBar = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const searchParams = new URLSearchParams(window.location.search);
-            if (categoryQueries.length > 0) {
+            if (categoryQueries?.length > 0) {
                 // If there are categories selected, update the URL with the new categories
                 const newQueries = categoryQueries.join(',');
                 searchParams.set('categories', newQueries);
