@@ -33,7 +33,6 @@ const Posts = () => {
                     />)
                 ) : <h1 className="text-2xl font-semibold text-center mt-5 text-white">No posts here. Share your thoughts!</h1>
             }
-
         </section>
     );
 };

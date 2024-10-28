@@ -11,8 +11,9 @@ import PostActionButton from "./PostActionButton";
 import LikeButton from "./LikeButton";
 
 const PostCard = ({ post }: any) => {
-    const { content, category, author, _id: postId, comments } = post;
+    const { content, category, author, _id: postId, likes } = post;
     const { name, profilePicture, _id: authorId } = author;
+    const isLiked = likes.includes(authorId);
 
     return (
         <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
@@ -69,7 +70,7 @@ const PostCard = ({ post }: any) => {
                 <div className={postCardStyles.reactionIcons}>
 
                     {/* Like */}
-                   <LikeButton postId={postId} />
+                    <LikeButton postId={postId} initialLikesCount={likes.length} initialIsLiked={isLiked} />
 
                     {/* Comment */}
                     <button>
