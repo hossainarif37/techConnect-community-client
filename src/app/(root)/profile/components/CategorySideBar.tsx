@@ -60,7 +60,7 @@ const CategorySideBar = () => {
                                 type="checkbox"
                                 name="category"
                                 id={category.toLowerCase()}
-                                checked={categoryQueries.includes(category)} // Determine if the category is selected
+                                checked={categoryQueries?.includes(category)} // Determine if the category is selected
                             />
                             <span
                                 className="text-lg lg:text-xl select-none text-white cursor-pointer"
