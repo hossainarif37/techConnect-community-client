@@ -18,7 +18,7 @@ export default function ProfileLayout({
 }>) {
 
     return (
-        <>
+        <div className="lg:max-w-5xl mx-auto xl:max-w-full">
             <ProfileHeader />
 
             <main className="container">
@@ -26,7 +26,7 @@ export default function ProfileLayout({
                 <ProfileTabs />
 
                 {/* News feed Layout */}
-                <div className="flex">
+                <div className="flex flex-col md:flex-row">
                     {/* Category Sidebar */}
                         <CategorySideBar />
 
@@ -34,6 +34,6 @@ export default function ProfileLayout({
                     {children}
                 </div>
             </main>
-        </>
+        </div>
     );
 }

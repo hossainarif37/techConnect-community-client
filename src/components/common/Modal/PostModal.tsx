@@ -1,7 +1,7 @@
 "use client"
 
 
-import { BaseSyntheticEvent, useContext, useEffect, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import toast from "react-hot-toast";
@@ -85,18 +85,18 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
     return (
         <>
-            <div className={`${isModalOpen ? "scale-100" : "scale-0"} px-2 bg-primary bg-opacity-70 top-0 flex items-center justify-center w-full z-50 h-screen fixed right-0`}>
+            <div className={`${isModalOpen ? "scale-100" : "scale-0"} px-3 md:px-5 bg-primary bg-opacity-70 top-0 flex items-center justify-center w-full z-50 h-screen fixed right-0`}>
                 {/*//* Modal Body */}
-                <form onSubmit={handleSubmit(handleCreatePost)} className={`bg-accent lg:w-2/5 lg:mt-20 xl:mt-10 p-5 duration-300 rounded-xl ${isModalOpen ? "scale-100" : "scale-0"}`}>
+                <form onSubmit={handleSubmit(handleCreatePost)} className={`bg-accent lg:w-2/5 w-full lg:mt-20 xl:mt-10 p-5 duration-300 rounded-xl ${isModalOpen ? "scale-100" : "scale-0"}`}>
                     {/* Modal Heading Start */}
                     <div className="flex justify-between items-center">
                         <div className='flex gap-x-5 items-center'>
                             {/* User Image */}
-                            <UserImage className="w-16" />
+                            <UserImage className="w-14 xl:w-16" />
 
                             <div>
                                 {/* User Name */}
-                                <h2 className='text-xl text-white font-bold'>{user?.name}</h2>
+                                <h2 className='text-lg xl:text-xl text-white font-bold'>{user?.name}</h2>
 
                                 <div className="flex gap-x-2">
                                     <Controller
@@ -106,7 +106,7 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
                                         render={({ field }) => (
                                             <select
                                                 {...field}
-                                                className='bg-secondary text-white p-1 mt-1 outline-none border border-secondary rounded-lg cursor-pointer duration-100'
+                                                className='bg-secondary text-white p-1 mt-0 xl:mt-1 text-sm xl:text-base outline-none border border-secondary rounded-lg cursor-pointer duration-100'
                                             >
                                                 <option value="">Select Category</option>
                                                 {

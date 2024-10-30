@@ -69,7 +69,7 @@ const LikeButton = ({
       <span>
         <Icon 
           icon={isLiked ? "ant-design:like-filled" : "ant-design:like-outlined"} 
-          className="text-3xl"
+          className="text-2xl xl:text-3xl"
         />
       </span>
 

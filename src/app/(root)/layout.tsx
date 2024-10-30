@@ -15,7 +15,7 @@ export default function Layout({
     return (
         <>
             <Navbar />
-            <main className="px-5 pt-5">
+            <main className="px-5 pt-5 max-w-[1920px] mx-auto">
                 {children}
             </main>
         </>

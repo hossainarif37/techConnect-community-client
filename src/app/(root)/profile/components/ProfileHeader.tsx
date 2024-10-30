@@ -33,10 +33,10 @@ const ProfileHeader = () => {
     return (
         <section>
             {/*-------- Profile Header Start ---------*/}
-            <div className="lg:w-[750px] text-white mx-auto flex flex-col lg:flex-row items-center">
+            <div className="md:w-[600px] xl:w-[750px] text-white mx-auto flex flex-col lg:flex-row items-center">
 
                 {/* Profile Photo */}
-                <div className="w-28 mb-3 lg:mb-0 lg:w-36 xl:w-48 mr-5">
+                <div className="w-28 mb-3 lg:mb-0 lg:w-32 xl:w-48 md:mr-5">
                     <Image
                         className="w-full"
                         src={profile_blank_image} alt=""
@@ -44,16 +44,16 @@ const ProfileHeader = () => {
                 </div>
 
                 {/* Profile Title Area */}
-                <div className="flex flex-1 justify-between gap-7 lg:gap-0 items-center">
+                <div className="flex flex-1 justify-between gap-y-2 gap-x-7  lg:gap-y-0 items-center">
                     <div>
                         {/* Name */}
-                        <h4 className="font-bold">{name}</h4>
+                        <h4 className="font-bold text-nowrap">{name}</h4>
 
                         {/* Followers */}
-                        <h4><span>{followers?.length}</span> Follwers</h4>
+                        <h4 className="text-nowrap"><span>{followers?.length}</span> Followers</h4>
 
                         {/* Following */}
-                        <h4><span>{following?.length}</span> Following</h4>
+                        <h4 className="text-nowrap"><span>{following?.length}</span> Following</h4>
                     </div>
 
                     {/* Change Photo Button */}
