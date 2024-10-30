@@ -4,18 +4,28 @@ import UserImage from "@/components/common/UserImage";
 import { navLinks } from "@/constants/navLinks";
 import Link from "next/link";
 import NavLink from "./NavLink/NavLink";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import CloseMenu from "@/components/common/Button/CloseMenu";
 import OpenMenu from "@/components/common/Button/OpenMenu";
 import { useState } from "react";
 import UserMenuDropdown from "./UserMenuDropDown/UserMenuDropdown";
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { FaUser } from "react-icons/fa";
+import ActiveUserSideBar from "@/components/ActiveUserSideBar/ActiveUserSideBar";
+import { IoMdClose } from "react-icons/io";
+import Cookies from "js-cookie";
+import { removeUser } from "@/redux/slices/user/userSlice";
+import { LuLogOut } from "react-icons/lu";
+import PrimaryButton from "@/components/common/Button/PrimaryButton";
 
 const Navbar = () => {
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
-    const dropdownRef = useOutsideClick(() => setIsProfileDropdown(false), isProfileDropdown);
+    const dropdownRef = useOutsideClick(() => setIsProfileDropdown(false),
+        isProfileDropdown);
+    const [openActiveUserSidebar, setOpenActiveUserSidebar] = useState(false);
+    const dispatch = useDispatch();
 
     return (
         <nav className="bg-[#122033] text-white  p-3 lg:py-5 sticky top-0 z-40">
@@ -23,7 +33,7 @@ const Navbar = () => {
 
                 {/* Navbar Logo */}
                 <div className="flex items-center gap-3">
-                    <Link href='/' className="lg:text-4xl text-3xl font-bold text-transparent bg-clip-text gradient-blue">TechConnect</Link>
+                    <Link href='/' className="xl:text-4xl text-3xl font-bold text-transparent bg-clip-text gradient-blue">TechConnect</Link>
                 </div>
 
                 {/* Desktop Menu */}
@@ -41,7 +51,7 @@ const Navbar = () => {
                     </ul>
 
                     <div onClick={() => setIsProfileDropdown(!isProfileDropdown)} className="relative" ref={dropdownRef}>
-                        <UserImage className="w-14" />
+                        <UserImage className="w-12 xl:w-14" />
 
                         {/* Profile Dropdown */}
                         {
@@ -53,11 +63,33 @@ const Navbar = () => {
                 {/* Mobile Menu */}
                 <div className="block lg:hidden">
 
-                    {/* Navbar Menu Button */}
-                    {!isNavToggle && <OpenMenu />}
+                    <div className="flex gap-x-5">
+                        <button
+                            type="button"
+                            className="text-2xl pt-2"
+                            onClick={() => setOpenActiveUserSidebar(!openActiveUserSidebar)}
+                        >
+                            <FaUser />
+                        </button>
 
-                    {/* Navbar Close Button */}
-                    <ul className={`shadow-xl bg-white absolute text-center border-t rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>
+                        {/* Navbar Menu Button */}
+                        {!isNavToggle && <OpenMenu />}
+                    </div>
+
+                    <ul className={`shadow-xl z-50 bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${openActiveUserSidebar ? 'scale-x-100' : 'scale-x-0'}`}>
+                        <div className="w-full text-right">
+                            <button
+                                type="button"
+                                className="text-3xl pt-2"
+                                onClick={() => setOpenActiveUserSidebar(false)}
+                            >
+                                <IoMdClose />
+                            </button>
+                        </div>
+                        <ActiveUserSideBar setOpenActiveUserSidebar={setOpenActiveUserSidebar}/>
+                    </ul>
+
+                    <ul className={`shadow-xl bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>
 
                         {/* Navbar Menu Button */}
                         <div className="w-full text-right">
@@ -76,6 +108,19 @@ const Navbar = () => {
                                 />
                             ))
                         }
+                        <PrimaryButton
+                            type="button"
+                            className="flex w-full items-center justify-center gap-x-2 bg-secondary"
+                            title="Logout"
+                            onClick={() => {
+                                Cookies.remove('authToken');
+                                dispatch(removeUser());
+                            }}
+
+                        >
+                            <LuLogOut />
+                            <span>Logout</span>
+                        </PrimaryButton>
                     </ul>
                 </div>
             </div>

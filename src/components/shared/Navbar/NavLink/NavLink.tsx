@@ -13,7 +13,7 @@ const NavLink = ({ title, path }: NavLinkProps) => {
     return (
         <li >
             <Link
-                className={`${pathName === path && 'bg-gray-200 lg:bg-transparent rounded  md:font-bold py-2 block w-full'}`} href={path}>
+                className={`${pathName === path && 'bg-accent lg:bg-transparent rounded  font-bold py-2 block w-full'}`} href={path}>
                 {title}
             </Link>
         </li>

@@ -1,7 +1,7 @@
 "use client"
 
 import { IRootState } from "@/types/types";
-import profiletabStyles from "./profileTabs.module.css"
+import profileTabStyles from "./profileTabs.module.css"
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import Loading from "@/components/common/Loading";
@@ -16,7 +16,7 @@ const ProfileTabs = () => {
         return <Loading />
     }
 
-    const { _id, name, profilePicture, followers, following } = user;
+    const { _id } = user;
 
     const profileTabLinks = [
         {
@@ -46,10 +46,8 @@ const ProfileTabs = () => {
         },
     ]
 
-    console.log(pathname);
-
     return (
-        <div className={`mt-3 lg:my-5 grid ${paramsId !== _id ? 'md:grid-cols-4' : 'md:grid-cols-5'}  justify-center gap-3 lg:gap-7 ${profiletabStyles.tabLink}`}>
+        <div className={`my-3 pl-10 md:pl-0 sidebar-scrollbar pb-2 md:pb-0 lg:my-5 flex overflow-x-auto md:grid ${paramsId !== _id ? 'md:grid-cols-4' : 'md:grid-cols-5'}  justify-center gap-3 lg:gap-7 ${profileTabStyles.tabLink}`}>
             {
                 profileTabLinks.map((link, i) =>
                     <Link className={`${(paramsId !== _id && link.title === 'Saved') ? 'hidden' : 'block'} ${link.path === pathname && 'bg-highlight'} text-white`} key={i} href={link.path}>{link.title}</Link>

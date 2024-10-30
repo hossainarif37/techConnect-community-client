@@ -42,7 +42,7 @@ const CommentInput = forwardRef<HTMLTextAreaElement, CommentInputPropsTypes>(({
                 {...register}
                 ref={ref}
                 onChange={handleTextareaChange}
-                className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-4  text-lg placeholder:font-semibold `}
+                className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-2 xl:p-4 px-4  text-lg placeholder:font-semibold `}
                 cols={30}
                 rows={textareaRows}
                 id="comment-input"

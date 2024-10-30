@@ -17,7 +17,7 @@ const PostCard = ({ post }: any) => {
     const commentInputRef = useRef<HTMLTextAreaElement>(null);
 
     return (
-        <div className="bg-[#122033] py-3 px-10 rounded-xl max-h-full">
+        <div className="bg-[#122033] py-3 px-3 md:px-10 rounded-xl max-h-full">
             <div>
                 {/* Header Start */}
                 <div className="flex justify-between items-center text-black-secondary mb-2">
@@ -28,7 +28,7 @@ const PostCard = ({ post }: any) => {
                         {/* User Image */}
                         <Link href={`/profile/${authorId}/posts`}>
                             <UserImage
-                                className="w-16"
+                                className="w-14 xl:w-16"
                                 profilePicture={profilePicture}
                             />
                         </Link>
@@ -36,17 +36,15 @@ const PostCard = ({ post }: any) => {
                         {/* Title and Category Wrapper */}
                         <div>
                             {/* User Name */}
-                            <Link href={`/profile/${authorId}/posts`} className='lg:text-base xl:text-lg text-white hover:underline font-bold'>{name}</Link>
+                            <Link href={`/profile/${authorId}/posts`} className='text-base xl:text-lg text-white hover:underline font-bold'>{name}</Link>
 
                             {/* Category Selection */}
                             <div className="flex gap-x-1 bg-accent text-white px-1 mt-1 rounded-lg items-center">
-
                                 {/* Category Icon */}
-                                <span className="text-3xl"><Icon icon="f7:menu" /></span>
+                                <span className="text-2xl xl:text-3xl"><Icon icon="f7:menu" /></span>
 
                                 {/* Category Text */}
                                 <span className="">{category}</span>
-
                             </div>
                         </div>
 
@@ -61,7 +59,7 @@ const PostCard = ({ post }: any) => {
 
                 {/* Content */}
                 {/* Render the modified content */}
-                {renderContentWithBr(content, "pl-2 xl:text-xl text-[#f3f3f3] lg:text-base")}
+                {renderContentWithBr(content, "pl-2 xl:text-xl text-[#f3f3f3] text-base")}
 
                 {/* horizontal line */}
                 {/* horizontal line */}
@@ -76,7 +74,7 @@ const PostCard = ({ post }: any) => {
                     {/* Comment */}
                     <button type="button" onClick={() => commentInputRef.current?.focus()}>
                         {/* Comment Icon */}
-                        <span className="text-3xl"><Icon icon="octicon:comment-24" /></span>
+                        <span className="text-2xl xl:text-3xl"><Icon icon="octicon:comment-24" /></span>
                         {/* Text */}
                         <p>Comment</p>
                     </button>

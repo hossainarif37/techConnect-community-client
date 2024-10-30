@@ -10,7 +10,7 @@
 }
 
 .reactionIcons p{
-    @apply text-xl font-semibold
+    @apply text-base xl:text-xl font-semibold
 }
 
 .postActionsDropdown{
