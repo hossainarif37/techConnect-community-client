@@ -104,9 +104,9 @@ const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
             {/* Comment Form  */}
             <form
                 onSubmit={handleSubmit(handleComment)}
-                className="pt-3 flex gap-x-3"
+                className="pt-3 flex gap-x-3 items-center"
             >
-                <UserImage className="w-12 xl:w-14" profilePicture={user?.profilePicture} />
+                <UserImage className="w-10 lg:w-12 xl:w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
                     ref={commentInputRef}
                     register={{ ...register('comment', { required: true }) }}

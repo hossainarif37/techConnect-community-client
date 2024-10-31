@@ -52,10 +52,10 @@ const CategorySideBar = ({isScroll}:CategorySideBarProps) => {
     
         {/* Scrollable Categories Section */}
         <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] md:mt-5">
-            <div className="flex md:flex-wrap flex-nowrap flex-row gap-x-6 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
+            <div className="flex md:flex-wrap flex-nowrap my-2 flex-row gap-x-6 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
                 {
                     filteredCategories?.map((category: string, key: number) => (
-                        <label htmlFor={category.toLowerCase()} key={key} className="flex gap-2 items-center lg:gap-3 hover:bg-accent hover:cursor-pointer p-3 rounded-lg duration-150">
+                        <label htmlFor={category.toLowerCase()} key={key} className="flex gap-2 items-center lg:gap-3 hover:bg-accent hover:cursor-pointer py-1 px-2 md:p-3 rounded-lg duration-150">
                             <input
                                 onChange={(e) => handleCategory(category, e.target.checked)}
                                 className="lg:h-5 lg:w-5 xl:h-7 xl:w-7 cursor-pointer"
