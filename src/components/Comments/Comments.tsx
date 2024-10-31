@@ -10,7 +10,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import UserImage from "../common/UserImage";
 import { useSelector } from "react-redux";
 import TempCommentCard from "./TempCommentCard";
-import Loading from "../common/Loading";
 
 type CommentsPropsTypes = {
     postId: string;
@@ -55,7 +54,6 @@ const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
 
 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
-        console.log('Comment Data: ',data);
         createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then(() => {
             setHasText(false);
             reset();
@@ -63,8 +61,6 @@ const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
             console.log('Comment Error:', err);
         })
     }
-
-    console.log(error);
 
     return (
         <div>
