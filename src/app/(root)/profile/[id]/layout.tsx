@@ -1,21 +1,15 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/shared/Navbar/Navbar";
-import AuthProvider from "@/providers/AuthProvider";
+"use client";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileTabs from "../components/ProfileTabs/ProfileTabs";
 import CategorySideBar from "../components/CategorySideBar";
-
-
-export const metadata: Metadata = {
-    title: "Profile",
-    description: "This is Profile Page",
-};
+import useWindowScroll from "@/hooks/useWindowScroll";
 
 export default function ProfileLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const isScroll = useWindowScroll(300);
 
     return (
         <div className="lg:max-w-5xl mx-auto xl:max-w-full">
@@ -28,7 +22,7 @@ export default function ProfileLayout({
                 {/* News feed Layout */}
                 <div className="flex flex-col md:flex-row">
                     {/* Category Sidebar */}
-                        <CategorySideBar />
+                    <CategorySideBar isScroll={isScroll} />
 
                     {/* News feed Area */}
                     {children}

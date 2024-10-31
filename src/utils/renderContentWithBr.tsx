@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 export const renderContentWithBr = (...args: [text: string, className?: string]) => {
-    const [text, className] = args; // args থেকে text এবং className আলাদা করা হলো
+    const [text, className] = args;
     const lines = text.split('\n');
     return lines.map((line, index) => {
         // Only add a <br /> if there is text after the newline
@@ -11,7 +11,7 @@ export const renderContentWithBr = (...args: [text: string, className?: string])
         }
         return (
             <React.Fragment key={index}>
-                <p className={cn("text-[#f3f3f3]", className)}>
+                <p className={cn("text-[#f3f3f3] break-words", className)}>
                     {line}
                 </p>
             </React.Fragment>
