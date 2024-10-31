@@ -16,7 +16,7 @@ const PostInputCard = () => {
     }
 
     return (
-        <div className="bg-secondary rounded-xl flex p-3 lg:px-10 lg:py-5 xl:py-10 xl:px-10 gap-5">
+        <div className="bg-secondary rounded-xl flex p-3 lg:px-10 lg:py-5 xl:py-10 xl:px-10 gap-5 w-full mx-auto lg:w-[500px] xl:w-[650px]">
             <UserImage className="w-14 xl:w-16" />
             <button
                 onClick={openModal}

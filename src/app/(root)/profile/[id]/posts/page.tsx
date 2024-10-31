@@ -1,4 +1,3 @@
-import Posts from "@/components/Posts/Posts";
 import PostInputCard from "@/components/common/Input/PostInputCard";
 import ProfilePosts from "../../components/ProfilePosts/ProfilePosts";
 

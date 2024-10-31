@@ -22,7 +22,7 @@ interface IFormValues {
 }
 
 
-const Comments = ({ postId , commentInputRef}: CommentsPropsTypes) => {
+const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
     const [isViewMoreComments, setIsViewMoreComments] = useState(false);
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
@@ -55,13 +55,16 @@ const Comments = ({ postId , commentInputRef}: CommentsPropsTypes) => {
 
 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
-        createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then(()=>{
+        console.log('Comment Data: ',data);
+        createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then(() => {
             setHasText(false);
             reset();
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log('Comment Error:', err);
         })
     }
+
+    console.log(error);
 
     return (
         <div>
@@ -73,7 +76,7 @@ const Comments = ({ postId , commentInputRef}: CommentsPropsTypes) => {
                         className={
                             `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
                         ${(isViewMoreComments && remainingData?.remainingComments < 2) && 'hidden'}
-                        my-3 hover:underline text-[#ddd] underline text-lg font-bold`
+                        my-3 hover:underline text-[#ddd] underline text-base xl:text-lg font-bold`
                         }>
                         View more comments
                     </button>
@@ -109,7 +112,7 @@ const Comments = ({ postId , commentInputRef}: CommentsPropsTypes) => {
             >
                 <UserImage className="w-12 xl:w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
-                ref={commentInputRef}
+                    ref={commentInputRef}
                     register={{ ...register('comment', { required: true }) }}
                     commentInputText="Write a comment..."
                     isCreateCommentLoading={isCreateCommentLoading}

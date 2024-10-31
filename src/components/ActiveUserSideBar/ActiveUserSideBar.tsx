@@ -41,7 +41,7 @@ const ActiveUserSideBar = ({setOpenActiveUserSidebar}: ActiveUserSideBarProps) =
     console.log(36, data);
 
     return (
-        <aside className="h-full md:sticky lg:top-[116px] left-0 lg:min-w-[300px] xl:min-w-[480px] md:pl-7">
+        <aside className="h-full md:sticky lg:top-[108px] xl:top-[116px] left-0 lg:w-[300px] xl:w-[480px] md:pl-7">
             {/* Search Input */}
             <SearchInput searchInputText="Search User" handleSearch={handleSearchUser} />
 

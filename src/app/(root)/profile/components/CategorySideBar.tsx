@@ -4,10 +4,16 @@ import { useState, useEffect } from "react";
 import { IoIosList } from "react-icons/io";
 import { categories } from "@/constants/categories";
 import SearchInput from "@/components/common/Input/SearchInput";
+import { usePathname } from "next/navigation";
+interface CategorySideBarProps {
+    isScroll?: boolean;
+}
 
-const CategorySideBar = () => {
+const CategorySideBar = ({isScroll}:CategorySideBarProps) => {
     const [categoryQueries, setCategoryQueries] = useState<string[]>([]);
     const [searchInputValue, setSearchInputValue] = useState('');
+    const pathname = usePathname();
+    const isHomePage = pathname === '/';
 
     const handleCategory = (category: string, isChecked: boolean) => {
         let newQueries = [...categoryQueries];
@@ -21,12 +27,9 @@ const CategorySideBar = () => {
 
     const filteredCategories = categories.filter(c => c.toLowerCase().includes(searchInputValue.toLowerCase()));
 
-
-
     const handleSearchCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInputValue(e.target.value);
     }
-
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -43,13 +46,12 @@ const CategorySideBar = () => {
         }
     }, [categoryQueries]);
 
-
     return (
-        <aside className="h-full sticky lg:top-[116px] left-0 xl:min-w-[480px] lg:min-w-[300px] lg:pr-10 pb-2 md:pb-0 px-3 lg:px-0">
+        <aside className={`bg-primary z-50 h-full sticky top-[60px] ${isScroll && 'pt-5 duration-300' || isHomePage && 'pt-5'} lg:pt-0 xl:pt-0 lg:top-[108px] xl:top-[116px] left-0 xl:w-[480px] lg:w-[300px] lg:pr-10 pb-2 md:pb-0 px-3 lg:px-0`}>
         <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
     
         {/* Scrollable Categories Section */}
-        <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] mt-5">
+        <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] md:mt-5">
             <div className="flex md:flex-wrap flex-nowrap flex-row gap-x-6 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
                 {
                     filteredCategories?.map((category: string, key: number) => (
