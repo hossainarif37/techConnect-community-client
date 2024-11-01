@@ -1,9 +1,7 @@
-"use client"
-
-import { useCreateCommentMutation, useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery } from "@/redux/api/endpoints/comments/comments";
+import { useCreateCommentMutation, useLazyGetCommentsByPostIdQuery } from "@/redux/api/endpoints/comments/comments";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
-import { IComment, IRootState, IUser } from "@/types/types";
+import { IComment, IRootState } from "@/types/types";
 import LoadingRound from "../common/LoadingRound";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,95 +11,81 @@ import TempCommentCard from "./TempCommentCard";
 
 type CommentsPropsTypes = {
     postId: string;
-    commentInputRef: React.RefObject<HTMLTextAreaElement>
-}
+    commentInputRef: React.RefObject<HTMLTextAreaElement>;
+    latestComment: IComment | null;
+    remainingComments: number;
+};
 
 interface IFormValues {
     comment: string;
 }
 
-
-const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
-    const [isViewMoreComments, setIsViewMoreComments] = useState(false);
+const Comments = ({ postId, commentInputRef, latestComment, remainingComments }: CommentsPropsTypes) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormValues>();
+    const { register, handleSubmit, reset } = useForm<IFormValues>();
+    const [comments, setComments] = useState<IComment[]>(latestComment?.author ? [latestComment] : []); // Only set if author exists
     const [tempComment, setTempComment] = useState<string[]>([]);
-
-    // Get latest one comment by postId
-    const { data, isLoading, isError, error } = useGetCommentsByPostIdQuery({ postId });
-
-    // Create a new comment
-    const [createComment, { data: createCommentData, isError: isCreateCommentError, error: createCommentError, isLoading: isCreateCommentLoading }] = useCreateCommentMutation();
+    const [skip, setSkip] = useState(1);
     const [hasText, setHasText] = useState(false);
 
-    // Get remaining all comments by skip existing ones with the same postId
-    const [getRemainingComments, { data: remainingData, isError: remainingIsError, isLoading: remainingLoading, error: remainingError }] = useLazyGetCommentsByPostIdQuery();
+    const [getRemainingComments, { data: remainingData, isLoading: remainingLoading, isError: remainingIsError }] = useLazyGetCommentsByPostIdQuery();
+    const [createComment, { isLoading: isCreateCommentLoading }] = useCreateCommentMutation();
 
     useEffect(() => {
-        if (createCommentData?.success) {
-            setTempComment([...tempComment, createCommentData?.comment]);
+        if (latestComment?.author && !comments.some(comment => comment._id === latestComment._id)) {
+            setComments(prev => [latestComment, ...prev]);
         }
-    }, [isCreateCommentLoading])
+    }, [latestComment]);
 
-    if (isLoading) {
-        return <LoadingRound className="text-blue-primary text-4xl py-10" />
-    }
+    useEffect(() => {
+        if (remainingData?.success) {
+            setComments(prevComments => [...remainingData.comments, ...prevComments]);
+            setSkip(prev => prev + 10);
+        }
+    }, [remainingData]);
 
-    const handleViewMoreComments = (postId: string) => {
-        setIsViewMoreComments(true);
-        getRemainingComments({ postId, skip: 1 });
-    }
-
+    const handleViewMoreComments = () => {
+        getRemainingComments({ postId, limit: 10, skip });
+    };
 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
-        createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then(() => {
+        createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then((response) => {
+            setTempComment([...tempComment, response.comment]);
             setHasText(false);
             reset();
-        }).catch((err) => {
-            console.log('Comment Error:', err);
-        })
-    }
+        }).catch((err) => console.log("Comment Error:", err));
+    };
 
     return (
         <div>
-            {
-                remainingLoading ? <LoadingRound className="text-blue-primary text-4xl py-5" /> : data?.remainingComments > 0 && (
-                    <button
-                        type="button"
-                        onClick={() => handleViewMoreComments(postId)}
-                        className={
-                            `${(isViewMoreComments && remainingData?.remainingComments > 1) && 'block'}
-                        ${(isViewMoreComments && remainingData?.remainingComments < 2) && 'hidden'}
-                        my-3 hover:underline text-[#ddd] underline text-base xl:text-lg font-bold`
-                        }>
-                        View more comments
-                    </button>
-                )
-            }
+            {/* Only show comments section if there's a valid latest comment (with author) or temp comments */}
+            {(latestComment?.author || tempComment.length > 0) && (
+                <>
+                    {remainingLoading ? (
+                        <LoadingRound className="text-blue-primary text-4xl py-5" />
+                    ) : (remainingData?.remainingComments ?? remainingComments) > 0 && (
+                        <button
+                            type="button"
+                            onClick={handleViewMoreComments}
+                            className="my-3 hover:underline text-[#ddd] underline text-base xl:text-lg font-bold"
+                        >
+                            View more comments
+                        </button>
+                    )}
 
+                    {/* Display Comments */}
+                    <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
+                        {comments.map((comment: IComment, i: number) => (
+                            <CommentCard key={i} comment={comment} />
+                        ))}
+                        {tempComment.map((comment: string, i: number) => (
+                            <TempCommentCard key={i} comment={comment} />
+                        ))}
+                    </div>
+                </>
+            )}
 
-            {/* Comment Card */}
-            <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
-                {
-                    remainingData?.success && remainingData?.comments?.map((comment: IComment, i: number) => (
-                        <CommentCard comment={comment} key={i} />
-                    ))
-                }
-
-                {
-                    data?.comments?.length > 0 && data?.comments?.map((comment: IComment, i: number) => <CommentCard key={i} comment={comment} />)
-                }
-
-                {
-                    tempComment.map((comment: string, i: number) => (
-                        <TempCommentCard key={i}
-                            comment={comment}
-                        />
-                    ))
-                }
-            </div>
-
-            {/* Comment Form  */}
+            {/* Comment Form - always visible */}
             <form
                 onSubmit={handleSubmit(handleComment)}
                 className="pt-3 flex gap-x-3 items-center"
@@ -109,7 +93,7 @@ const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
                 <UserImage className="w-10 lg:w-12 xl:w-14" profilePicture={user?.profilePicture} />
                 <CommentInput
                     ref={commentInputRef}
-                    register={{ ...register('comment', { required: true }) }}
+                    register={{ ...register("comment", { required: true }) }}
                     commentInputText="Write a comment..."
                     isCreateCommentLoading={isCreateCommentLoading}
                     isError={remainingIsError}
@@ -117,7 +101,6 @@ const Comments = ({ postId, commentInputRef }: CommentsPropsTypes) => {
                     setHasText={setHasText}
                 />
             </form>
-
         </div>
     );
 };

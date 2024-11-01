@@ -79,7 +79,7 @@ const PostCard = ({ post }: any) => {
             </div>
 
             {/* Comments */}
-            <Comments postId={postId} commentInputRef={commentInputRef} />
+            <Comments latestComment={post.latestComment}  postId={postId} commentInputRef={commentInputRef} remainingComments={post.remainingComments}/>
         </div>
     );
 };
