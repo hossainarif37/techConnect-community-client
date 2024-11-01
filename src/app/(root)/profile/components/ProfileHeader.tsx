@@ -13,11 +13,7 @@ import LoadingRound from "@/components/common/LoadingRound";
 
 const ProfileHeader = () => {
     const params = useParams();
-    console.log(params);
     const { isError, error, isLoading, data } = useGetUserProfileByIdQuery(params?.id);
-
-
-    console.log(data);
 
     if (isLoading) {
         return <LoadingRound className="text-2xl text-blue-primary py-20"/>
