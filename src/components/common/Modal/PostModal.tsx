@@ -2,7 +2,7 @@
 
 
 import { BaseSyntheticEvent, useEffect, useState } from "react";
-import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, FieldValues, set, useForm } from "react-hook-form";
 
 import toast from "react-hot-toast";
 import UserImage from "../UserImage";
@@ -15,13 +15,13 @@ import PrimaryButton from "../Button/PrimaryButton";
 
 type PostModalTypes = {
     isModalOpen: boolean;
-    closeModal: () => void;
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type PostDataTypes = (data: FieldValues, event: BaseSyntheticEvent<object, any, any> | undefined) => void;
 
 
-const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
+const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
 
     const { user } = useSelector((state: IRootState) => state.userSlice);
@@ -34,7 +34,7 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
     const contentInput = document.getElementById('content-input');
 
     const handleModalClose = () => {
-        closeModal();
+        setIsModalOpen(false);
         setHasText(false);
         if (contentInput) {
             (contentInput as HTMLTextAreaElement).value = '';
@@ -59,9 +59,6 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
         setTextareaRows(trimmedText?.length === 0 ? 5 : Math.min(Math.max(numberOfLineBreaks + 1, 5), 8)); // Set a minimum of 5 rows when text exists
     };
 
-
-
-
     // Handle Create Post
     const handleCreatePost: PostDataTypes = (data, event) => {
         const postResponse = createPost({ ...data, author: user?._id }).unwrap();
@@ -73,11 +70,11 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
             loading: 'Loading',
             success: ({ message }) => {
                 reset();
-                closeModal();
+                setIsModalOpen(false);
                 return message;
             },
             error: ({ data }) => {
-                closeModal();
+                setIsModalOpen(false);
                 return data?.message || 'Post Create failed';
             },
         });
@@ -85,9 +82,8 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
 
     return (
         <>
-            <div className={`${isModalOpen ? "scale-100" : "scale-0"} px-3 md:px-5 bg-primary bg-opacity-70 top-0 flex items-center justify-center w-full z-50 h-screen fixed right-0`}>
                 {/*//* Modal Body */}
-                <form onSubmit={handleSubmit(handleCreatePost)} className={`bg-accent lg:w-2/5 w-full lg:mt-20 xl:mt-10 p-5 duration-300 rounded-xl ${isModalOpen ? "scale-100" : "scale-0"}`}>
+                <form onSubmit={handleSubmit(handleCreatePost)}>
                     {/* Modal Heading Start */}
                     <div className="flex justify-between items-center">
                         <div className='flex gap-x-5 items-center'>
@@ -164,7 +160,6 @@ const PostModal = ({ isModalOpen, closeModal }: PostModalTypes) => {
                         </PrimaryButton>
                     </div>
                 </form>
-            </div>
         </>
     );
 };
