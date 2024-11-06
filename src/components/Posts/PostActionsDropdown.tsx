@@ -1,102 +1,87 @@
-"use client"
+"use client";
 
-import { CgProfile } from "react-icons/cg";
-import postCardStyles from './postcard.module.css'
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegSquarePlus } from "react-icons/fa6";
-import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
+import { useState } from "react";
+import postCardStyles from './postcard.module.css';
 import { FaWindowClose } from "react-icons/fa";
-import { IconType } from "react-icons";
-
-// Define reusable type for the onClick handler
-type TOnClickHandler = (
-    setActionsDropdown: React.Dispatch<React.SetStateAction<boolean>>, 
-    postId?: string
-) => void;
-
-// Define the ActionItem interface using OnClickHandler
-interface IActionItem {
-    icon: JSX.Element;
-    title: string;
-    onClick: TOnClickHandler;
-}
+import EditPostModal from "../common/Modal/EditPostModal";
+import { Modal } from "../common/Modal/Modal";
 
 interface PostActionsDropdownProps {
     authorId: string;
     setActionsDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+    post: any;
 }
 
-const loggedInUserPostActions: IActionItem[]  = [
-    {
-        icon: <BsBookmarkPlusFill />,
-        title: "Save Post",
-        onClick: (setActionsDropdown) => {
-            setActionsDropdown(false);
-        }
-    },
-    {
-        icon: <MdModeEdit />,
-        title: "Edit Post",
-        onClick: (setActionsDropdown) => {
-            setActionsDropdown(false);
-        }
-    },
-    {
-        icon: <RiDeleteBin6Line  />,
-        title: "Delete Post",
-        onClick: (setActionsDropdown) => {
-            setActionsDropdown(false);
-        }
+const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActionsDropdownProps) => {
+    const { user } = useSelector((state: IRootState) => state.userSlice);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const handleSavePost = () => setActionsDropdown(false);
+    const handleDeletePost = () => setActionsDropdown(false);
+    const handleFollow = () => setActionsDropdown(false);
+    const handleUnfollow = () => setActionsDropdown(false);
+
+    const handleEditPost = (data: any) => {
+        console.log(31, data);
     }
-]
-
-const nonLoggedInUserPostActions: IActionItem[] = [
-    {
-        icon: <BsBookmarkPlusFill />,
-        title: "Save Post",
-        onClick: (setActionsDropdown) => {
-            setActionsDropdown(false);
-        }
-    },
-    {
-        icon: <FaRegSquarePlus  />,
-        title: "Follow",
-        onClick: (setActionsDropdown) => {
-            setActionsDropdown(false);
-        }
-    },
-    {
-        icon: <FaWindowClose   />,
-        title: "Unfollow",
-        onClick: (setActionsDropdown) => {
-            setActionsDropdown(false);
-        }
-    },
-]
-
-const PostActionsDropdown = ({setActionsDropdown, authorId}: PostActionsDropdownProps) => {
-    const {user} = useSelector((state: IRootState) => state.userSlice);
-    const isFollow = true;
-
-    const actionButtons = user?._id === authorId ? loggedInUserPostActions : nonLoggedInUserPostActions;
 
     return (
-        <ul className={`${postCardStyles.postActionsDropdown}`}>
-                {
-                    actionButtons.map((action, index) => (
-                        <li key={index} className={`${action.title === "Follow" && isFollow && "hidden" || action.title === "Unfollow" && !isFollow && "hidden"}`}>
-                            <button onClick={() => action.onClick(setActionsDropdown)}>
-                                <span className="text-xl">{action.icon}</span>
-                                <span className="">{action.title}</span>
+        <>
+            <ul className={postCardStyles.postActionsDropdown}>
+                <li>
+                    <button onClick={handleSavePost}>
+                        <span className="text-xl"><BsBookmarkPlusFill /></span>
+                        <span>Save Post</span>
+                    </button>
+                </li>
+                {user?._id === authorId ? (
+                    <>
+                        <li>
+                            <button onClick={() => setIsEditing(true)}>
+                                <span className="text-xl"><MdModeEdit /></span>
+                                <span>Edit Post</span>
+                            </button>
+
+
+                        </li>
+                        <li>
+                            <button onClick={handleDeletePost}>
+                                <span className="text-xl"><RiDeleteBin6Line /></span>
+                                <span>Delete Post</span>
                             </button>
                         </li>
-                    ))
-                }
+                    </>
+                ) : (
+                    <>
+                        <li>
+                            <button onClick={handleFollow}>
+                                <span className="text-xl"><FaRegSquarePlus /></span>
+                                <span>Follow</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={handleUnfollow}>
+                                <span className="text-xl"><FaWindowClose /></span>
+                                <span>Unfollow</span>
+                            </button>
+                        </li>
+                    </>
+                )}
             </ul>
+
+
+            <Modal isModalOpen={isEditing}>
+                <EditPostModal
+                    isModalOpen={isEditing} setIsModalOpen={setIsEditing} post={post} handleEditPost={handleEditPost}
+                />
+            </Modal>
+        </>
     );
 };
 

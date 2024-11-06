@@ -17,7 +17,7 @@ const PostInputCard = () => {
                 Share Your Experience
             </button>
 
-            <Modal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}>
+            <Modal isModalOpen={isModalOpen}>
                 <PostModal
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}

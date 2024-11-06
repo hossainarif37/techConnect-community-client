@@ -23,9 +23,9 @@ type PostDataTypes = (data: FieldValues, event: BaseSyntheticEvent<object, any, 
 
 const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
+    const [hasText, setHasText] = useState(false);
 
     const { user } = useSelector((state: IRootState) => state.userSlice);
-    const [hasText, setHasText] = useState(false);
 
     const [createPost, { isLoading, isError, error, data }] = useCreatePostMutation();
 
@@ -62,8 +62,6 @@ const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
     // Handle Create Post
     const handleCreatePost: PostDataTypes = (data, event) => {
         const postResponse = createPost({ ...data, author: user?._id }).unwrap();
-
-
         setHasText(false);
 
         toast.promise(postResponse, {
@@ -81,86 +79,80 @@ const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
     };
 
     return (
-        <>
-                {/*//* Modal Body */}
-                <form onSubmit={handleSubmit(handleCreatePost)}>
-                    {/* Modal Heading Start */}
-                    <div className="flex justify-between items-center">
-                        <div className='flex gap-x-5 items-center'>
-                            {/* User Image */}
-                            <UserImage className="w-14 xl:w-16" />
+        <form onSubmit={handleSubmit(handleCreatePost)} className="w-full">
+            <h1 className="text-2xl text-white font-semibold text-center">Create Post</h1>
+            {/* Modal Close Button */}
+            <button type="button" onClick={handleModalClose} className="cursor-pointer text-3xl text-white duration-200 absolute top-5 right-7">
+                <IoMdClose />
+            </button>
+            <hr className="my-5 border-none h-0.5 bg-white/10" />
+            {/* Modal Heading Start */}
+            <div className='flex gap-x-5 items-center'>
+                {/* User Image */}
+                <UserImage className="w-14 xl:w-16" />
 
-                            <div>
-                                {/* User Name */}
-                                <h2 className='text-lg xl:text-xl text-white font-bold'>{user?.name}</h2>
+                <div>
+                    {/* User Name */}
+                    <h2 className='text-lg xl:text-xl text-white font-bold'>{user?.name}</h2>
 
-                                <div className="flex gap-x-2">
-                                    <Controller
-                                        name="category"
-                                        control={control}
-                                        rules={{ required: "Category is required!" }}
-                                        render={({ field }) => (
-                                            <select
-                                                {...field}
-                                                className='bg-secondary text-white p-1 mt-0 xl:mt-1 text-sm xl:text-base outline-none border border-secondary rounded-lg cursor-pointer duration-100'
-                                            >
-                                                <option value="">Select Category</option>
-                                                {
-                                                    categories?.map((category, i) => <option
-                                                        key={i}
-                                                        value={category}
-                                                    >
-                                                        {category}
-                                                    </option>)
-                                                }
-                                            </select>
-                                        )}
-                                    />
-
+                    <div className="flex gap-x-2">
+                        <Controller
+                            name="category"
+                            control={control}
+                            rules={{ required: "Category is required!" }}
+                            render={({ field }) => (
+                                <select
+                                    {...field}
+                                    className='bg-secondary text-white p-1 mt-0 xl:mt-1 text-sm xl:text-base outline-none border border-secondary rounded-lg cursor-pointer duration-100'
+                                >
+                                    <option value="">Select Category</option>
                                     {
-                                        typeof errors?.category?.message === 'string' && <p className="error">{errors?.category?.message}</p>
+                                        categories?.map((category, i) => <option
+                                            key={i}
+                                            value={category}
+                                        >
+                                            {category}
+                                        </option>)
                                     }
-                                </div>
-                            </div>
+                                </select>
+                            )}
+                        />
 
-                        </div>
-
-                        {/* Modal Close Button */}
-                        <button type="button" onClick={handleModalClose} className="cursor-pointer text-3xl text-white duration-200">
-                            <IoMdClose />
-                        </button>
-
-                    </div>
-                    {/* Modal Heading End */}
-
-                    {/* Textarea */}
-                    <div className="mt-4">
-                        <textarea
-                            {...register('content', { required: 'Content is required! Share you thoughts' })}
-                            className='w-full bg-accent outline-none text-xl font-sans placeholder:font-normal text-white' placeholder='Write here...'
-                            id="content-input"
-                            cols={30}
-                            rows={textareaRows}
-                            onChange={handleTextareaChange}
-                        ></textarea>
-                        {/* Errors */}
                         {
-                            typeof errors?.content?.message === 'string' && <p className="error">{errors?.content?.message}</p>
+                            typeof errors?.category?.message === 'string' && <p className="error">{errors?.category?.message}</p>
                         }
                     </div>
+                </div>
+            </div>
+            {/* Modal Heading End */}
 
-                    {/* Submit Button */}
-                    <div className="mt-4 flex justify-end">
-                        <PrimaryButton
-                            disabled={!hasText}
-                            type="submit"
-                            className={`${!hasText ? "btn-disabled" : "bg-gradient-to-r from-[#079EF2] to-blue-primary text-white "} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
-                        >
-                            {isLoading ? 'Posting...' : 'Post'}
-                        </PrimaryButton>
-                    </div>
-                </form>
-        </>
+            {/* Textarea */}
+            <div className="mt-4">
+                <textarea
+                    {...register('content', { required: 'Content is required! Share you thoughts' })}
+                    className='w-full bg-accent outline-none text-xl font-sans placeholder:font-normal text-white' placeholder='Write here...'
+                    id="content-input"
+                    cols={30}
+                    rows={textareaRows}
+                    onChange={handleTextareaChange}
+                ></textarea>
+                {/* Errors */}
+                {
+                    typeof errors?.content?.message === 'string' && <p className="error">{errors?.content?.message}</p>
+                }
+            </div>
+
+            {/* Submit Button */}
+            <div className="mt-4 flex justify-end">
+                <PrimaryButton
+                    disabled={!hasText}
+                    type="submit"
+                    className={`${!hasText ? "btn-disabled" : "bg-gradient-to-r from-[#079EF2] to-blue-primary text-white "} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
+                >
+                    {isLoading ? 'Posting...' : 'Post'}
+                </PrimaryButton>
+            </div>
+        </form>
     );
 };
 

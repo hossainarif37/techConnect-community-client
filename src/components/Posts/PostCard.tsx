@@ -5,8 +5,6 @@ import { Icon } from "@iconify/react"
 import React, { useEffect, useRef, useState } from "react";
 import Comments from "../Comments/Comments";
 import { renderContentWithBr } from "@/utils/renderContentWithBr";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import PostActionsMenu from "./PostActionsDropdown";
 import PostActionButton from "./PostActionButton";
 import LikeButton from "./LikeButton";
 
@@ -47,7 +45,7 @@ const PostCard = ({ post }: any) => {
                     </div>
 
                     {/* Action Button */}
-                    <PostActionButton authorId={authorId} />
+                    <PostActionButton authorId={authorId} post={post}/>
                 </div>
                 {/* Header End */}
 

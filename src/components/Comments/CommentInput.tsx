@@ -43,9 +43,9 @@ const CommentInput = forwardRef<{ focus: () => void } | null, CommentInputPropsT
         <div className={`flex-1 flex items-${textareaRows > 1 ? 'end' : 'center'} relative`}>
             <textarea
                 {...register}
-                ref={(el) => {
-                    localRef.current = el; // Set the element to localRef
-                    register.ref(el); // Pass the element to register.ref for form handling
+                ref={(element) => {
+                    localRef.current = element; // Set the element to localRef
+                    register.ref(element); // Pass the element to register.ref for form handling
                 }}
                 onChange={handleTextareaChange}
                 className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-2 xl:p-4 px-4 text-lg placeholder:xl:font-semibold placeholder:text-nowrap`}
