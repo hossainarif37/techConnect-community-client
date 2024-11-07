@@ -11,6 +11,9 @@ import postCardStyles from './postcard.module.css';
 import { FaWindowClose } from "react-icons/fa";
 import EditPostModal from "../common/Modal/EditPostModal";
 import { Modal } from "../common/Modal/Modal";
+import { useDeletePostMutation } from "@/redux/api/endpoints/posts/posts";
+import toast from "react-hot-toast";
+import PrimaryButton from "../common/Button/PrimaryButton";
 
 interface PostActionsDropdownProps {
     authorId: string;
@@ -21,13 +24,30 @@ interface PostActionsDropdownProps {
 const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActionsDropdownProps) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const [isEditing, setIsEditing] = useState(false);
+    const [deletePost] = useDeletePostMutation();
+    const [isDeleteAlert, setIsDeleteAlert] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const handleSavePost = () => setActionsDropdown(false);
-    const handleDeletePost = () => setActionsDropdown(false);
+    const handleDeletePost = () => {
+        setIsDeleting(true);
+        deletePost(post._id).unwrap().then(() => {
+            setTimeout(() => {
+                toast.success("Post deleted successfully");
+            }, 1000);
+        }).catch((err) => {
+            console.log("Delete Post Error:", err);
+            toast.error("Post delete failed");
+        }).finally(()=>{
+            setIsDeleting(false);
+            setActionsDropdown(false);
+            setIsDeleteAlert(false);
+        })
+    };
     const handleFollow = () => setActionsDropdown(false);
     const handleUnfollow = () => setActionsDropdown(false);
 
-   
+
 
     return (
         <>
@@ -49,7 +69,7 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
 
                         </li>
                         <li>
-                            <button onClick={handleDeletePost}>
+                            <button onClick={() => setIsDeleteAlert(true)}>
                                 <span className="text-xl"><RiDeleteBin6Line /></span>
                                 <span>Delete Post</span>
                             </button>
@@ -78,6 +98,20 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
                 <EditPostModal
                     isModalOpen={isEditing} setIsModalOpen={setIsEditing} post={post} setActionsDropdown={setActionsDropdown}
                 />
+            </Modal>
+
+
+            {/* Delete alert */}
+            <Modal isModalOpen={isDeleteAlert}>
+                <div className="w-full flex flex-col gap-5">
+                    <h1 className="text-2xl">Are you sure you want to delete this post?</h1>
+
+                    <div className="flex justify-end gap-x-5">
+                        <PrimaryButton className="bg-primary hover:bg-secondary py-2" onClick={() => setIsDeleteAlert(false)}>No</PrimaryButton>
+
+                        <PrimaryButton className="bg-red-500 py-2 hover:bg-red-400" onClick={handleDeletePost}>{isDeleting ? "Deleting..." : "Yes"}</PrimaryButton>
+                    </div>
+                </div>
             </Modal>
         </>
     );

@@ -28,7 +28,6 @@ const ProfilePosts = () => {
         return <LoadingRound className="text-blue-primary text-4xl py-20"/>
     }
 
-
     return (
         <section className="space-y-5 py-5">
             {
@@ -37,7 +36,6 @@ const ProfilePosts = () => {
                     post={post}
                 />) : <h1 className="text-2xl h-auto md:h-screen font-semibold text-center mt-5 text-black-secondary">No posts here. Share your thoughts!</h1>
             }
-
         </section>
     );
 };
