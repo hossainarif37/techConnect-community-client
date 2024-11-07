@@ -6,32 +6,36 @@ import { useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import PrimaryButton from "../Button/PrimaryButton";
+import { useEditPostMutation } from "@/redux/api/endpoints/posts/posts";
+import toast from "react-hot-toast";
 
 type PostModalTypes = {
     isModalOpen: boolean;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    handleEditPost: (data: any) => void;
     post: any;
+    setActionsDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditPostModal = ({ isModalOpen, setIsModalOpen, post, handleEditPost }: PostModalTypes) => {
+const EditPostModal = ({ isModalOpen, setIsModalOpen, post, setActionsDropdown }: PostModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
     const [hasText, setHasText] = useState(!!post.content);
+    const localRef = useRef<HTMLTextAreaElement | null>(null);
+    const [editPost, { isError, error, data }] = useEditPostMutation();
+    const [isLoading, setIsLoading] = useState(false);
 
     // Initialize form with useForm and add setValue for manual control
-    const { handleSubmit, formState: { errors }, setValue, control , reset} = useForm();
+    const { handleSubmit, formState: { errors }, setValue, control, reset } = useForm();
 
     // Set form values explicitly whenever `post` changes
     useEffect(() => {
         if (post) {
             setValue("content", post.content || '', { shouldDirty: true });
             setValue("category", post.category || '', { shouldDirty: true });
-            setHasText(!!post.content); 
+            setHasText(!!post.content);
         }
     }, [post, setValue]);
 
-    const localRef = useRef<HTMLTextAreaElement | null>(null);
-    
+
     useEffect(() => {
         if (isModalOpen && localRef.current) {
             const textarea = localRef.current;
@@ -40,7 +44,7 @@ const EditPostModal = ({ isModalOpen, setIsModalOpen, post, handleEditPost }: Po
             textarea.setSelectionRange(textLength, textLength);
         }
     }, [isModalOpen]);
-    
+
     const user = useSelector((state: IRootState) => state.userSlice.user);
 
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -55,7 +59,22 @@ const EditPostModal = ({ isModalOpen, setIsModalOpen, post, handleEditPost }: Po
     const handleCloseModal = () => {
         reset({ content: post.content, category: post.category });
         setIsModalOpen(false);
+        setActionsDropdown(false);
     };
+
+    const handleEditPost = (data: any) => {
+        setIsLoading(true);
+        editPost({ ...data, postId: post._id }).unwrap().then(() => {
+            setTimeout(() => {
+                toast.success("Post edited successfully!");
+                setIsLoading(false);
+                handleCloseModal();
+            }, 1000);
+        }).catch((err) => {
+            console.log("Edit Post Error 69:", err);
+            setIsLoading(false);
+        });
+    }
 
     return (
         <form onSubmit={handleSubmit(handleEditPost)} className="w-full">
@@ -122,7 +141,7 @@ const EditPostModal = ({ isModalOpen, setIsModalOpen, post, handleEditPost }: Po
                     type="submit"
                     className={`${!hasText ? "btn-disabled" : "bg-gradient-to-r from-[#079EF2] to-blue-primary text-white"} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
                 >
-                    {false ? 'Updating...' : 'Update'}
+                    {isLoading ? 'Updating...' : 'Update'}
                 </PrimaryButton>
             </div>
         </form>

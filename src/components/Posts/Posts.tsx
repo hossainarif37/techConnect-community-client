@@ -23,17 +23,15 @@ const Posts = () => {
     }
 
     if (isError) {
-        return <h1 className="text-2xl text-red-500 text-center">Failed to load posts. Please try again.</h1>; // Handle error state
+        return <h1 className="text-2xl text-red-500 text-center mt-10">Failed to load posts. Please try again.</h1>;
     }
-
-    console.log('Posts: ', data);
 
     return (
         <section className="space-y-5 py-5 min-h-screen">
             {
-                data?.posts?.length > 0 ? data.posts.map((post: any) => ( // Pass each post to PostCard
+                data?.posts?.length > 0 ? data.posts.map((post: any) => (
                     <PostCard
-                        key={post._id} // Use post ID as the key
+                        key={post._id}
                         post={post}
                     />
                 )) : (

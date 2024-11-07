@@ -29,9 +29,18 @@ const postsApi = baseApi.injectEndpoints({
                 body: data
             }),
             invalidatesTags: ['Posts'],
+        }),
+
+        editPost: builder.mutation({
+            query: (data) => ({
+                url: `/posts/${data.postId}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: ['Posts'],
         })
     })
 })
 
 
-export const { usePostsQuery, useCreatePostMutation, useGetPostsByUserQuery } = postsApi;
+export const { usePostsQuery, useCreatePostMutation, useGetPostsByUserQuery, useEditPostMutation } = postsApi;

@@ -27,9 +27,7 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
     const handleFollow = () => setActionsDropdown(false);
     const handleUnfollow = () => setActionsDropdown(false);
 
-    const handleEditPost = (data: any) => {
-        console.log(31, data);
-    }
+   
 
     return (
         <>
@@ -78,7 +76,7 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
 
             <Modal isModalOpen={isEditing}>
                 <EditPostModal
-                    isModalOpen={isEditing} setIsModalOpen={setIsEditing} post={post} handleEditPost={handleEditPost}
+                    isModalOpen={isEditing} setIsModalOpen={setIsEditing} post={post} setActionsDropdown={setActionsDropdown}
                 />
             </Modal>
         </>
