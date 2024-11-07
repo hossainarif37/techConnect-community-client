@@ -47,7 +47,7 @@ const CategorySideBar = ({isScroll}:CategorySideBarProps) => {
     }, [categoryQueries]);
 
     return (
-        <aside className={`bg-primary z-50 h-full sticky top-[60px] ${isScroll && 'pt-5 duration-300' || isHomePage && 'pt-5'} lg:pt-0 xl:pt-0 lg:top-[108px] xl:top-[116px] left-0 xl:w-[480px] lg:w-[300px] lg:pr-10 pb-2 md:pb-0 px-3 lg:px-0`}>
+        <aside className={`bg-primary z-10 h-full sticky top-[60px] ${isScroll && 'pt-5 duration-300' || isHomePage && 'pt-5'} lg:pt-0 xl:pt-0 lg:top-[108px] xl:top-[116px] left-0 xl:w-[480px] lg:w-[300px] lg:pr-10 pb-2 md:pb-0 px-3 lg:px-0`}>
         <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
     
         {/* Scrollable Categories Section */}
