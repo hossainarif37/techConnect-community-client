@@ -16,7 +16,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
                     <UserImage className="w-10 lg:w-12 xl:w-14" profilePicture={comment?.author?.profilePicture} />
                 </Link>
             </div>
-            <div className="flex-1 bg-accent p-3 rounded-xl overflow-hidden"> {/* Add overflow-hidden */}
+            <div className=" bg-accent p-3 rounded-xl overflow-hidden"> {/* Add overflow-hidden */}
                 <Link
                     href={`/profile/${comment?.author?._id}/posts`}
                     className="font-bold text-white text-lg hover:underline"

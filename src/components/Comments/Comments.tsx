@@ -39,7 +39,7 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments }:
 
     useEffect(() => {
         if (remainingData?.success) {
-            setComments(prevComments => [...remainingData.comments, ...prevComments]);
+            setComments(prevComments => [...prevComments, ...remainingData.comments ]);
             setSkip(prev => prev + 10);
         }
     }, [remainingData]);
@@ -61,9 +61,8 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments }:
             {/* Only show comments section if there's a valid latest comment (with author) or temp comments */}
             {(latestComment?.author || tempComment.length > 0) && (
                 <>
-                    {remainingLoading ? (
-                        <LoadingRound className="text-blue-primary text-4xl py-5" />
-                    ) : (remainingData?.remainingComments ?? remainingComments) > 0 && (
+                    {
+                     (remainingData?.remainingComments ?? remainingComments) > 0 && (
                         <button
                             type="button"
                             onClick={handleViewMoreComments}
@@ -71,7 +70,8 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments }:
                         >
                             View more comments
                         </button>
-                    )}
+                    )
+                    }
 
                     {/* Display Comments */}
                     <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
@@ -82,6 +82,12 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments }:
                             <TempCommentCard key={i} comment={comment} />
                         ))}
                     </div>
+
+                    {
+                        remainingLoading && (
+                            <LoadingRound className="text-blue-primary text-4xl py-5" />
+                        )
+                    }
                 </>
             )}
 
