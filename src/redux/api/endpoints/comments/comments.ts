@@ -6,7 +6,9 @@ const commentApi = baseApi.injectEndpoints({
             query: ({ postId, skip = 0, limit = 10 }) => ({
                 url: `/comments/${postId}?skip=${skip}&limit=${limit}`,
                 method: 'GET'
-            })
+            }),
+
+            providesTags: ['Comments'],
         }),
         
 
@@ -16,7 +18,18 @@ const commentApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: data
             })
-        })
+        }),
+
+
+        editComment: builder.mutation({
+            query: (data) => ({
+                url: `/comments/${data.commentId}`,
+                method: 'PUT',
+                body: data
+            }),
+
+            invalidatesTags: ['Posts', 'Comments']
+        }),
     })
 })
 

@@ -11,18 +11,18 @@ type EditCommentModalTypes = {
 
 const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
-    const [hasText, setHasText] = useState(!!comment.content);
     const localRef = useRef<HTMLTextAreaElement | null>(null);
     const modalRef = useRef<HTMLFormElement | null>(null);
 
-    const { control, handleSubmit, formState: { errors }, setValue, reset } = useForm({
-        defaultValues: { content: comment.content }
+    const { control, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm({
+        defaultValues: { content: comment.content || '' }
     });
+
+    const contentValue = watch("content", comment.content || '');
 
     useEffect(() => {
         if (comment) {
             setValue("content", comment.content || '', { shouldDirty: true });
-            setHasText(!!comment.content);
         }
     }, [comment, setValue]);
 
@@ -63,20 +63,22 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
     const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.target.value;
         const trimmedText = text.trim();
-        setHasText(trimmedText.length > 0);
 
         const numberOfLineBreaks = (text.match(/\n/g) || []).length;
         setTextareaRows(trimmedText.length === 0 ? 5 : Math.min(Math.max(numberOfLineBreaks + 1, 5), 8));
     };
 
     const handleCloseModal = () => {
-        reset({ content: comment.content });
+        reset({ content: comment.content || '' });
         setIsModalOpen(false);
     };
 
     const handleUpdateComment = (data: any) => {
         console.log("Updated comment data:", data);
+        // Add your update logic here
     };
+
+    const isSubmitDisabled = contentValue.trim().length === 0;
 
     return (
         <form onSubmit={handleSubmit(handleUpdateComment)} className="w-full" ref={modalRef}>
@@ -107,6 +109,7 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
                                 handleTextareaChange(e);
                             }}
                             ref={(el) => {
+                                field.ref(el);
                                 localRef.current = el;
                             }}
                         />
@@ -117,11 +120,11 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
 
             <div className="mt-4 flex justify-end">
                 <PrimaryButton
-                    disabled={!hasText}
+                    disabled={isSubmitDisabled}
                     type="submit"
-                    className={`${!hasText ? "btn-disabled" : "bg-gradient-to-r from-[#079EF2] to-blue-primary text-white"} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
+                    className={`${isSubmitDisabled ? "btn-disabled" : "bg-gradient-to-r from-[#079EF2] to-blue-primary text-white"} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
                 >
-                    {false ? 'Updating...' : 'Update'}
+                    Update
                 </PrimaryButton>
             </div>
         </form>
