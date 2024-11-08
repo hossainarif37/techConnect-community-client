@@ -10,7 +10,7 @@ type SearchInputPropsTypes = {
 const SearchInput = ({ searchInputText, handleSearch }: SearchInputPropsTypes) => {
 
     return (
-        <div className="relative flex items-center bg-secondary border border-accent pl-5 rounded-full">
+        <div className="relative -z-10 flex items-center bg-secondary border border-accent pl-5 rounded-full">
             <span className="text-xl xl:text-3xl text-white"><IoSearchOutline /></span>
             <input
                 onChange={handleSearch}

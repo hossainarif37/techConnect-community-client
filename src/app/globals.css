@@ -98,3 +98,9 @@ textarea {
 .sidebar-scrollbar:hover::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #f3f3f32c 0%, #f4f4f42f 100%);
 }
+
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}

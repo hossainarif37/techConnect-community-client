@@ -5,7 +5,7 @@ import Cookies from "js-cookie"
 
 export const baseApi = createApi({
     reducerPath: 'api',
-    tagTypes: ['Posts'],
+    tagTypes: ['Posts', 'Comments'],
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_SERVER_BASE_URL,
         prepareHeaders: (headers, { getState }) => {

@@ -1,0 +1,9 @@
+.commentActionsDropdown {
+    @apply z-50 w-48 rounded-lg p-2 absolute overflow-visible bg-accent border border-highlight right-0;
+    top: 100%; /* Positions dropdown below the button */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Adds shadow for better visibility */
+}
+
+.commentActionsDropdown button {
+    @apply border-black flex items-center justify-start gap-2 w-full px-4 py-3 text-sm text-white hover:bg-highlight rounded-lg;
+}

@@ -15,7 +15,7 @@ const TempCommentCard = ({ comment }: TempCommentCardPropsTypes) => {
                     <UserImage className="w-10 lg:w-12 xl:w-14" profilePicture={user?.profilePicture} />
                 </Link>
             </div>
-            <div className="flex-1 flex-wrap bg-accent p-3 rounded-xl overflow-hidden">
+            <div className="flex-wrap bg-accent p-3 rounded-xl overflow-hidden">
                 <Link
                     href={`/profile/${user?._id}/posts`} className="font-bold text-white text-lg hover:underline"
                 >

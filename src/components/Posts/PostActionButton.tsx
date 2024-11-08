@@ -3,7 +3,7 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import PostActionsDropdown from "./PostActionsDropdown";
 
-const PostActionButton = ({ authorId }: { authorId: string }) => {
+const PostActionButton = ({ authorId , post}: { authorId: string, post:any }) => {
     const [actionsDropdown, setActionsDropdown] = useState(false);
 
     const dropdownRef = useOutsideClick(() => setActionsDropdown(false), actionsDropdown);
@@ -24,6 +24,7 @@ const PostActionButton = ({ authorId }: { authorId: string }) => {
                 <PostActionsDropdown
                     authorId={authorId}
                     setActionsDropdown={setActionsDropdown}
+                    post={post}
                 />
             )}
         </div>

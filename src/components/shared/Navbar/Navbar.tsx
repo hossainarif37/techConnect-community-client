@@ -89,7 +89,7 @@ const Navbar = () => {
                         <ActiveUserSideBar setOpenActiveUserSidebar={setOpenActiveUserSidebar}/>
                     </ul>
 
-                    <ul className={`shadow-xl bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>
+                    <ul className={`shadow-xl z-50 bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>
 
                         {/* Navbar Menu Button */}
                         <div className="w-full text-right">
