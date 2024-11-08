@@ -31,7 +31,6 @@ const CommentActionButton: React.FC<CommentActionButtonProps> = ({ postAuthorId,
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const [deleteComment, { isLoading }] = useDeleteCommentMutation();
-    console.log(comment);
 
     const handleDeleteComment = (e: any) => {
         e.preventDefault();
