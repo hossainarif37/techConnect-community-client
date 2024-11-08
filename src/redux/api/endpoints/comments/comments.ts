@@ -1,25 +1,29 @@
+// redux/api/endpoints/comments/comments.js
+
 import { baseApi } from "../../baseApi";
 
 const commentApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getCommentsByPostId: builder.query({
-            query: ({ postId, skip = 0, limit = 10 }) => ({
+            query: ({ postId, skip = 1, limit = 10 }) => ({
                 url: `/comments/${postId}?skip=${skip}&limit=${limit}`,
                 method: 'GET'
             }),
-
-            providesTags: ['Comments'],
+            providesTags: (result, error, arg) => [
+                { type: 'Comments', id: arg.postId }
+            ],
         }),
         
-
         createComment: builder.mutation({
             query: (data) => ({
                 url: '/comments',
                 method: 'POST',
                 body: data
-            })
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Comments', id: arg.article } // 'article' represents postId
+            ],
         }),
-
 
         editComment: builder.mutation({
             query: (data) => ({
@@ -27,10 +31,11 @@ const commentApi = baseApi.injectEndpoints({
                 method: 'PUT',
                 body: data
             }),
-
-            invalidatesTags: ['Posts', 'Comments']
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Comments', id: arg.postId } // Ensure 'postId' is part of the arg
+            ],
         }),
     })
-})
+});
 
-export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery, useCreateCommentMutation } = commentApi;
+export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery, useCreateCommentMutation, useEditCommentMutation } = commentApi;

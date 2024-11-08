@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Controller, useForm } from "react-hook-form";
 import PrimaryButton from "../common/Button/PrimaryButton";
+import { useEditCommentMutation } from "@/redux/api/endpoints/comments/comments";
+import toast from "react-hot-toast";
 
 type EditCommentModalTypes = {
     comment: any;
@@ -13,6 +15,8 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
     const [textareaRows, setTextareaRows] = useState(5);
     const localRef = useRef<HTMLTextAreaElement | null>(null);
     const modalRef = useRef<HTMLFormElement | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [editComment, { isError, error, data }] = useEditCommentMutation();
 
     const { control, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm({
         defaultValues: { content: comment.content || '' }
@@ -75,7 +79,15 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
 
     const handleUpdateComment = (data: any) => {
         console.log("Updated comment data:", data);
+        setIsLoading(true);
+        
         // Add your update logic here
+        editComment({ ...data, commentId: comment._id }).unwrap().then(() => {
+            handleCloseModal();
+            toast.success("Comment updated successfully!");
+        })
+        .catch((err) => console.log("Edit Comment Error:", err))
+        .finally(() => setIsLoading(false));
     };
 
     const isSubmitDisabled = contentValue.trim().length === 0;
@@ -124,7 +136,7 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
                     type="submit"
                     className={`${isSubmitDisabled ? "btn-disabled" : "bg-gradient-to-r from-[#079EF2] to-blue-primary text-white"} select-none py-3 rounded-lg xl:py-4 lg:py-3 w-full font-bold`}
                 >
-                    Update
+                    {isLoading ? 'Updating...' : 'Update'}
                 </PrimaryButton>
             </div>
         </form>
