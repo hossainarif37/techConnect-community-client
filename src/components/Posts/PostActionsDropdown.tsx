@@ -31,6 +31,7 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
     const handleSavePost = () => setActionsDropdown(false);
     const handleDeletePost = () => {
         setIsDeleting(true);
+
         deletePost(post._id).unwrap().then(() => {
             setTimeout(() => {
                 toast.success("Post deleted successfully");
@@ -38,7 +39,7 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
         }).catch((err) => {
             console.log("Delete Post Error:", err);
             toast.error("Post delete failed");
-        }).finally(()=>{
+        }).finally(() => {
             setIsDeleting(false);
             setActionsDropdown(false);
             setIsDeleteAlert(false);
@@ -93,7 +94,7 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
                 )}
             </ul>
 
-
+            {/* Edit Post Modal */}
             <Modal isModalOpen={isEditing}>
                 <EditPostModal
                     isModalOpen={isEditing} setIsModalOpen={setIsEditing} post={post} setActionsDropdown={setActionsDropdown}

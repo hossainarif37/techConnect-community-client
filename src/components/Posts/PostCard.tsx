@@ -13,7 +13,6 @@ const PostCard = ({ post }: any) => {
     const { name, profilePicture, _id: authorId } = author;
     const isLiked = likes?.includes(authorId);
     const commentInputRef = useRef<HTMLTextAreaElement>(null);
-
     return (
         <div className="bg-[#122033] py-3 px-3 md:px-10 rounded-xl max-h-full w-full mx-auto md:w-[500px] xl:w-[650px]">
             <div>
@@ -77,7 +76,7 @@ const PostCard = ({ post }: any) => {
             </div>
 
             {/* Comments */}
-            <Comments latestComment={post.latestComment}  postId={postId} commentInputRef={commentInputRef} remainingComments={post.remainingComments}/>
+            <Comments latestComment={post.latestComment}  postId={postId}  postAuthorId={authorId} commentInputRef={commentInputRef} remainingComments={post.remainingComments}/>
         </div>
     );
 };

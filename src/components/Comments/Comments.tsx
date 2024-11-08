@@ -14,13 +14,14 @@ type CommentsPropsTypes = {
     commentInputRef: React.RefObject<HTMLTextAreaElement>;
     latestComment: IComment | null;
     remainingComments: number;
+    postAuthorId: string;
 };
 
 interface IFormValues {
     comment: string;
 }
 
-const Comments = ({ postId, commentInputRef, latestComment, remainingComments }: CommentsPropsTypes) => {
+const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, postAuthorId }: CommentsPropsTypes) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { register, handleSubmit, reset } = useForm<IFormValues>();
     const [comments, setComments] = useState<IComment[]>(latestComment?.author ? [latestComment] : []);
@@ -76,7 +77,7 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments }:
                     {/* Display Comments */}
                     <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
                         {comments.map((comment: IComment, i: number) => (
-                            <CommentCard key={i} comment={comment} />
+                            <CommentCard key={i} comment={comment} postAuthorId={postAuthorId}/>
                         ))}
                         {tempComment.map((comment: string, i: number) => (
                             <TempCommentCard key={i} comment={comment} />
@@ -94,7 +95,7 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments }:
             {/* Comment Form - always visible */}
             <form
                 onSubmit={handleSubmit(handleComment)}
-                className="pt-3 flex gap-x-3 items-center"
+                className="pt-3 flex gap-x-3 items-center -z-10"
             >
                 <UserImage
                     className="w-10 lg:w-12 xl:w-14"
