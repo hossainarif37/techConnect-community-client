@@ -35,7 +35,17 @@ const commentApi = baseApi.injectEndpoints({
                 { type: 'Comments', id: arg.postId } // Ensure 'postId' is part of the arg
             ],
         }),
+
+        deleteComment: builder.mutation({
+            query: ({commentId, articleId}) => ({
+                url: `/comments/${commentId}/${articleId}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Comments', id: arg.postId } // Ensure 'postId' is part of the arg
+            ],
+        }),
     })
 });
 
-export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery, useCreateCommentMutation, useEditCommentMutation } = commentApi;
+export const { useGetCommentsByPostIdQuery, useLazyGetCommentsByPostIdQuery, useCreateCommentMutation, useEditCommentMutation, useDeleteCommentMutation } = commentApi;
