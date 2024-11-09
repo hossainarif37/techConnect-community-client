@@ -18,9 +18,13 @@ import Cookies from "js-cookie";
 import { removeUser } from "@/redux/slices/user/userSlice";
 import { LuLogOut } from "react-icons/lu";
 import PrimaryButton from "@/components/common/Button/PrimaryButton";
+import { CgProfile } from "react-icons/cg";
+import { IoSettingsOutline } from "react-icons/io5";
+import { toggleNav } from "@/redux/slices/navbar/navbarSlice";
 
 const Navbar = () => {
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
+    const { user } = useSelector((state: IRootState) => state.userSlice);
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
     const dropdownRef = useOutsideClick(() => setIsProfileDropdown(false),
         isProfileDropdown);
@@ -86,7 +90,7 @@ const Navbar = () => {
                                 <IoMdClose />
                             </button>
                         </div>
-                        <ActiveUserSideBar setOpenActiveUserSidebar={setOpenActiveUserSidebar}/>
+                        <ActiveUserSideBar setOpenActiveUserSidebar={setOpenActiveUserSidebar} />
                     </ul>
 
                     <ul className={`shadow-xl z-50 bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>
@@ -108,6 +112,23 @@ const Navbar = () => {
                                 />
                             ))
                         }
+
+                        <li onClick={()=> dispatch(toggleNav())}>
+                            <Link
+                                href={`/profile/${user?._id}/posts`}
+                                title="Profile"
+                            >
+                               Profile
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="#"
+                                title="Settings"
+                            >
+                                Settings
+                            </Link>
+                        </li>
                         <PrimaryButton
                             type="button"
                             className="flex w-full items-center justify-center gap-x-2 bg-secondary"

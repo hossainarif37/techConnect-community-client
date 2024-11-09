@@ -1,6 +1,8 @@
 "use client"
+import { toggleNav } from "@/redux/slices/navbar/navbarSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 type NavLinkProps = {
     title: string;
@@ -9,9 +11,10 @@ type NavLinkProps = {
 
 const NavLink = ({ title, path }: NavLinkProps) => {
     const pathName = usePathname();
+    const dispatch = useDispatch();
 
     return (
-        <li >
+        <li onClick={() => dispatch(toggleNav())}>
             <Link
                 className={`${pathName === path && 'bg-accent lg:bg-transparent rounded  font-bold py-2 block w-full'}`} href={path}>
                 {title}
