@@ -26,10 +26,10 @@ const Navbar = () => {
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
+    const dispatch = useDispatch();
+    const [openActiveUserSidebar, setOpenActiveUserSidebar] = useState(false);
     const dropdownRef = useOutsideClick(() => setIsProfileDropdown(false),
         isProfileDropdown);
-    const [openActiveUserSidebar, setOpenActiveUserSidebar] = useState(false);
-    const dispatch = useDispatch();
 
     return (
         <nav className="bg-[#122033] text-white  p-3 lg:py-5 sticky top-0 z-40">
@@ -55,7 +55,7 @@ const Navbar = () => {
                     </ul>
 
                     <div onClick={() => setIsProfileDropdown(!isProfileDropdown)} className="relative" ref={dropdownRef}>
-                        <UserImage className="w-12 xl:w-14" />
+                        <UserImage profilePicture={user?.profilePicture} className="w-12 xl:w-14 h-12 xl:h-14" />
 
                         {/* Profile Dropdown */}
                         {

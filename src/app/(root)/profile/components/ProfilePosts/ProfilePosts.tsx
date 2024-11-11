@@ -5,7 +5,8 @@ import Loading from "@/components/common/Loading";
 import LoadingRound from "@/components/common/LoadingRound";
 import { useGetPostsByUserQuery } from "@/redux/api/endpoints/posts/posts";
 import { IRootState } from "@/types/types";
-import { useParams, useSearchParams } from "next/navigation";
+import { checkOwner } from "@/utils/checkOwner";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -15,6 +16,7 @@ const ProfilePosts = () => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const searchParams = useSearchParams();
     const params = useParams();
+    const isOwner = checkOwner(params?.id as string, user?._id as string);
 
     const categories = searchParams.get('categories') || '';
     const { isLoading, isError, error, data, refetch } = useGetPostsByUserQuery({ userId: params.id, categories });
@@ -34,7 +36,7 @@ const ProfilePosts = () => {
                 data?.posts?.length > 0 ? data?.posts?.map((post: any, i: number) => <PostCard
                     key={i}
                     post={post}
-                />) : <h1 className="text-2xl h-auto md:h-screen font-semibold text-center mt-5 text-black-secondary">No posts here. Share your thoughts!</h1>
+                />) : <h1 className="text-2xl h-auto md:h-screen font-semibold text-center mt-5 text-black-secondary"> {isOwner ? 'No posts here. Share your thoughts!' : 'No posts found!'}</h1>
             }
         </section>
     );

@@ -25,7 +25,7 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { register, handleSubmit, reset } = useForm<IFormValues>();
     const [comments, setComments] = useState<IComment[]>(latestComment?.author ? [latestComment] : []);
-    const [tempComment, setTempComment] = useState<string[]>([]);
+    const [tempComment, setTempComment] = useState<IComment[]>([]);
     const [skip, setSkip] = useState(1);
     const [hasText, setHasText] = useState(false);
 
@@ -52,10 +52,13 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
     const handleComment: SubmitHandler<IFormValues> = (data) => {
         createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then((response) => {
             setTempComment([...tempComment, response.comment]);
+            console.log("Comment Response:", response);
             setHasText(false);
             reset();
         }).catch((err) => console.log("Comment Error:", err));
     };
+
+    console.log(61,tempComment);
 
     return (
         <div>
@@ -79,8 +82,8 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
                         {comments.map((comment: IComment, i: number) => (
                             <CommentCard key={i} comment={comment} postAuthorId={postAuthorId}/>
                         ))}
-                        {tempComment.map((comment: string, i: number) => (
-                            <TempCommentCard key={i} comment={comment} />
+                        {tempComment.map((comment: IComment, i: number) => (
+                            <TempCommentCard key={i} comment={comment} postAuthorId={postAuthorId} />
                         ))}
                     </div>
 
@@ -98,7 +101,7 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
                 className="pt-3 flex gap-x-3 items-center -z-10"
             >
                 <UserImage
-                    className="w-10 lg:w-12 xl:w-14"
+                    className="w-10 h-10 lg:w-12 xl:w-14 lg:h-12 xl:h-14"
                     profilePicture={user?.profilePicture}
                 />
                 <CommentInput

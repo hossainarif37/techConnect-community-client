@@ -85,7 +85,7 @@ const EditPostModal = ({ isModalOpen, setIsModalOpen, post, setActionsDropdown }
             <hr className="my-5 border-none h-0.5 bg-white/10" />
 
             <div className="flex gap-x-5 items-center">
-                <UserImage className="w-14 xl:w-16" />
+                <UserImage className="w-14 xl:w-16 h-14 xl:h-16" />
                 <div>
                     <h2 className='text-lg xl:text-xl text-white font-bold'>{user?.name}</h2>
                     <div className="flex gap-x-2">
