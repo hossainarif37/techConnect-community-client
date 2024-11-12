@@ -58,7 +58,6 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
         }).catch((err) => console.log("Comment Error:", err));
     };
 
-    console.log(61,tempComment);
 
     return (
         <div>
