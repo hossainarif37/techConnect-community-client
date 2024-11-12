@@ -46,9 +46,19 @@ const userApi = baseApi.injectEndpoints({
                 url: '/auth/logout',
                 method: 'POST',
             })
-        })
+        }),
+
+        updateUser: builder.mutation({
+            query: ({userId, body}) => ({
+                url: `/users/${userId}`,
+                method: 'PUT',
+                body
+            })
+        }),
+
+
     })
 })
 
 
-export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery, useGetAllUsersQuery, useGetUserProfileByIdQuery } = userApi;
+export const { useLoginMutation, useRegisterMutation, useCurrentUserQuery, useLazyCurrentUserQuery, useGetAllUsersQuery, useGetUserProfileByIdQuery, useUpdateUserMutation } = userApi;

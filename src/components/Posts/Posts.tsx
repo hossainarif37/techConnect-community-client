@@ -3,13 +3,14 @@
 import { usePostsQuery } from "@/redux/api/endpoints/posts/posts";
 import PostCard from "./PostCard";
 import LoadingRound from "../common/LoadingRound";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 
 const Posts = () => {
     const searchParams = useSearchParams();
+    
     const categories = searchParams.get('categories') || '';
     const { isLoading, isError, data, refetch } = usePostsQuery(categories); // Fetch posts from the API
     const { user } = useSelector((state: IRootState) => state.userSlice); // Get user data from Redux

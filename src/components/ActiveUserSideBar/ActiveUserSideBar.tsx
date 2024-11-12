@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import { useEffect, useState } from "react";
+import { checkOwner } from "@/utils/checkOwner";
 
 type UserType = {
     _id: string;
@@ -49,7 +50,7 @@ const ActiveUserSideBar = ({setOpenActiveUserSidebar}: ActiveUserSideBarProps) =
                     {
                         data?.users?.map((user: UserType, key: number) => (
                             <Link onClick={() => setOpenActiveUserSidebar && setOpenActiveUserSidebar(false)} href={`/profile/${user?._id}/posts`} key={key} className="flex items-center gap-2 lg:gap-3 hover:bg-accent p-2.5 rounded-lg duration-150">
-                                <UserImage className="w-10" />
+                                <UserImage profilePicture={user?.profilePicture} className="w-10 h-10" />
                                 <span className="text-lg xl:text-xl font-semibold select-none text-white cursor-pointer">{user.name}</span>
                             </Link>
                         ))

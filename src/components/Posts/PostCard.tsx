@@ -23,7 +23,7 @@ const PostCard = ({ post }: any) => {
                         {/* User Image */}
                         <Link href={`/profile/${authorId}/posts`}>
                             <UserImage
-                                className="w-12 lg:w-14 xl:w-16"
+                                className="w-12 lg:w-14 xl:w-16 h-12 lg:h-14 xl:h-16"
                                 profilePicture={profilePicture}
                             />
                         </Link>

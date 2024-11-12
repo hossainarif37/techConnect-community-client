@@ -20,11 +20,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
     const [getCurrentUser, { data: userData, isLoading, isError, error }] = useLazyCurrentUserQuery();
 
+
     useEffect(() => {
         if (!isAuthenticated) {
             getCurrentUser(undefined);
         }
-        if (userData?.success && token) {
+        if (userData?.success && token && !isAuthenticated) {
             dispatch(setUser({ user: userData.user, isAuthenticated: true }));
         }
 
