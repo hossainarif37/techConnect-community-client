@@ -26,11 +26,9 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice);
 
-
-    //* hanle login function
+    //* handle login function
     const handleLogin = (data: IFormInput) => {
         const loginResponse = login({ email: data.email, password: data.password }).unwrap();
-
 
         toast.promise(loginResponse, {
             loading: 'Loading',
