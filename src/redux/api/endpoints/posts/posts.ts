@@ -1,5 +1,3 @@
-
-
 import { baseApi } from "../../baseApi";
 
 const postsApi = baseApi.injectEndpoints({
@@ -13,15 +11,15 @@ const postsApi = baseApi.injectEndpoints({
         }),
 
         getPostsByUser: builder.query({
-            query: ({ userId, categories }) => {
-                // Assuming your API supports filtering by categories through query parameters
+            query: ({ userId, categories, page }) => {
                 return ({
-                    url: `/posts/${userId}?categories=${categories}`,
+                    url: `/posts/${userId}?categories=${categories}&page=${page}`,
                     method: 'GET',
                 })
             },
             providesTags: ['Posts']
         }),
+
         createPost: builder.mutation({
             query: (data) => ({
                 url: '/posts',
