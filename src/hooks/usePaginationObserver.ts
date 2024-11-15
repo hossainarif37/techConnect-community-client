@@ -1,42 +1,48 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 interface UsePaginationObserverProps {
-    data: any;
-    page: number;
-    isLoading: boolean;
-    isLoadingMore: boolean;
-    setIsLoadingMore: React.Dispatch<React.SetStateAction<boolean>>;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+  isLoading: boolean;
+  data: any;
+  setIsIntersecting: React.Dispatch<React.SetStateAction<boolean>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  isIntersecting: boolean;
 }
 
-const usePaginationObserver = ({ data, page, isLoading, setIsLoadingMore, setPage, isLoadingMore }: UsePaginationObserverProps) => {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const observerOptions = { threshold: 0.1 };
+const usePaginationObserver = ({
+  isLoading,
+  data,
+  setIsIntersecting,
+  setPage,
+  isIntersecting,
+}: UsePaginationObserverProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const observerOptions = { threshold: 1 };
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && data?.hasMore && !isLoading && !isLoadingMore) {
-            setIsLoadingMore(true);
-            setPage(prevPage => prevPage + 1);
-        }else if (!data?.hasMore) {
-            setIsLoadingMore(false);
-        }
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const entry = entries[0];
+      if (entry.isIntersecting && data?.hasMore && !isLoading && !isIntersecting) {
+        setIsIntersecting(true);
+        setPage((prevPage) => prevPage + 1);
+      }
+    },
+    [data, isLoading, isIntersecting, setIsIntersecting, setPage]
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    const currentContainerRef = containerRef.current;
+
+    if (currentContainerRef) {
+      observer.observe(currentContainerRef);
+    }
+
+    return () => {
+      if (currentContainerRef) observer.unobserve(currentContainerRef);
     };
+  }, [containerRef, handleIntersection]);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(handleIntersection, observerOptions);
-        const currentContainerRef = containerRef.current;
-
-        if (currentContainerRef) {
-            observer.observe(currentContainerRef);
-        }
-
-        return () => {
-            if (currentContainerRef) observer.unobserve(currentContainerRef);
-        };
-    }, [containerRef, page, isLoading, isLoadingMore]);
-
-    return containerRef;
+  return containerRef;
 };
 
 export default usePaginationObserver;
