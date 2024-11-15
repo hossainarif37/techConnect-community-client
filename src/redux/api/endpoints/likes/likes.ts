@@ -1,5 +1,3 @@
-
-
 import { baseApi } from "../../baseApi";
 
 const postsApi = baseApi.injectEndpoints({
