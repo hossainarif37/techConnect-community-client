@@ -85,11 +85,11 @@ const CommentActionButton: React.FC<CommentActionButtonProps> = ({ postAuthorId,
             </DropdownMenu>
             {/* Delete Confirmation Modal */}
             <Modal isModalOpen={isDeleteModalOpen}>
-                <div className="w-full flex flex-col gap-5">
+                <div className="w-full flex flex-col gap-5 py-3">
                     <h1 className="text-2xl">Are you sure you want to delete this comment?</h1>
                     <div className="flex justify-end gap-x-5">
-                        <PrimaryButton onClick={() => setIsDeleteModalOpen(false)}>No</PrimaryButton>
-                        <PrimaryButton className="bg-red-500 py-2 hover:bg-red-400" onClick={(e: any) => handleDeleteComment(e)}>
+                        <PrimaryButton className="bg-secondary hover:bg-primary py-2" onClick={() => setIsDeleteModalOpen(false)}>No</PrimaryButton>
+                        <PrimaryButton className="bg-red-500 py-2 hover:bg-red-600" onClick={(e: any) => handleDeleteComment(e)}>
                             {isLoading ? "Deleting..." : "Yes"}
                         </PrimaryButton>
                     </div>

@@ -52,9 +52,7 @@ const userApi = baseApi.injectEndpoints({
                 method: 'PUT',
                 body
             })
-        }),
-
-
+        })
     })
 })
 
