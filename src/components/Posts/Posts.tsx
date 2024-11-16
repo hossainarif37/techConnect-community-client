@@ -1,28 +1,34 @@
-import { usePostsQuery } from "@/redux/api/endpoints/posts/posts";
-import PostCard from "./PostCard";
+import usePaginationObserver from "@/hooks/usePaginationObserver";
 import LoadingRound from "../common/LoadingRound";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import PostCard from "./PostCard";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
-import usePaginationObserver from "@/hooks/usePaginationObserver";
+import { usePostsQuery } from "@/redux/api/endpoints/posts/posts";
+import { useSearchParams } from "next/navigation";
 
 const Posts = () => {
     const searchParams = useSearchParams();
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState<any>([]);
     const [isRefetching, setIsRefetching] = useState(false);
-    const [isLoadingMore, setIsLoadingMore] = useState(false);
-    const categories = searchParams.get('categories') || '';
+    const [isIntersecting, setIsIntersecting] = useState(false);
+    const categories = searchParams.get("categories") || "";
     const { isLoading, isError, data, refetch } = usePostsQuery({ categories, page });
     const { user } = useSelector((state: IRootState) => state.userSlice);
 
-    // Pagination observer hook
-    const containerRef = usePaginationObserver({ data, page, isLoading, setIsLoadingMore, setPage, isLoadingMore });
+    // Use the custom pagination observer hook
+    const containerRef = usePaginationObserver({
+        isLoading,
+        data,
+        setIsIntersecting,
+        setPage,
+        isIntersecting,
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [categories])
+    }, [categories]);
 
     useEffect(() => {
         if (categories) {
@@ -35,14 +41,18 @@ const Posts = () => {
         setIsRefetching(true);
         refetch().finally(() => {
             setIsRefetching(false);
-            setIsLoadingMore(false);
+            setIsIntersecting(false);
         });
     }, [categories, user, refetch]);
 
     useEffect(() => {
         if (data?.posts?.length > 0 && !isRefetching && !isLoading) {
-            setPosts((prevPosts: any) => page === 1 ? data.posts : [...prevPosts, ...data.posts]);
-            setIsLoadingMore(false);
+            setPosts((prevPosts: any) => (page === 1 ? data.posts : [...prevPosts, ...data.posts]));
+            setIsIntersecting(false);
+        }
+        if (data?.posts?.length === 0 && !isRefetching && !isLoading) {
+            setPosts([]);
+            setIsIntersecting(false);
         }
     }, [data, categories, isRefetching, isLoading]);
 
@@ -60,17 +70,19 @@ const Posts = () => {
 
     return (
         <section className="space-y-5 py-5 min-h-screen">
-            {
-                posts.length > 0 ? posts.map((post: any) => (
-                    <PostCard key={post._id} post={post} />
-                )) : (
-                    <h1 className="text-2xl h-screen font-semibold text-center mt-5 text-white">
-                        No posts here. Share your thoughts!
-                    </h1>
-                )
-            }
+            {posts.length > 0 ? (
+                posts.map((post: any) => <PostCard key={post._id} post={post} />)
+            ) : (
+                <h1 className="text-2xl h-screen font-semibold text-center mt-5 text-white">
+                    No posts here. Share your thoughts!
+                </h1>
+            )}
             <div className="text-center py-10" ref={containerRef}>
-                {data?.hasMore ? <LoadingRound className="text-blue-500 text-4xl" /> : 'No more posts'}
+                {data?.hasMore ? (
+                    <LoadingRound className="text-blue-500 text-4xl" />
+                ) : (
+                    "No more posts"
+                )}
             </div>
         </section>
     );
