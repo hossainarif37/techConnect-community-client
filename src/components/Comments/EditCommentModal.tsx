@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Controller, useForm } from "react-hook-form";

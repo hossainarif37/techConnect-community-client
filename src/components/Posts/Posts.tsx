@@ -1,3 +1,5 @@
+"use client";
+
 import usePaginationObserver from "@/hooks/usePaginationObserver";
 import LoadingRound from "../common/LoadingRound";
 import PostCard from "./PostCard";

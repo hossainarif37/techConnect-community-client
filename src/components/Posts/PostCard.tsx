@@ -1,17 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import UserImage from "../common/UserImage";
 import postCardStyles from "./postcard.module.css"
 import { Icon } from "@iconify/react"
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef } from "react";
 import Comments from "../Comments/Comments";
 import { renderContentWithBr } from "@/utils/renderContentWithBr";
 import PostActionButton from "./PostActionButton";
 import LikeButton from "./LikeButton";
+import { useSelector } from "react-redux";
+import { IRootState } from "@/types/types";
 
 const PostCard = ({ post }: any) => {
+    const { user } = useSelector((state: IRootState) => state.userSlice);
     const { content, category, author, _id: postId, likes } = post;
     const { name, profilePicture, _id: authorId } = author;
-    const isLiked = likes?.includes(authorId);
+    console.log(author)
+    const isLiked = likes?.includes(user?._id);
     const commentInputRef = useRef<HTMLTextAreaElement>(null);
     return (
         <div className="bg-[#122033] py-3 px-3 md:px-10 rounded-xl max-h-full w-full mx-auto md:w-[500px] xl:w-[650px]">
@@ -70,7 +76,7 @@ const PostCard = ({ post }: any) => {
                         <p>Comment</p>
 
                         {/* Comment Count */}
-                      {post.totalComments > 0 &&  <span className="text-sm xl:text-base text-blue-primary">({post.totalComments})</span>}
+                      {post.totalComments > 0 &&  <span className="text-sm xl:text-base text-white">({post.totalComments})</span>}
                     </button>
                 </div>
 

@@ -1,3 +1,4 @@
+"use client"
 import { Dispatch, SetStateAction, useState, forwardRef, useImperativeHandle, useRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { IoMdSend } from "react-icons/io";

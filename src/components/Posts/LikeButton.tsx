@@ -19,6 +19,7 @@ const LikeButton = ({
 }: LikeButtonProps) => {
   const [likesCount, setLikesCount] = useState(initialLikesCount);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
+  console.log('from like button', initialIsLiked)
 
   // Redux
   const [likePost, { isLoading }] = useLikePostMutation();
