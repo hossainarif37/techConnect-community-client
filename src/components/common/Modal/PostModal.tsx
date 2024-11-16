@@ -89,7 +89,7 @@ const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
             {/* Modal Heading Start */}
             <div className='flex gap-x-5 items-center'>
                 {/* User Image */}
-                <UserImage className="w-14 xl:w-16 h-14 xl:h-16" />
+                <UserImage profilePicture={user?.profilePicture} className="w-14 xl:w-16 h-14 xl:h-16" />
 
                 <div>
                     {/* User Name */}

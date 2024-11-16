@@ -5,11 +5,12 @@ import { IoIosList } from "react-icons/io";
 import { categories } from "@/constants/categories";
 import SearchInput from "@/components/common/Input/SearchInput";
 import { usePathname } from "next/navigation";
+import { FaCheck } from "react-icons/fa";
 interface CategorySideBarProps {
     isScroll?: boolean;
 }
 
-const CategorySideBar = ({isScroll}:CategorySideBarProps) => {
+const CategorySideBar = ({ isScroll }: CategorySideBarProps) => {
     const [categoryQueries, setCategoryQueries] = useState<string[]>([]);
     const [searchInputValue, setSearchInputValue] = useState('');
     const pathname = usePathname();
@@ -48,35 +49,50 @@ const CategorySideBar = ({isScroll}:CategorySideBarProps) => {
 
     return (
         <aside className={`bg-primary ${!isHomePage && 'border-r border-black/15'} z-10 h-full sticky top-[60px] ${isScroll && 'pt-5 duration-300' || isHomePage && 'pt-5'} lg:pt-0 xl:pt-0 lg:top-[108px] xl:top-[116px] left-0 xl:w-[480px] lg:w-[300px] lg:pr-10 pb-2 md:pb-0 px-3 lg:px-0`}>
-        <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
-    
-        {/* Scrollable Categories Section */}
-        <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] md:mt-5">
-            <div className="flex md:flex-wrap flex-nowrap my-2 flex-row gap-x-6 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
-                {
-                    filteredCategories?.map((category: string, key: number) => (
-                        <label htmlFor={category.toLowerCase()} key={key} className="flex gap-2 items-center lg:gap-3 hover:bg-accent hover:cursor-pointer py-1 px-2 md:p-3 rounded-lg duration-150">
-                            <input
-                                onChange={(e) => handleCategory(category, e.target.checked)}
-                                className="lg:h-5 lg:w-5 xl:h-7 xl:w-7 cursor-pointer"
-                                type="checkbox"
-                                name="category"
-                                id={category.toLowerCase()}
-                                checked={categoryQueries?.includes(category)} // Determine if the category is selected
-                            />
-                            <span
-                                className="text-lg xl:text-xl text-nowrap select-none text-white cursor-pointer"
-                                
+            <SearchInput searchInputText="Search Category" handleSearch={handleSearchCategory} />
+
+            {/* Scrollable Categories Section */}
+            <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] md:mt-5">
+                <div className="flex md:flex-wrap flex-nowrap my-2 flex-row gap-x-6 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
+                    {
+                        filteredCategories?.map((category: string, key: number) => (
+                            <label
+                                htmlFor={category.toLowerCase()}
+                                key={key}
+                                className="flex gap-2 items-center lg:gap-3 hover:bg-accent hover:cursor-pointer py-1 px-2 md:p-3 rounded-lg duration-150"
                             >
-                                {category}
-                            </span>
-                        </label>
-                    ))
-                }
+                                {/* Hidden Input */}
+                                <input
+                                    onChange={(e) => handleCategory(category, e.target.checked)}
+                                    className="hidden" // Keep the input hidden
+                                    type="checkbox"
+                                    name="category"
+                                    id={category.toLowerCase()}
+                                    checked={categoryQueries?.includes(category)} // Determine if the category is selected
+                                />
+
+                                {/* Custom Checkbox */}
+                                <div
+                                    className={`lg:h-5 lg:w-5 xl:h-7 xl:w-7 rounded-md cursor-pointer duration-150 ${categoryQueries?.includes(category) ? "bg-white text-secondary" : "bg-transparent border border-gray-400"
+                                        } flex items-center justify-center`}
+                                >
+                                    {categoryQueries?.includes(category) && (
+                                        <FaCheck />
+                                    )}
+                                </div>
+
+                                {/* Category Name */}
+                                <span className="text-lg xl:text-xl text-nowrap select-none text-white cursor-pointer">
+                                    {category}
+                                </span>
+                            </label>
+
+                        ))
+                    }
+                </div>
             </div>
-        </div>
-    </aside>
-    
+        </aside>
+
 
     );
 }
