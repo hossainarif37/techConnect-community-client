@@ -12,14 +12,14 @@ interface LikeButtonProps {
   initialIsLiked?: boolean;
 }
 
-const LikeButton = ({ 
-  postId, 
+const LikeButton = ({
+  postId,
   initialLikesCount = 0,
-  initialIsLiked = false 
+  initialIsLiked = false
 }: LikeButtonProps) => {
   const [likesCount, setLikesCount] = useState(initialLikesCount);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
-  
+
   // Redux
   const [likePost, { isLoading }] = useLikePostMutation();
   const { user } = useSelector((state: IRootState) => state.userSlice);
@@ -39,7 +39,7 @@ const LikeButton = ({
 
       // API call
       const response = await likePost({ postId }).unwrap();
-      
+
       // Update based on server response
       if (response.message === 'Liked' || response.message === 'Removed') {
         setLikesCount(response.likes);
@@ -67,8 +67,8 @@ const LikeButton = ({
     >
       {/* Like Icon */}
       <span>
-        <Icon 
-          icon={isLiked ? "ant-design:like-filled" : "ant-design:like-outlined"} 
+        <Icon
+          icon={isLiked ? "ant-design:like-filled" : "ant-design:like-outlined"}
           className="text-2xl xl:text-3xl"
         />
       </span>

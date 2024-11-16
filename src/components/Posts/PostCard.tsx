@@ -68,6 +68,9 @@ const PostCard = ({ post }: any) => {
                         <span className="text-2xl xl:text-3xl"><Icon icon="octicon:comment-24" /></span>
                         {/* Text */}
                         <p>Comment</p>
+
+                        {/* Comment Count */}
+                      {post.totalComments > 0 &&  <span className="text-sm xl:text-base text-blue-primary">({post.totalComments})</span>}
                     </button>
                 </div>
 
