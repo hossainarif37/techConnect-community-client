@@ -8,7 +8,6 @@ const postsApi = baseApi.injectEndpoints({
                 url: `/likes/${postId}`,
                 method: 'POST'
             }),
-            invalidatesTags: ['Posts']
         }),
     })
 })

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import UserImage from "../common/UserImage";
 import { useSelector } from "react-redux";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useCreateCommentMutation, useLazyGetCommentsByPostIdQuery } from "@/redux/api/endpoints/comments/comments";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";

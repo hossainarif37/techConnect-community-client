@@ -1,3 +1,5 @@
+"use client"
+
 import { Controller, useForm } from "react-hook-form";
 import UserImage from "../UserImage";
 import { categories } from "@/constants/categories";
