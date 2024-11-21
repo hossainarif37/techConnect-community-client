@@ -1,34 +1,107 @@
-## TechConnect  Community
+# TechConnect - Tech Community Platform
 
-First, run the development server:
+TechConnect is a social platform designed to address the tech community's need for organized, accessible information and professional networking. It facilitates knowledge sharing, professional connections, and community engagement within various tech domains.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project showcases my expertise in **full-stack web development** and includes core functionalities such as content categorization, community interactions, secure authentication, and an admin dashboard.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Features
+### **1. Post Management**
+- Create, update, and delete posts.
+- Like/unlike posts and view likes.
+- Category-based post filtering for better content organization.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### **2. Comments Section**
+- Add, update, and delete comments on posts.
+- Fetch latest comments efficiently for each post.
+- Load additional comments only when requested, optimizing performance.
 
-## Learn More
+### **3. Profile Management**
+- User profiles with personalized data.
+- Tabs to display posts, comments, or liked posts by the user.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔜 Upcoming Features
+### **1. User Management**
+- **Role-based access**: Users, Moderators, Admins.
+- Moderator and admin roles for managing content and users.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### **2. Admin Dashboard**
+- Manage users, moderators, and content.
+- Monitor platform activities and enforce community guidelines.
+- Analytics and reporting tools for platform insights.
 
-## Deploy on Vercel
+### **3. OAuth Integration**
+- Third-party sign-ins (e.g., Google, GitHub).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **4. Additional Features**
+- User-contributed Resources: Users will be able to add their own books and courses, enhancing the platform’s library.
+- Location-Based Job/Meetup Filtering
+- Categorized Course Filtering and Books
+- Real-Time Notifications
+- Direct Messaging System
+- User Following System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## 🛠️ Technologies I Used
+- **Frontend**: Next.js, Tailwind CSS
+- **State Management**: Redux Toolkit
+- **Backend**: Node.js, Express.js (see [backend repository](https://github.com/hossainarif37/techConnect-community-server.git))
+- **Authentication**: JWT
+- **Payment Integration**: Stripe
+
+---
+
+## 💡 Project Goals
+This project was built to:
+1. **Enhance my skills** in designing a full-stack application from scratch.
+2. Implement **real-world functionality** for content management, community interactions, and secure authentication.
+3. Showcase my ability to build scalable and maintainable systems.
+
+---
+
+## 📦 Workflow
+1. **User**: Create and interact with content, engage with the community, and manage their profile.
+2. **Moderator**: Oversee content quality, manage user interactions, and enforce community guidelines.
+3. **Admin**: Manage users, moderators, content, and platform settings.
+
+---
+
+## 🔗 Project Links
+- **Backend Repository**: [TechConnect Server Repository](https://github.com/hossainarif37/techConnect-community-server.git)
+- **Live Demo**: [TechConnect Platform](https://tech-connect-community.vercel.app)
+
+---
+
+## ⚙️ Local Setup
+
+### **Frontend Setup**
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/hossainarif37/techConnect-community-client.git
+    cd techConnect-community-client
+    ```
+
+2. **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+3. **Configure environment**:
+    Create a `.env` file with:
+    ```bash
+    NEXT_PUBLIC_SERVER_BASE_URL="http://localhost:5000/api/v1"
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your_cloudinary_cloud_name"
+    NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET="your_cloudinary_upload_preset"
+    ```
+
+4. **Run the application**:
+    ```bash
+    npm run dev
+    ```
+
+5. **Access the app**:
+    Open your browser at `http://localhost:3000`
