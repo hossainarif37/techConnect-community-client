@@ -1,6 +1,7 @@
 # TechConnect - Tech Community Platform
 
-TechConnect is a social platform designed to address the tech community's need for organized, accessible information and professional networking. It facilitates knowledge sharing, professional connections, and community engagement within various tech domains.
+TechConnect is a social platform designed to solve the tech community’s need for organized,
+accessible information and professional networking. By categorizing posts (e.g., Web Development, Freelancing) users can easily find relevant content, engage with others, and access resources that support their career growth.
 
 This project showcases my expertise in **full-stack web development** and includes core functionalities such as content categorization, community interactions, secure authentication, and an admin dashboard.
 
