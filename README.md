@@ -13,7 +13,7 @@ This project showcases my expertise in **full-stack web development** and includ
 - Like/unlike posts and view likes.
 - Category-based post filtering for better content organization.
 
-### **2. Comments Section**
+### **2. Comments Management**
 - Add, update, and delete comments on posts.
 - Fetch latest comments efficiently for each post.
 - Load additional comments only when requested, optimizing performance.

@@ -25,12 +25,12 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, postAuthorId }) => {
             <div className="flex-1 bg-accent p-3 rounded-xl overflow-hidden min-w-0">
                 <Link
                     href={`/profile/${comment?.author?._id}/posts`}
-                    className="font-bold text-white text-lg hover:underline"
+                    className="font-bold text-white text-sm xl:text-lg hover:underline"
                 >
                     {comment?.author?.name}
                 </Link>
                 <div>
-                    {renderContentWithBr(comment?.content)}
+                    {renderContentWithBr(comment?.content, 'text-sm xl:text-base')}
                 </div>
             </div>
             {/* Include the CommentActionButton here */}

@@ -23,13 +23,13 @@ const TempCommentCard = ({ comment,  postAuthorId }: TempCommentCardPropsTypes) 
             </div>
             <div className="flex-1 bg-accent p-3 rounded-xl overflow-hidden min-w-0">
                 <Link
-                    href={`/profile/${user?._id}/posts`} className="font-bold text-white text-lg hover:underline"
+                    href={`/profile/${user?._id}/posts`} className="font-bold text-white text-sm xl:text-lg hover:underline"
                 >
                     {user?.name}
                 </Link>
 
                 <div className="break-words">
-                    {renderContentWithBr(comment?.content)}
+                    {renderContentWithBr(comment?.content, "text-sm xl:text-base")}
                 </div>
             </div>
 
