@@ -11,13 +11,13 @@ const useOutsideClick = (callback: () => void, isOpen: boolean) => {
 
     useEffect(() => {
         if (isOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
+            addEventListener("mousedown", handleClickOutside);
         } else {
-            document.removeEventListener("mousedown", handleClickOutside);
+            removeEventListener("mousedown", handleClickOutside);
         }
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            removeEventListener("mousedown", handleClickOutside);
         };
     }, [isOpen]); // Re-run when isOpen changes
 

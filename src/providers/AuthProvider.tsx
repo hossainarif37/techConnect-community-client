@@ -11,15 +11,11 @@ import Cookies from "js-cookie";
 import Loading from "../components/common/Loading"
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const dispatch = useDispatch();
-    const { isAuthenticated, user } = useSelector((state: IRootState) => state.userSlice);
-
-
-    const token = Cookies.get('authToken');
-
-    const router = useRouter();
     const [getCurrentUser, { data: userData, isLoading, isError, error }] = useLazyCurrentUserQuery();
-
+    const { isAuthenticated } = useSelector((state: IRootState) => state.userSlice);
+    const dispatch = useDispatch();
+    const token = Cookies.get('authToken');
+    const router = useRouter();
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -36,27 +32,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return <Loading />;
     }
 
-
     // Ensure children are returned when the user is authenticated
-    if (isAuthenticated) {
-        return children;
-    }
-
-
-    if (isError) {
-        if ((error as LoginErrorType)?.status === 401 || (error as LoginErrorType)?.status === 'FETCH_ERROR') {
-            if ((error as LoginErrorType)?.status === 'FETCH_ERROR') {
-                return (
-                    <div className="h-screen flex justify-center items-center">
-                        <h1 className="text-3xl text-white">Internal server error!</h1>
-                    </div>
-                );
-            }
-            router.push('/');
-            return <AuthLayout />;
-        }
-    }
-    return null;
+    return children;
 };
 
 export default AuthProvider;

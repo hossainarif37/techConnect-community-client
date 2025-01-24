@@ -59,10 +59,10 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
             }
         };
 
-        document.addEventListener("focusout", handleFocusOut);
+        addEventListener("focusout", handleFocusOut);
 
         return () => {
-            document.removeEventListener("focusout", handleFocusOut);
+            removeEventListener("focusout", handleFocusOut);
         };
     }, [isModalOpen]);
 
@@ -82,14 +82,14 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
     const handleUpdateComment = (data: any) => {
         console.log("Updated comment data:", data);
         setIsLoading(true);
-        
+
         // Add your update logic here
         editComment({ ...data, commentId: comment._id }).unwrap().then(() => {
             handleCloseModal();
             toast.success("Comment updated successfully!");
         })
-        .catch((err) => console.log("Edit Comment Error:", err))
-        .finally(() => setIsLoading(false));
+            .catch((err) => console.log("Edit Comment Error:", err))
+            .finally(() => setIsLoading(false));
     };
 
     const isSubmitDisabled = contentValue.trim().length === 0;
