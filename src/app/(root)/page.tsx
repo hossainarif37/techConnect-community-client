@@ -18,7 +18,7 @@ const Home = () => {
       <CategorySideBar />
       <section className="flex-1 lg:px-14 px-0">
         <div className="max-w-2xl mx-auto">
-          <PostInputCard />
+          {user && <PostInputCard />}
           <Posts />
         </div>
       </section>

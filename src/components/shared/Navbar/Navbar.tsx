@@ -21,6 +21,7 @@ import PrimaryButton from "@/components/common/Button/PrimaryButton";
 import { CgProfile } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { toggleNav } from "@/redux/slices/navbar/navbarSlice";
+import { LogIn } from "lucide-react";
 
 const Navbar = () => {
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
@@ -32,7 +33,7 @@ const Navbar = () => {
         isProfileDropdown);
 
     return (
-        <nav className="bg-[#122033] text-white  p-3 lg:py-5 sticky top-0 z-40">
+        <nav className="bg-[#122033] text-white p-3 lg:px-5 lg:py-5 sticky top-0 z-40">
             <div className="flex justify-between items-center">
 
                 {/* Navbar Logo */}
@@ -42,19 +43,28 @@ const Navbar = () => {
 
                 {/* Desktop Menu */}
                 <div className="lg:flex hidden items-center flex-1 justify-between">
-                    <ul className="flex items-center mx-auto space-x-10">
+                    <ul className="flex items-center mx-auto gap-x-14">
                         {
                             navLinks?.map((link, i) => (
                                 <NavLink
                                     key={i}
                                     path={link.path}
                                     title={link.title}
+                                    Icon={link.icon}
                                 />
                             ))
                         }
+
                     </ul>
 
-                    <div onClick={() => setIsProfileDropdown(!isProfileDropdown)} className="relative" ref={dropdownRef}>
+                    <Link
+                        className={`bg-accent flex items-center gap-2 lg:bg-transparent rounded  font-bold py-2 w-full'}`} href={'/login'}
+                    >
+                        <LogIn className="h-5 w-5" />
+                        Login
+                    </Link>
+
+                    <div hidden={user ? false : true} onClick={() => setIsProfileDropdown(!isProfileDropdown)} className="relative" ref={dropdownRef}>
                         <UserImage profilePicture={user?.profilePicture} className="w-12 xl:w-14 h-12 xl:h-14" />
 
                         {/* Profile Dropdown */}
@@ -109,16 +119,17 @@ const Navbar = () => {
                                     key={i}
                                     path={link.path}
                                     title={link.title}
+                                    Icon={link.icon}
                                 />
                             ))
                         }
 
-                        <li onClick={()=> dispatch(toggleNav())}>
+                        <li onClick={() => dispatch(toggleNav())}>
                             <Link
                                 href={`/profile/${user?._id}/posts`}
                                 title="Profile"
                             >
-                               Profile
+                                Profile
                             </Link>
                         </li>
                         <li>

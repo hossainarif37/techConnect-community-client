@@ -23,7 +23,7 @@ interface IFormValues {
     comment: string;
 }
 
-const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, postAuthorId }: CommentsPropsTypes) => {
+const Comments = ({ postId, commentInputRef, latestComment, remainingComments, postAuthorId }: CommentsPropsTypes) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { register, handleSubmit, reset } = useForm<IFormValues>();
     const [comments, setComments] = useState<IComment[]>(latestComment?.author ? [latestComment] : []);
@@ -63,7 +63,6 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
 
     return (
         <div>
-            {/* Only show comments section if there's a valid latest comment (with author) or temp comments */}
             {(latestComment?.author || tempComment.length > 0) && (
                 <>
                     {
@@ -81,7 +80,7 @@ const Comments = ({ postId,  commentInputRef, latestComment, remainingComments, 
                     {/* Display Comments */}
                     <div className="comment-scrollbar max-h-[300px] overflow-y-auto pb-3 pr-3">
                         {comments.map((comment: IComment, i: number) => (
-                            <CommentCard key={i} comment={comment} postAuthorId={postAuthorId}/>
+                            <CommentCard key={i} comment={comment} postAuthorId={postAuthorId} />
                         ))}
                         {tempComment.map((comment: IComment, i: number) => (
                             <TempCommentCard key={i} comment={comment} postAuthorId={postAuthorId} />

@@ -14,12 +14,12 @@ type CommentInputPropsTypes = {
 }
 
 const CommentInput = forwardRef<{ focus: () => void } | null, CommentInputPropsTypes>(({
-    commentInputText, 
-    register, 
-    isCreateCommentLoading, 
-    isError, 
-    hasText, 
-    setHasText 
+    commentInputText,
+    register,
+    isCreateCommentLoading,
+    isError,
+    hasText,
+    setHasText
 }, ref) => {
     const [textareaRows, setTextareaRows] = useState(1);
 
@@ -43,10 +43,11 @@ const CommentInput = forwardRef<{ focus: () => void } | null, CommentInputPropsT
     return (
         <div className={`flex-1 flex items-${textareaRows > 1 ? 'end' : 'center'} relative`}>
             <textarea
+                data-gramm={false}
                 {...register}
                 ref={(element) => {
-                    localRef.current = element; // Set the element to localRef
-                    register.ref(element); // Pass the element to register.ref for form handling
+                    localRef.current = element;
+                    register.ref(element);
                 }}
                 onChange={handleTextareaChange}
                 className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-2 xl:p-4 px-4 text-lg placeholder:xl:font-semibold placeholder:text-nowrap`}
@@ -59,7 +60,7 @@ const CommentInput = forwardRef<{ focus: () => void } | null, CommentInputPropsT
                 <button
                     title="Comment"
                     disabled={isCreateCommentLoading}
-                    className="text-white hover:bg-accent text-2xl w-10 h-10 flex justify-center items-center rounded-full"
+                    className="text-blue-primary hover:bg-accent text-2xl w-10 h-10 flex justify-center items-center rounded-full"
                     type="submit"
                 >
                     {isCreateCommentLoading ? <AiOutlineLoading3Quarters className="animate-spin" /> : <IoMdSend />}
