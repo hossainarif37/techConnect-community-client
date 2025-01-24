@@ -32,12 +32,11 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
         toast.promise(loginResponse, {
             loading: 'Loading',
-            success: ({ user, message, token }) => {
-                console.log('User', user )
-                dispatch(setUser({ user: user, isAuthenticated: true }));
+            success: (data: any) => {
+                const { user, message, token } = data;
+                dispatch(setUser({ user, isAuthenticated: true }));
                 Cookies.set('authToken', token, { expires: 30 });
                 return message;
-
             },
             error: ({ data }) => {
                 return data?.message || 'Login failed';
