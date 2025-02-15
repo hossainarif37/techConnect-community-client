@@ -13,7 +13,7 @@ export default function ClientWrapper({ children }: { children: ReactNode }) {
     return (
         <div className="flex flex-col md:flex-row">
             {children}
-            {largeScreen && <ActiveUserSideBar />}
+            <ActiveUserSideBar />
         </div>
     );
 }

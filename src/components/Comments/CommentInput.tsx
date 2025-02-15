@@ -63,7 +63,7 @@ const CommentInput = forwardRef<{ focus: () => void } | null, CommentInputPropsT
                     register.ref(element);
                 }}
                 onChange={handleTextareaChange}
-                className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-2 xl:p-4 px-4 text-lg placeholder:xl:font-semibold placeholder:text-nowrap`}
+                className={`w-full pr-12 ${textareaRows > 1 ? 'rounded-xl pb-6' : 'rounded-full'} border border-accent bg-transparent text-white outline-none p-2 xl:p-4 px-4 text-lg placeholder:text-sm placeholder:md:text-base placeholder:xl:font-semibold placeholder:text-nowrap`}
                 cols={30}
                 rows={textareaRows}
                 id="comment-input"

@@ -11,8 +11,8 @@ import Loading from "../components/common/Loading"
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [getCurrentUser, { data: userData, isLoading }] = useLazyCurrentUserQuery();
     const { isAuthenticated } = useSelector((state: IRootState) => state.userSlice);
-    const dispatch = useDispatch();
     const token = Cookies.get('authToken');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -23,11 +23,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
     }, [userData, token, isAuthenticated]);
-
-
-    if (isLoading) {
-        return <Loading />;
-    }
 
     // Ensure children are returned when the user is authenticated
     return children;

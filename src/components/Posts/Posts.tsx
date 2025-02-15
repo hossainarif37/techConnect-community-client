@@ -80,9 +80,9 @@ const Posts = () => {
                     No posts here. Share your thoughts!
                 </h1>
             )}
-            <div className="text-center py-10" ref={containerRef}>
+            <div className="text-center" ref={containerRef}>
                 {data?.hasMore ? (
-                    <LoadingRound className="text-blue-500 text-4xl" />
+                    <PostCardSkeleton posts={1} />
                 ) : (
                     "No more posts"
                 )}

@@ -14,7 +14,7 @@ const SearchInput = ({ searchInputText, handleSearch }: SearchInputPropsTypes) =
             <span className="text-xl xl:text-3xl text-white"><IoSearchOutline /></span>
             <input
                 onChange={handleSearch}
-                className="input input-secondary bg-transparent placeholder:text-white text-base xl:text-lg semibold border-none  rounded-full py-4" type="text" name="search" id="search" placeholder={searchInputText} />
+                className="input input-secondary placeholder:text-sm placeholder:md:text-base bg-transparent placeholder:text-white text-base xl:text-lg semibold border-none  rounded-full py-4" type="text" name="search" id="search" placeholder={searchInputText} />
         </div>
     );
 };

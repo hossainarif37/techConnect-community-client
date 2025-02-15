@@ -19,7 +19,7 @@ const NavLink = ({ title, path, Icon }: NavLinkProps) => {
     return (
         <Link
             onClick={() => dispatch(toggleNav())}
-            className={`flex items-center gap-2 ${pathName === path && 'bg-accent lg:bg-transparent rounded font-bold py-2 block w-full'}`} href={path}
+            className={`flex h-12 xl:h-14 items-center gap-2 ${pathName === path && 'bg-accent lg:bg-transparent rounded font-bold block w-full'}`} href={path}
         >
             <Icon className="w-5 h-5" />
             <span>{title}</span>
