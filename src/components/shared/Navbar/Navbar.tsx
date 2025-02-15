@@ -38,7 +38,7 @@ const Navbar = () => {
 
                 {/* Navbar Logo */}
                 <div className="flex items-center gap-3">
-                    <Link href='/' className="xl:text-4xl text-3xl font-extrabold text-transparent bg-clip-text gradient-blue">TechConnect</Link>
+                    <Link href='/' className="lg:text-3xl xl:text-4xl text-2xl font-extrabold text-transparent bg-clip-text gradient-blue">TechConnect</Link>
                 </div>
 
                 {/* Desktop Menu */}

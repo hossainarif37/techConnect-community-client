@@ -82,12 +82,12 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
                                 <span>Follow</span>
                             </button>
                         </li>
-                        <li>
+                        {/* <li>
                             <button onClick={handleUnfollow}>
                                 <span className="text-xl"><FaWindowClose /></span>
                                 <span>Unfollow</span>
                             </button>
-                        </li>
+                        </li> */}
                     </>
                 )}
             </ul>

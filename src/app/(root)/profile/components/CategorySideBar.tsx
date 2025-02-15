@@ -53,13 +53,13 @@ const CategorySideBar = ({ isScroll }: CategorySideBarProps) => {
 
             {/* Scrollable Categories Section */}
             <div className="sidebar-scrollbar flex flex-col overflow-y-auto max-h-[calc(100vh-116px)] md:mt-5">
-                <div className="flex md:flex-wrap flex-nowrap my-2 flex-row gap-x-6 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
+                <div className="flex md:flex-wrap flex-nowrap my-2 flex-row gap-x-1 md:gap-x-0 md:flex-col gap-y-1 xl:gap-y-3 pb-0 md:pb-24 pr-2">
                     {
                         filteredCategories?.map((category: string, key: number) => (
                             <label
                                 htmlFor={category.toLowerCase()}
                                 key={key}
-                                className="flex gap-2 items-center lg:gap-3 hover:bg-accent hover:cursor-pointer py-1 px-2 md:p-3 rounded-lg duration-150"
+                                className="flex gap-2 items-center lg:gap-3 hover:bg-accent hover:cursor-pointer py-1 px-2 md:p-3 rounded md:rounded-lg duration-150"
                             >
                                 {/* Hidden Input */}
                                 <input
@@ -73,7 +73,7 @@ const CategorySideBar = ({ isScroll }: CategorySideBarProps) => {
 
                                 {/* Custom Checkbox */}
                                 <div
-                                    className={`lg:h-5 lg:w-5 xl:h-7 xl:w-7 rounded-md cursor-pointer duration-150 ${categoryQueries?.includes(category) ? "bg-white text-secondary" : "bg-transparent border border-gray-400"
+                                    className={`size-4 lg:size-5 xl:h-7 xl:w-7 rounded md:rounded-md cursor-pointer duration-150 ${categoryQueries?.includes(category) ? "bg-white text-secondary" : "bg-transparent border border-gray-400"
                                         } flex items-center justify-center`}
                                 >
                                     {categoryQueries?.includes(category) && (
@@ -82,7 +82,7 @@ const CategorySideBar = ({ isScroll }: CategorySideBarProps) => {
                                 </div>
 
                                 {/* Category Name */}
-                                <span className="text-lg xl:text-xl text-nowrap select-none text-white cursor-pointer">
+                                <span className="text-xs xl:text-xl text-nowrap select-none text-white cursor-pointer">
                                     {category}
                                 </span>
                             </label>

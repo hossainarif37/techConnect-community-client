@@ -34,7 +34,7 @@ const CommentActionButton: React.FC<CommentActionButtonProps> = ({ postAuthorId,
 
     const handleDeleteComment = (e: any) => {
         e.preventDefault();
-        deleteComment({commentId:comment?._id, articleId: comment?.article}).unwrap().then(() => {
+        deleteComment({ commentId: comment?._id, articleId: comment?.article }).unwrap().then(() => {
             toast.success("Comment deleted successfully");
         }).catch((err) => {
             console.log("Delete Comment Error:", err);
@@ -70,7 +70,7 @@ const CommentActionButton: React.FC<CommentActionButtonProps> = ({ postAuthorId,
                         </>
                     )}
                     {postAuthorId === user?._id && user?._id !== comment?.author?._id && (
-                        <DropdownMenuItem onClick={() => setIsDeleteModalOpen(true)}>
+                        <DropdownMenuItem className="cursor-pointer p-3 hover:bg-accent" onClick={() => setIsDeleteModalOpen(true)}>
                             <span className="text-xl"><RiDeleteBin6Line /></span>
                             <span>Delete Comment</span>
                         </DropdownMenuItem>
