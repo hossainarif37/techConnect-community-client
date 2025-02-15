@@ -34,6 +34,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
                 const { user, message, token } = data;
                 dispatch(setUser({ user, isAuthenticated: true }));
                 Cookies.set('authToken', token, { expires: 30 });
+                router.push('/');
                 return message;
             },
             error: ({ data }) => {
@@ -125,10 +126,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
             {/*//* Navigate to Register page */}
             <p className="text-center text-white">
-                <span>Already have an account? <button
-                    type="button"
-                    onClick={() => setIsLoginComponent(true)}
-                    className="underline">Login</button></span>
+                <span>Already have an account? <Link href={'/login'} className="underline">Login</Link></span>
             </p>
 
         </form>

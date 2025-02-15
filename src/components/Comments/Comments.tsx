@@ -10,6 +10,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import UserImage from "../common/UserImage";
 import { useSelector } from "react-redux";
 import TempCommentCard from "./TempCommentCard";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type CommentsPropsTypes = {
     postId: string;
@@ -30,6 +32,8 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments, p
     const [tempComment, setTempComment] = useState<IComment[]>([]);
     const [skip, setSkip] = useState(1);
     const [hasText, setHasText] = useState(false);
+
+    const router = useRouter();
 
     const [getRemainingComments, { data: remainingData, isLoading: remainingLoading, isError: remainingIsError }] = useLazyGetCommentsByPostIdQuery();
     const [createComment, { isLoading: isCreateCommentLoading }] = useCreateCommentMutation();
@@ -54,12 +58,17 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments, p
     const handleComment: SubmitHandler<IFormValues> = (data) => {
         createComment({ content: data.comment, article: postId, author: user?._id }).unwrap().then((response) => {
             setTempComment([...tempComment, response.comment]);
-            console.log("Comment Response:", response);
             setHasText(false);
             reset();
         }).catch((err) => console.log("Comment Error:", err));
     };
 
+
+    const onUserImageClick = () => {
+        if (!user) {
+            router.push("/login");
+        }
+    }
 
     return (
         <div>
@@ -100,10 +109,12 @@ const Comments = ({ postId, commentInputRef, latestComment, remainingComments, p
                 onSubmit={handleSubmit(handleComment)}
                 className="pt-3 flex gap-x-3 items-center -z-10"
             >
-                <UserImage
-                    className="w-10 h-10 lg:w-12 xl:w-14 lg:h-12 xl:h-14"
-                    profilePicture={user?.profilePicture}
-                />
+                <button onClick={onUserImageClick}>
+                    <UserImage
+                        className="w-10 h-10 lg:w-12 xl:w-14 lg:h-12 xl:h-14"
+                        profilePicture={user?.profilePicture}
+                    />
+                </button>
                 <CommentInput
                     ref={commentInputRef}
                     register={{ ...register("comment", { required: true }) }}

@@ -3,10 +3,10 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
 type LoadingRoundPropsType = {
-className?: string;    
+    className?: string;
 }
 
-const LoadingRound = ({ className}: LoadingRoundPropsType) => {
+const LoadingRound = ({ className }: LoadingRoundPropsType) => {
     return (
         <div className={cn('flex justify-center', className)}>
             <AiOutlineLoading3Quarters

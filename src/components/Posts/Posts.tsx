@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import { usePostsQuery } from "@/redux/api/endpoints/posts/posts";
 import { useSearchParams } from "next/navigation";
+import PostCardSkeleton from "./PostCardSkeleton";
 
 const Posts = () => {
     const searchParams = useSearchParams();
@@ -59,7 +60,7 @@ const Posts = () => {
     }, [data, categories, isRefetching, isLoading]);
 
     if (isLoading) {
-        return <LoadingRound className="text-blue-500 text-4xl py-20" />;
+        return <PostCardSkeleton />;
     }
 
     if (isError) {

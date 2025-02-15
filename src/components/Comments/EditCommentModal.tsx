@@ -80,7 +80,6 @@ const EditCommentModal = ({ comment, isModalOpen, setIsModalOpen }: EditCommentM
     };
 
     const handleUpdateComment = (data: any) => {
-        console.log("Updated comment data:", data);
         setIsLoading(true);
 
         // Add your update logic here
