@@ -15,6 +15,7 @@ import { setUser } from "@/redux/slices/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import { checkOwner } from "@/utils/checkOwner";
+import ProfileHeaderSkeleton from "./ProfileHeaderSkeleton";
 
 
 const ProfileHeader = () => {
@@ -25,9 +26,11 @@ const ProfileHeader = () => {
     const [updateUser] = useUpdateUserMutation();
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const dispatch = useDispatch();
+
     if (isLoading) {
-        return <LoadingRound className="text-2xl text-blue-primary py-20" />
+        return <ProfileHeaderSkeleton />
     }
+
     const { name, profilePicture, followers, following, _id: userId } = data?.user;
     const isOwner = checkOwner(params?.id as string, user?._id as string);
 
@@ -46,9 +49,6 @@ const ProfileHeader = () => {
             setSelectedFile(file);
         }
     };
-
-    console.log('User Id: ', data);
-
 
     const handleUploadPhoto = async () => {
         try {
@@ -80,13 +80,11 @@ const ProfileHeader = () => {
             }
 
             const data = await response.json();
-            console.log('Image uploaded successfully:', data);
 
             updateUser({ userId, body: { profilePicture: data.secure_url } }).unwrap()
                 .then(({ user }) => {
                     toast.success('Image uploaded successfully!');
                     dispatch(setUser({ user, isAuthenticated: true }));
-                    console.log('User: ', user);
                     refetch();
                 })
                 .catch((err) => {
@@ -113,7 +111,7 @@ const ProfileHeader = () => {
             <div className="md:w-[600px] xl:w-[750px] text-white mx-auto flex flex-col lg:flex-row justify-center items-center">
 
                 {/* Profile Photo */}
-                <div className="w-28 h-28 overflow-hidden mb-3 rounded-full lg:mb-0 lg:w-32 lg:h-32 xl:w-48 xl:h-48 md:mr-5">
+                <div className="size-28 overflow-hidden mb-3 rounded-full lg:mb-0 lg:size-32 xl:size-48 md:mr-5">
                     <Image
                         className={`rounded-full object-cover ${(selectedFile || profilePicture) && 'scale-125'}`}
                         src={selectedFile ? URL.createObjectURL(selectedFile) : profilePicture || profile_blank_image}
@@ -139,39 +137,39 @@ const ProfileHeader = () => {
                     {/* Change Photo Button */}
                     {
                         isOwner ?
-                        <>
-                            {
-                                selectedFile ? (
-                                    <div className="flex items-center flex-col gap-2 lg:gap-3">
-                                        <PrimaryButton
-                                            disabled={isUploading}
-                                            onClick={handleUploadPhoto}
-                                            className="flex w-full py-2 lg:py-2.5 lg:w-56 justify-center items-center gap-x-1 border text-white bg-blue-primary border-blue-primary font-semibold">
-                                            <span className="text-xl lg:text-2xl"><FiUpload /></span>
-                                            <span className="text-sm lg:text-base">{isUploading ? 'Uploading...' : 'Upload Photo'}</span>
-                                        </PrimaryButton>
-                                        <PrimaryButton
-                                            onClick={() => setSelectedFile(null)}
-                                            className="flex w-full py-2 lg:py-2.5 lg:w-56 justify-center items-center gap-x-1 border border-highlight font-semibold">
-                                            <span className="text-xl lg:text-2xl"><IoClose /></span>
-                                            <span className="text-sm lg:text-base">Cancel</span>
-                                        </PrimaryButton>
-                                    </div>
-                                ) :
-                                    <label htmlFor="upload-photo" className="w-full lg:px-10 px-5 lg:w-56 py-2 lg:py-3 rounded-lg gap-x-1 bg-text-white border  border-highlight cursor-pointer font-semibold">
-                                        <input onChange={handleFileChange} type="file" className="hidden" id="upload-photo" accept="image/*" />
-                                        <div className="flex justify-center items-center gap-x-2">
-                                            <span className="text-xl lg:text-2xl"><TbPhotoPlus /></span>
-                                            <span className="text-sm lg:text-base">Choose Photo</span>
+                            <>
+                                {
+                                    selectedFile ? (
+                                        <div className="flex items-center flex-col gap-2 lg:gap-3">
+                                            <PrimaryButton
+                                                disabled={isUploading}
+                                                onClick={handleUploadPhoto}
+                                                className="flex w-full py-2 lg:py-2.5 lg:w-56 justify-center items-center gap-x-1 border text-white bg-blue-primary border-blue-primary font-semibold">
+                                                <span className="text-xl lg:text-2xl"><FiUpload /></span>
+                                                <span className="text-sm lg:text-base">{isUploading ? 'Uploading...' : 'Upload Photo'}</span>
+                                            </PrimaryButton>
+                                            <PrimaryButton
+                                                onClick={() => setSelectedFile(null)}
+                                                className="flex w-full py-2 lg:py-2.5 lg:w-56 justify-center items-center gap-x-1 border border-highlight font-semibold">
+                                                <span className="text-xl lg:text-2xl"><IoClose /></span>
+                                                <span className="text-sm lg:text-base">Cancel</span>
+                                            </PrimaryButton>
                                         </div>
-                                    </label>
-                            }
-                        </>
-                        :
-                        <PrimaryButton className="border lg:px-5 lg:py-2 border-highlight flex items-center justify-center gap-x-2 font-semibold">
-                            <span className="text-xl lg:text-2xl"><TbUserPlus /></span>
-                            <span className="text-sm lg:text-base">Follow</span>
-                        </PrimaryButton>
+                                    ) :
+                                        <label htmlFor="upload-photo" className="w-full lg:px-10 px-5 lg:w-56 py-2 lg:py-3 rounded-lg gap-x-1 bg-text-white border  border-highlight cursor-pointer font-semibold">
+                                            <input onChange={handleFileChange} type="file" className="hidden" id="upload-photo" accept="image/*" />
+                                            <div className="flex justify-center items-center gap-x-2">
+                                                <span className="text-xl lg:text-2xl"><TbPhotoPlus /></span>
+                                                <span className="text-sm lg:text-base">Choose Photo</span>
+                                            </div>
+                                        </label>
+                                }
+                            </>
+                            :
+                            <PrimaryButton className="border lg:px-5 lg:py-2 border-highlight flex items-center justify-center gap-x-2 font-semibold">
+                                <span className="text-xl lg:text-2xl"><TbUserPlus /></span>
+                                <span className="text-sm lg:text-base">Follow</span>
+                            </PrimaryButton>
                     }
                 </div>
             </div>

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
 import { useEffect, useState } from "react";
 import { checkOwner } from "@/utils/checkOwner";
+import ActiveUserSideBarSkeleton from "./ActiveUserSidebarSkeleton";
 
 type UserType = {
     _id: string;
@@ -24,10 +25,9 @@ interface ActiveUserSideBarProps {
 }
 
 
-const ActiveUserSideBar = ({setOpenActiveUserSidebar}: ActiveUserSideBarProps) => {
+const ActiveUserSideBar = ({ setOpenActiveUserSidebar }: ActiveUserSideBarProps) => {
     const [searchInputValue, setSearchInputValue] = useState('');
-    const { isLoading, isError, error, data, refetch } = useGetAllUsersQuery(searchInputValue);
-
+    const { data, isLoading, refetch } = useGetAllUsersQuery(searchInputValue);
 
     const { user } = useSelector((state: IRootState) => state.userSlice);
 
@@ -38,6 +38,10 @@ const ActiveUserSideBar = ({setOpenActiveUserSidebar}: ActiveUserSideBarProps) =
     useEffect(() => {
         refetch();
     }, [user]);
+
+    if (isLoading) {
+        return <ActiveUserSideBarSkeleton />;
+    }
 
     return (
         <aside className="h-full md:sticky lg:top-[108px] xl:top-[116px] left-0 lg:w-[300px] xl:w-[480px] md:pl-7">

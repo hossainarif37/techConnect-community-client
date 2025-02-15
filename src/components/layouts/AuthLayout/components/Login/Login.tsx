@@ -18,7 +18,7 @@ interface IFormInput {
 }
 
 
-const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
+const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
     const [login, { isLoading, isError, error }] = useLoginMutation();
@@ -32,12 +32,12 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
         toast.promise(loginResponse, {
             loading: 'Loading',
-            success: ({ user, message, token }) => {
-                console.log('User', user )
-                dispatch(setUser({ user: user, isAuthenticated: true }));
+            success: (data: any) => {
+                const { user, message, token } = data;
+                dispatch(setUser({ user, isAuthenticated: true }));
                 Cookies.set('authToken', token, { expires: 30 });
+                router.push('/');
                 return message;
-
             },
             error: ({ data }) => {
                 return data?.message || 'Login failed';
@@ -100,10 +100,9 @@ const Login = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
             </div>
             {/*//* Navigate to Register page */}
-            <p className="text-center text-white"><span>Don't have an account? <button
-                type="button"
-                onClick={() => setIsLoginComponent(false)}
-                className="underline">Create an account</button></span></p>
+            <p className="text-center text-white">
+                <span>Don't have an account? <Link href="/register" className="underline">Create an account</Link></span>
+            </p>
         </form>
     );
 };

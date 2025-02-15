@@ -1,7 +1,7 @@
 "use client"
 
 
-import { BaseSyntheticEvent, useEffect, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useRef, useState } from "react";
 import { Controller, FieldValues, set, useForm } from "react-hook-form";
 
 import toast from "react-hot-toast";
@@ -25,25 +25,26 @@ const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
     const [textareaRows, setTextareaRows] = useState(5);
     const [hasText, setHasText] = useState(false);
 
+    const contentInputRef = useRef<HTMLTextAreaElement>(null);
+
     const { user } = useSelector((state: IRootState) => state.userSlice);
 
     const [createPost, { isLoading, isError, error, data }] = useCreatePostMutation();
 
     const { register, handleSubmit, watch, formState: { errors }, reset, control } = useForm();
 
-    const contentInput = document.getElementById('content-input');
-
     const handleModalClose = () => {
         setIsModalOpen(false);
         setHasText(false);
-        if (contentInput) {
-            (contentInput as HTMLTextAreaElement).value = '';
+        if (contentInputRef.current) {
+            contentInputRef.current.value = '';
         }
     }
 
+
     useEffect(() => {
-        if (contentInput) {
-            contentInput.focus();
+        if (contentInputRef.current && isModalOpen) {
+            contentInputRef.current.focus();
         }
     }, [isModalOpen]);
 
@@ -130,7 +131,9 @@ const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
             <div className="mt-4">
                 <textarea
                     {...register('content', { required: 'Content is required! Share you thoughts' })}
-                    className='w-full bg-accent outline-none text-xl font-sans placeholder:font-normal text-white' placeholder='Write here...'
+                    ref={contentInputRef}
+                    className='w-full bg-accent outline-none text-xl font-sans placeholder:font-normal text-white'
+                    placeholder='Write here...'
                     id="content-input"
                     cols={30}
                     rows={textareaRows}

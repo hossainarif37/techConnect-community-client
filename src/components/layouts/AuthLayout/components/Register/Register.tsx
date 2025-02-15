@@ -7,6 +7,9 @@ import { useRegisterMutation } from "@/redux/api/endpoints/users/users";
 import toast from "react-hot-toast";
 import InputWithLabel from "@/components/common/Input/InputWithLabel";
 import PrimaryButton from "@/components/common/Button/PrimaryButton";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/user/userSlice";
+import Cookies from "js-cookie";
 
 interface IFormInput {
     name: string;
@@ -18,6 +21,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
     const [registerUser, { isLoading, isError, error }] = useRegisterMutation();
+    const dispatch = useDispatch();
 
 
     //* hanle login function
@@ -26,10 +30,12 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
         toast.promise(registerResponse, {
             loading: 'Loading',
-            success: ({ message }) => {
-                setIsLoginComponent(true);
+            success: (data: any) => {
+                const { user, message, token } = data;
+                dispatch(setUser({ user, isAuthenticated: true }));
+                Cookies.set('authToken', token, { expires: 30 });
+                router.push('/');
                 return message;
-
             },
             error: ({ data }) => {
                 return data?.message || 'Registration failed';
@@ -120,10 +126,7 @@ const Register = ({ isLoginComponent, setIsLoginComponent }: any) => {
 
             {/*//* Navigate to Register page */}
             <p className="text-center text-white">
-                <span>Already have an account? <button
-                    type="button"
-                    onClick={() => setIsLoginComponent(true)}
-                    className="underline">Login</button></span>
+                <span>Already have an account? <Link href={'/login'} className="underline">Login</Link></span>
             </p>
 
         </form>

@@ -1,6 +1,7 @@
 "use client";
 
 import PostCard from "@/components/Posts/PostCard";
+import PostCardSkeleton from "@/components/Posts/PostCardSkeleton";
 import LoadingRound from "@/components/common/LoadingRound";
 import usePaginationObserver from "@/hooks/usePaginationObserver";
 import { useGetPostsByUserQuery } from "@/redux/api/endpoints/posts/posts";
@@ -16,11 +17,12 @@ const ProfilePosts = () => {
 
     const isOwner = checkOwner(params?.id as string, user?._id as string);
     const searchParams = useSearchParams();
+    const categories = searchParams?.get("categories") || "";
+
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState<any>([]);
     const [isRefetching, setIsRefetching] = useState(false);
     const [isIntersecting, setIsIntersecting] = useState(false);
-    const categories = searchParams.get("categories") || "";
     const { data, isLoading, isError, refetch } = useGetPostsByUserQuery({
         userId: params.id,
         categories,
@@ -70,7 +72,7 @@ const ProfilePosts = () => {
     }, [data, categories, isRefetching, isLoading]);
 
     if (isLoading) {
-        return <LoadingRound className="text-blue-primary text-4xl py-20" />;
+        return <PostCardSkeleton />;
     }
 
     if (isError) {
