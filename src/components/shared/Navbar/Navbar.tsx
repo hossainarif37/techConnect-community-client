@@ -22,15 +22,23 @@ import { CgProfile } from "react-icons/cg";
 import { IoSettingsOutline } from "react-icons/io5";
 import { toggleNav } from "@/redux/slices/navbar/navbarSlice";
 import { LogIn } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
     const { isNavToggle } = useSelector((state: IRootState) => state.navbarSlice);
     const { user } = useSelector((state: IRootState) => state.userSlice);
+    const router = useRouter();
     const [isProfileDropdown, setIsProfileDropdown] = useState(false);
     const dispatch = useDispatch();
     const [openActiveUserSidebar, setOpenActiveUserSidebar] = useState(false);
     const dropdownRef = useOutsideClick(() => setIsProfileDropdown(false),
         isProfileDropdown);
+
+    const handleLogout = () => {
+        Cookies.remove('authToken');
+        dispatch(removeUser());
+        router.push('/login');
+    }
 
     return (
         <nav className="bg-[#122033] text-white p-3 lg:px-5 lg:py-5 sticky top-0 z-40">
@@ -146,10 +154,7 @@ const Navbar = () => {
                             type="button"
                             className="flex w-full items-center justify-center gap-x-2 bg-secondary"
                             title="Logout"
-                            onClick={() => {
-                                Cookies.remove('authToken');
-                                dispatch(removeUser());
-                            }}
+                            onClick={handleLogout}
 
                         >
                             <LuLogOut />

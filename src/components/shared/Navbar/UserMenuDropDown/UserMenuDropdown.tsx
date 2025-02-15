@@ -10,48 +10,53 @@ import { LuLogOut } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import Loading from "@/components/common/Loading";
+import { useRouter } from "next/navigation";
 
 const UserMenuDropdown = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state: IRootState) => state.userSlice);
-  
+    const router = useRouter();
+
+    const handleLogout = () => {
+        Cookies.remove("authToken");
+        dispatch(removeUser());
+        router.push("/login");
+    };
+
     return (
-            <ul className={`${userDropdownStyles.userProfileDropdown} `}>
-                <li>
-                    <Link
-                        href={`/profile/${user?._id}/posts`}
-                        title="Profile"
-                    >
-                        <span><CgProfile /></span>
-                        <span>Profile</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        href="#"
-                        title="Settings"
-                    >
-                        <span><IoSettingsOutline /></span>
-                        <span>Settings</span>
-                    </Link>
-                </li>
-                <li>
-                    <button
-                        type="button"
-                        // id="logout-button"
-                        title="Logout"
-                        onClick={() => {
-                            Cookies.remove('authToken');
-                            dispatch(removeUser());
-                        }}
+        <ul className={`${userDropdownStyles.userProfileDropdown} `}>
+            <li>
+                <Link
+                    href={`/profile/${user?._id}/posts`}
+                    title="Profile"
+                >
+                    <span><CgProfile /></span>
+                    <span>Profile</span>
+                </Link>
+            </li>
+            <li>
+                <Link
+                    href="#"
+                    title="Settings"
+                >
+                    <span><IoSettingsOutline /></span>
+                    <span>Settings</span>
+                </Link>
+            </li>
+            <li>
+                <button
+                    type="button"
+                    // id="logout-button"
+                    title="Logout"
+                    onClick={handleLogout}
 
-                    >
-                        <LuLogOut />
-                        <span>Logout</span>
-                    </button>
-                </li>
+                >
+                    <LuLogOut />
+                    <span>Logout</span>
+                </button>
+            </li>
 
-            </ul>
+        </ul>
     );
 };
 
