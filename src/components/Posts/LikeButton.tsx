@@ -5,6 +5,8 @@ import { IRootState } from "@/types/types";
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { AuthModal } from "../shared/Modals/AuthModal";
+import { useRouter } from "next/navigation";
 
 interface LikeButtonProps {
   postId: string;
@@ -20,6 +22,8 @@ const LikeButton = ({
   const [likesCount, setLikesCount] = useState(initialLikesCount);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
+  const router = useRouter();
+
   // Redux
   const [likePost, { isLoading }] = useLikePostMutation();
   const { user } = useSelector((state: IRootState) => state.userSlice);
@@ -31,7 +35,12 @@ const LikeButton = ({
   }, [initialLikesCount, initialIsLiked]);
 
   const handleLike = async () => {
-    if (!user || isLoading) return;
+    if (isLoading) return;
+
+    if (!user) {
+      router.push("/login")
+      return;
+    }
 
     try {
       setIsLiked(!isLiked);
@@ -57,7 +66,7 @@ const LikeButton = ({
     <button
       type="button"
       onClick={handleLike}
-      disabled={isLoading || !user}
+      disabled={isLoading}
       className={`
         flex items-center gap-2 
         transition-colors duration-200

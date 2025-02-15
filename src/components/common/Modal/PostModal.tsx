@@ -33,8 +33,6 @@ const PostModal = ({ isModalOpen, setIsModalOpen }: PostModalTypes) => {
 
     const { register, handleSubmit, watch, formState: { errors }, reset, control } = useForm();
 
-    const contentInput = document.getElementById('content-input');
-
     const handleModalClose = () => {
         setIsModalOpen(false);
         setHasText(false);

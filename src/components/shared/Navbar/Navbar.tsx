@@ -34,7 +34,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-[#122033] text-white p-3 lg:px-5 lg:py-5 sticky top-0 z-40">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center">
 
                 {/* Navbar Logo */}
                 <div className="flex items-center gap-3">
@@ -57,12 +57,12 @@ const Navbar = () => {
 
                     </ul>
 
-                    <Link
+                    {!user && <Link
                         className={`bg-accent flex items-center gap-2 lg:bg-transparent rounded  font-bold py-2 w-full'}`} href={'/login'}
                     >
                         <LogIn className="h-5 w-5" />
                         Login
-                    </Link>
+                    </Link>}
 
                     <div hidden={user ? false : true} onClick={() => setIsProfileDropdown(!isProfileDropdown)} className="relative" ref={dropdownRef}>
                         <UserImage profilePicture={user?.profilePicture} className="w-12 xl:w-14 h-12 xl:h-14" />
@@ -90,7 +90,7 @@ const Navbar = () => {
                         {!isNavToggle && <OpenMenu />}
                     </div>
 
-                    <ul className={`shadow-xl z-50 bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${openActiveUserSidebar ? 'scale-x-100' : 'scale-x-0'}`}>
+                    <ul className={`shadow-xl z-50 bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${openActiveUserSidebar ? 'scale-x-100' : 'scale-x-0'} transition-transform`}>
                         <div className="w-full text-right">
                             <button
                                 type="button"
@@ -100,7 +100,9 @@ const Navbar = () => {
                                 <IoMdClose />
                             </button>
                         </div>
-                        <ActiveUserSideBar setOpenActiveUserSidebar={setOpenActiveUserSidebar} />
+                        <div>
+                            <ActiveUserSideBar setOpenActiveUserSidebar={setOpenActiveUserSidebar} />
+                        </div>
                     </ul>
 
                     <ul className={`shadow-xl z-50 bg-primary text-white absolute text-center rounded-md w-full p-5 duration-300 h-screen top-0 space-y-3 right-0 origin-right ${isNavToggle ? 'scale-x-100' : 'scale-x-0'}`}>

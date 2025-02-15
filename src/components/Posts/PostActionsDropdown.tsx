@@ -48,8 +48,6 @@ const PostActionsDropdown = ({ setActionsDropdown, authorId, post }: PostActions
     const handleFollow = () => setActionsDropdown(false);
     const handleUnfollow = () => setActionsDropdown(false);
 
-
-
     return (
         <>
             <ul className={postCardStyles.postActionsDropdown}>

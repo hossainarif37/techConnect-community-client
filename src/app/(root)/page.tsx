@@ -1,30 +1,22 @@
-"use client";
-
+import LoadingRound from "@/components/common/LoadingRound";
 import CategorySideBar from "./profile/components/CategorySideBar";
 import PostInputCard from "@/components/common/Input/PostInputCard";
+import ClientWrapper from "@/components/layouts/AuthLayout/components/ClientWrapper";
 import Posts from "@/components/Posts/Posts";
-import ActiveUserSideBar from "@/components/ActiveUserSideBar/ActiveUserSideBar";
-import useScreenSize from "@/hooks/useScreenSize";
-import { useSelector } from "react-redux";
-import { IRootState } from "@/types/types";
+import { Suspense } from "react";
 
-const Home = () => {
-  const screenSize = useScreenSize();
-  const largeScreen = screenSize.width >= 1280;
-  const { user } = useSelector((state: IRootState) => state.userSlice);
-
+export default function Home() {
   return (
-    <div className="flex flex-col md:flex-row">
+    <ClientWrapper>
       <CategorySideBar />
       <section className="flex-1 lg:px-14 px-0">
         <div className="max-w-2xl mx-auto">
-          {user && <PostInputCard />}
-          <Posts />
+          <PostInputCard />
+          <Suspense fallback={<LoadingRound />}>
+            <Posts />
+          </Suspense>
         </div>
       </section>
-      {largeScreen && <ActiveUserSideBar />}
-    </div>
+    </ClientWrapper>
   );
-};
-
-export default Home;
+}

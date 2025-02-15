@@ -2,25 +2,34 @@
 
 import Link from "next/link";
 import tabStyles from "./tab.module.css"
+import { usePathname, useRouter } from "next/navigation";
 
-const LoginRegisterTab = ({ isLoginComponent, setIsLoginComponent }: any) => {
-
+const LoginRegisterTab = () => {
+    const router = useRouter();
+    const pathname = usePathname();
+    const isLoginComponent = pathname === '/login';
+    const handleNavigate = (path: string) => {
+        if (path === "/login") {
+            router.push("/login");
+        } else {
+            router.push("/register");
+        }
+    };
 
     return (
         <div>
-
             <div className="grid grid-cols-2 gap-2 relative">
                 {/* Login */}
 
                 <button
-                    onClick={() => setIsLoginComponent(true)}
+                    onClick={() => handleNavigate("/login")}
                     className={`${tabStyles.tab}`}>
                     Login
                 </button>
 
                 {/* Register */}
                 <button
-                    onClick={() => setIsLoginComponent(false)}
+                    onClick={() => handleNavigate("/register")}
                     className={`${tabStyles.tab}`}>
                     Register
                 </button>

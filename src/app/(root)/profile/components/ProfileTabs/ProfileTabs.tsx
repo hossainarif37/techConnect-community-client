@@ -12,11 +12,7 @@ const ProfileTabs = () => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { id: paramsId } = useParams();
 
-    if (!user) {
-        return <Loading />
-    }
-
-    const { _id } = user;
+    const _id = user?._id;
 
     const profileTabLinks = [
         {

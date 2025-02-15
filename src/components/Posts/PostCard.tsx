@@ -11,14 +11,28 @@ import PostActionButton from "./PostActionButton";
 import LikeButton from "./LikeButton";
 import { useSelector } from "react-redux";
 import { IRootState } from "@/types/types";
+import { useRouter } from "next/navigation";
 
 const PostCard = ({ post }: any) => {
     const { user } = useSelector((state: IRootState) => state.userSlice);
     const { content, category, author, _id: postId, likes } = post;
     const { name, profilePicture, _id: authorId } = author;
-    console.log(author)
     const isLiked = likes?.includes(user?._id);
     const commentInputRef = useRef<HTMLTextAreaElement>(null);
+    const router = useRouter();
+
+    const onCommentClick = () => {
+        if (!user) {
+            router.push("/login");
+            return;
+        }
+        commentInputRef.current?.focus();
+    }
+
+    const onUserImageClick = () => {
+        router.push(`/profile/${authorId}/posts`)
+    }
+
     return (
         <div className="bg-[#122033] py-3 px-3 md:px-10 rounded-xl max-h-full w-full mx-auto md:w-[500px] xl:w-[650px]">
             <div>
@@ -27,12 +41,12 @@ const PostCard = ({ post }: any) => {
                     {/* Heading Left */}
                     <div className='flex gap-x-3 items-center'>
                         {/* User Image */}
-                        <Link href={`/profile/${authorId}/posts`}>
+                        <button onClick={onUserImageClick}>
                             <UserImage
                                 className="w-12 lg:w-14 xl:w-16 h-12 lg:h-14 xl:h-16"
                                 profilePicture={profilePicture}
                             />
-                        </Link>
+                        </button>
 
                         {/* Title and Category Wrapper */}
                         <div>
@@ -82,7 +96,7 @@ const PostCard = ({ post }: any) => {
                     {/* Comment */}
                     <button
                         type="button"
-                        onClick={() => commentInputRef.current?.focus()}
+                        onClick={onCommentClick}
                     >
                         {/* Comment Icon */}
                         <span className="text-2xl xl:text-3xl">
