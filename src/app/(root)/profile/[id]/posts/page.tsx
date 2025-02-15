@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import LoadingRound from "@/components/common/LoadingRound";
+import PostCardSkeleton from "@/components/Posts/PostCardSkeleton";
 
 const ProfilePostPage = () => {
     const params = useParams();
@@ -17,7 +18,7 @@ const ProfilePostPage = () => {
     return (
         <section className="flex-1 lg:pl-20 px-2 lg:px-0">
             {isOwner && <PostInputCard />}
-            <Suspense fallback={<LoadingRound />}>
+            <Suspense fallback={<PostCardSkeleton />}>
                 <ProfilePosts />
             </Suspense>
         </section>
