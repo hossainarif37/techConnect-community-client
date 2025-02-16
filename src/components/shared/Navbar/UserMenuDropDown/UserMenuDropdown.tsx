@@ -55,7 +55,6 @@ const UserMenuDropdown = () => {
                     <span>Logout</span>
                 </button>
             </li>
-
         </ul>
     );
 };
