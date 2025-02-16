@@ -73,8 +73,8 @@ const Posts = () => {
 
     return (
         <section className="space-y-5 py-5 min-h-screen">
-            {posts.length > 0 ? (
-                posts.map((post: any) => <PostCard key={post._id} post={post} />)
+            {posts?.length > 0 ? (
+                posts?.map((post: any) => <PostCard key={post._id} post={post} />)
             ) : (
                 <h1 className="text-2xl h-screen font-semibold text-center mt-5 text-white">
                     No posts here. Share your thoughts!
